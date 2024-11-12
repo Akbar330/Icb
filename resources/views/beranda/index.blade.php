@@ -8,11 +8,6 @@
         <section class="bg-gray-100 text-black shadow-xl mb-10 p-6">
             <div class="flex flex-col">
 
-                <!-- Banner Image Section -->
-                <div class="w-full mb-6">
-                    <img src="{{ asset('storage/smk_icb_ct.jpeg') }}" alt="SMK ICB Cinta Teknika" class="w-[500px] h-[200px] object-cover rounded-md shadow-md">
-                </div>
-
                 <!-- Content Section: Text on Left and News/Pencarian on Right -->
                 <div class="flex">
 
