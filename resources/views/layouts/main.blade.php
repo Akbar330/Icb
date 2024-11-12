@@ -119,6 +119,8 @@ footer a:hover {
 
 
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 
 <body>
@@ -171,19 +173,17 @@ footer a:hover {
             <!-- Social Media Links -->
             <div>
                 <h3 class="text-xl font-semibold mb-4">Ikuti Kami</h3>
-                <ul class="space-y-2">
-                    <li><a href="#" class="text-blue-400 hover:text-blue-600">Facebook</a></li>
-                    <li><a href="#" class="text-blue-400 hover:text-blue-600">Instagram</a></li>
-                    <li><a href="#" class="text-blue-400 hover:text-blue-600">Twitter</a></li>
-                    <li><a href="#" class="text-blue-400 hover:text-blue-600">LinkedIn</a></li>
-                </ul>
+                    <a href="#" class="text-blue-400 hover:text-blue-600 mx-3"><i class="fab fa-facebook-f fa-2x"></i></a>
+                    <a href="#" class="text-blue-400 hover:text-blue-600 mx-3"><i class="fab fa-instagram fa-2x"></i></a>
+                    <a href="#" class="text-blue-400 hover:text-blue-600 mx-3"><i class="fab fa-twitter fa-2x"></i></a>
+                    <a href="#" class="text-blue-400 hover:text-blue-600 mx-3"><i class="fab fa-linkedin-in fa-2x"></i></a>
             </div>
 
             <!-- Quick Links -->
             <div>
                 <h3 class="text-xl font-semibold mb-4">Tautan Cepat</h3>
                 <ul class="space-y-2">
-                    <li><a href="/tentang" class="hover:text-yellow-200">Tentang Kami</a></li>
+                    <a href="/tentang" class="hover:text-yellow-200">Tentang Kami</a></li>
                     <li><a href="/kontak" class="hover:text-yellow-200">Kontak Kami</a></li>
                     <li><a href="/berita" class="hover:text-yellow-200">Berita</a></li>
                     <li><a href="/pendaftaran" class="hover:text-yellow-200">Pendaftaran</a></li>
