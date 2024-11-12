@@ -27,13 +27,13 @@ nav a {
 
 nav a:hover,
 nav a.active {
-    color: #F1C40F;
-    border-bottom: 2px solid #F1C40F;
+    color: #000000;
+    border-bottom: 2px solid #000000;
 }
 
 /* Header */
 header {
-    background: linear-gradient(to right, #1E3A8A, #F1C40F);
+    background: linear-gradient(to right, #00bceb, #F1C40F);
     padding: 10px 0; /* Reduced padding */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
