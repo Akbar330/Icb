@@ -10,16 +10,18 @@
 
                 <!-- Content Section: Text on Left and News/Pencarian on Right -->
                 <div class="flex">
-
-                    <!-- Left Section: 70% of the width -->
-                    <div class="w-7/10 mr-6">
+                <div class="w-7/10 mr-6">
+                <!-- Banner Section -->
+                <div>
+                    <img src="{{ asset('storage/smk_icb_ct.jpeg') }}" alt="" class="w-full h-40 bg-blue-500 mb-6 flex items-center justify-center">
+                </div>
+                <!-- Text Section -->
                         <div class="text-left">
                             <h2 class="text-3xl font-semibold mb-4">Selamat Datang di SMK ICB Cinta Teknika</h2>
                             <p class="text-lg mb-4">SMK ICB Cinta Teknika adalah sekolah yang berfokus pada pengembangan keterampilan dan pengetahuan siswa untuk mempersiapkan mereka menghadapi tantangan dunia kerja. Kami menawarkan berbagai program pendidikan yang inovatif dan berkualitas.</p>
                             <p class="text-lg">Kami berkomitmen untuk memberikan pendidikan terbaik bagi siswa, dengan berbagai kegiatan ekstrakurikuler yang mendukung pengembangan diri dan prestasi mereka.</p>
                         </div>
                     </div>
-
                     <!-- Right Section: 30% of the width -->
                     <div class="w-3/10 pl-8 border-l-4 border-gray-400">
                         <!-- News Card -->
@@ -66,4 +68,44 @@
             </section>
         </div>
     </div>
+    <div class="mt-8 flex items-start">
+ 
+    <div class="mt-8 flex items-start space-x-6">
+ 
+    <div class="mt-8 flex items-start">
+  <!-- Bagian Kiri: Foto Kepala Sekolah -->
+  <div class="w-1/3 text-center">
+    <h1 class="text-3xl font-bold mb-4">KEPALA SEKOLAH</h1>
+    <img src="{{ asset('storage/kepsek.jpg') }}" alt="Foto Kepala Sekolah" class="w-full h-96 object-cover rounded-lg shadow-lg">
+  </div>
+
+  <!-- Bagian Kanan: Deskripsi Kepala Sekolah -->
+  <div class="w-2/3 pl-6">
+    <h2 class="text-2xl font-semibold mb-2">Nama Kepala Sekolah</h2>
+    <p class="text-lg mb-6">Deskripsi Kepala Sekolah yang dapat mencakup visi, misi, serta pengalaman atau latar belakang beliau di bidang pendidikan. Ini adalah tempat untuk memperkenalkan Kepala Sekolah dan nilai-nilai yang mereka bawa ke Sekolah Harapan Bangsa. Deskripsi dapat lebih panjang untuk memberikan gambaran yang jelas dan inspiratif.</p>
+
+    <!-- Foto Tambahan di Bawah Deskripsi -->
+    <div class="flex space-x-4 justify-center">
+      <!-- Foto Wakasek -->
+      <div class="text-center">
+        <img src="{{ asset('storage/kepsek.jpg') }}" alt="Foto Wakasek" class="w-32 h-40 object-cover rounded-lg shadow-lg">
+        <p class="mt-2 text-lg font-medium">Wakasek</p>
+      </div>
+      
+      <!-- Foto Sekretaris -->
+      <div class="text-center">
+        <img src="{{ asset('storage/kepsek.jpg') }}" alt="Foto Sekretaris" class="w-32 h-40 object-cover rounded-lg shadow-lg">
+        <p class="mt-2 text-lg font-medium">Sekretaris</p>
+      </div>
+
+      <!-- Foto Bendahara -->
+      <div class="text-center">
+        <img src="{{ asset('storage/kepsek.jpg') }}" alt="Foto Bendahara" class="w-32 h-40 object-cover rounded-lg shadow-lg">
+        <p class="mt-2 text-lg font-medium">Bendahara</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 @endsection
+
