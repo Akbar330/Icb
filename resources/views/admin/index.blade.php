@@ -38,6 +38,7 @@
                 <table class="w-full mt-4 text-left border-collapse">
                     <thead>
                         <tr>
+                            <th class="border-b px-4 py-2">Gambar</th>
                             <th class="border-b px-4 py-2">Judul</th>
                             <th class="border-b px-4 py-2">Penulis</th>
                             <th class="border-b px-4 py-2">Tanggal</th>
@@ -47,6 +48,13 @@
                     <tbody>
                         @foreach($artikels as $artikel)
                             <tr>
+                                <td class="border-b px-4 py-2">
+                                    @if($artikel->gambar)
+                                        <img src="{{ asset('storage/' . $artikel->gambar) }}" alt="{{ $artikel->judul }}" class="w-20 h-20 object-cover rounded">
+                                    @else
+                                        <span class="text-gray-500">Tidak ada gambar</span>
+                                    @endif
+                                </td>
                                 <td class="border-b px-4 py-2">{{ $artikel->judul }}</td>
                                 <td class="border-b px-4 py-2">{{ $artikel->penulis }}</td>
                                 <td class="border-b px-4 py-2">{{ $artikel->created_at->format('d M Y') }}</td>
@@ -70,6 +78,7 @@
                 <table class="w-full mt-4 text-left border-collapse">
                     <thead>
                         <tr>
+                            <th class="border-b px-4 py-2">Gambar</th>
                             <th class="border-b px-4 py-2">Judul</th>
                             <th class="border-b px-4 py-2">Penulis</th>
                             <th class="border-b px-4 py-2">Tanggal</th>
@@ -79,6 +88,13 @@
                     <tbody>
                         @foreach($beritas as $berita)
                             <tr>
+                                <td class="border-b px-4 py-2">
+                                    @if($berita->gambar)
+                                        <img src="{{ asset('storage/' . $berita->gambar) }}" alt="{{ $berita->judul }}" class="w-20 h-20 object-cover rounded">
+                                    @else
+                                        <span class="text-gray-500">Tidak ada gambar</span>
+                                    @endif
+                                </td>
                                 <td class="border-b px-4 py-2">{{ $berita->judul }}</td>
                                 <td class="border-b px-4 py-2">{{ $berita->penulis }}</td>
                                 <td class="border-b px-4 py-2">{{ $berita->created_at->format('d M Y') }}</td>

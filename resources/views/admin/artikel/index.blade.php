@@ -28,10 +28,11 @@
 
             <!-- Daftar Berita -->
             <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold text-gray-700">Berita</h3>
+                <h3 class="text-xl font-semibold text-gray-700">Artikel</h3>
                 <table class="w-full mt-4 text-left border-collapse">
                     <thead>
                         <tr>
+                            <th class="border-b px-4 py-2">Gambar</th>
                             <th class="border-b px-4 py-2">Judul</th>
                             <th class="border-b px-4 py-2">Penulis</th>
                             <th class="border-b px-4 py-2">Tanggal</th>
@@ -42,6 +43,13 @@
                         <!-- Loop berita dari database -->
                         @foreach($artikels as $artikel)
                             <tr>
+                                <td class="border-b px-4 py-2">
+                                    @if($artikel->gambar)
+                                        <img src="{{ asset('storage/' . $artikel->gambar) }}" alt="{{ $artikel->judul }}" class="w-20 h-20 object-cover rounded">
+                                    @else
+                                        <span class="text-gray-500">Tidak ada gambar</span>
+                                    @endif
+                                </td>
                                 <td class="border-b px-4 py-2">{{ $artikel->judul }}</td>
                                 <td class="border-b px-4 py-2">{{ $artikel->penulis }}</td>
                                 <td class="border-b px-4 py-2">{{ $artikel->created_at->format('d M Y') }}</td>
