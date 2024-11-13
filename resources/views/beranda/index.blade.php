@@ -3,68 +3,91 @@
 @section('title', 'Beranda')
 
 @section('content')
-    <div class="px-0 py-12">
-        <!-- Welcome Section -->
-        <section class="bg-gray-100 text-black shadow-xl mb-10 p-6">
-            <div class="flex flex-col">
+<head>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-                <!-- Content Section: Text on Left and News/Pencarian on Right -->
-                <div class="flex">
-                <div class="w-7/10 mr-6">
-                <!-- Banner Section -->
-                <div>
-                    <img src="{{ asset('storage/smk_icb_ct.jpeg') }}" alt="" class="w-full h-40 bg-blue-500 mb-6 flex items-center justify-center">
-                </div>
-                <!-- Text Section -->
-                        <div class="text-left">
-                            <h2 class="text-3xl font-semibold mb-4">Selamat Datang di SMK ICB Cinta Teknika</h2>
-                            <p class="text-lg mb-4">SMK ICB Cinta Teknika adalah sekolah yang berfokus pada pengembangan keterampilan dan pengetahuan siswa untuk mempersiapkan mereka menghadapi tantangan dunia kerja. Kami menawarkan berbagai program pendidikan yang inovatif dan berkualitas.</p>
-                            <p class="text-lg">Kami berkomitmen untuk memberikan pendidikan terbaik bagi siswa, dengan berbagai kegiatan ekstrakurikuler yang mendukung pengembangan diri dan prestasi mereka.</p>
+    <!-- jQuery (opsional jika diperlukan) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<div class="px-0 py-12">
+    <!-- Welcome Section -->
+    <section class="bg-gray-100 text-black shadow-xl mb-10 p-6" style="min-height: 350px;">
+        <div class="flex flex-col">
+
+            <!-- Carousel Section -->
+            <div class="w-full mb-6">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="height: 450px;">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ asset('storage/smk_icb_ct.jpeg') }}" class="d-block w-100" style="height: 450px; object-fit: cover;" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('storage/smk_icb_ct2.jpeg') }}" class="d-block w-100" style="height: 450px; object-fit: cover;" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('storage/smk_icb_ct3.jpeg') }}" class="d-block w-100" style="height: 450px; object-fit: cover;" alt="...">
                         </div>
                     </div>
-                    <!-- Right Section: 30% of the width -->
-                    <div class="w-3/10 pl-8 border-l-4 border-gray-400">
-                        <!-- News Card -->
-                        <div class="bg-white p-6 shadow-lg rounded-lg mb-6 hover:shadow-xl transition duration-300">
-                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Berita Terbaru</h3>
-                            <ul class="space-y-3 text-gray-600">
-                                <li><strong>13 November 2024:</strong> Sekolah meraih juara umum lomba matematika tingkat kota.</li>
-                                <li><strong>10 November 2024:</strong> Workshop pengembangan karakter untuk siswa dan guru.</li>
-                            </ul>
-                        </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
 
-                        <!-- Search Card -->
-                        <div class="bg-white p-6 shadow-lg rounded-lg hover:shadow-xl transition duration-300">
-                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Pencarian</h3>
-                            <input type="text" class="w-full px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-6" placeholder="Cari berita atau artikel...">
-                        </div>
+            <!-- Latest News Cards Section Below Carousel -->
+            <div class="w-full mt-4">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Berita Terbaru</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- News Card 1 -->
+                    <div class="bg-white p-4 shadow-lg rounded-lg hover:shadow-xl transition duration-300">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-2">Berita 1</h4>
+                        <p class="text-gray-600 text-sm">Deskripsi singkat berita terbaru yang menarik perhatian pembaca.</p>
+                    </div>
+                    
+                    <!-- News Card 2 -->
+                    <div class="bg-white p-4 shadow-lg rounded-lg hover:shadow-xl transition duration-300">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-2">Berita 2</h4>
+                        <p class="text-gray-600 text-sm">Deskripsi singkat berita terbaru yang menarik perhatian pembaca.</p>
+                    </div>
+                    
+                    <!-- News Card 3 -->
+                    <div class="bg-white p-4 shadow-lg rounded-lg hover:shadow-xl transition duration-300">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-2">Berita 3</h4>
+                        <p class="text-gray-600 text-sm">Deskripsi singkat berita terbaru yang menarik perhatian pembaca.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+</div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            <!-- Section: Artikel -->
             <section id="artikel" class="bg-white text-black shadow-xl overflow-hidden">
                 <div class="p-6">
-                    <h2 class="text-2xl font-semibold mb-4 hover:text-yellow-200">Artikel Terbaru</h2>
-                    <p class="text-lg mb-4">Kumpulan artikel terbaru seputar pendidikan dan pengembangan diri.</p>
-                    <ul class="list-disc pl-6 space-y-3">
-                        <li>Pendidikan karakter dalam lingkungan sekolah</li>
-                        <li>Membangun kebiasaan belajar yang efektif</li>
-                    </ul>
+                    <img src="{{ ('storage/icibos.jpeg') }}" alt="">
+                </div>
+            </section>
+
+            <section id="artikel" class="bg-white text-black shadow-xl overflow-hidden">
+                <div class="p-6">
+                    <img src="{{ ('storage/icibos.jpeg') }}" alt="">
                 </div>
             </section>
 
             <!-- Section: Pendaftaran -->
             <section id="pendaftaran" class="bg-white text-black shadow-xl overflow-hidden transform transition hover:scale-105 duration-300">
-                <div class="p-6">
-                    <h2 class="text-2xl font-semibold mb-6">Pendaftaran Siswa Baru</h2>
-                    <p class="text-lg mb-4">Informasi dan tata cara pendaftaran siswa baru di Sekolah Harapan Bangsa.</p>
-                    <a href="/pendaftaran" class="inline-block bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 hover:bg-yellow-200">
-                        Daftar Sekarang
-                    </a>
-                </div>
+            <div class="p-6">
+                <img src="{{ ('storage/icibos.jpeg') }}" alt="" class="h-150 w-150">
+                    </div>
             </section>
         </div>
     </div>
@@ -73,10 +96,11 @@
     <div class="mt-8 flex items-start space-x-6">
  
     <div class="mt-8 flex items-start">
+        
   <!-- Bagian Kiri: Foto Kepala Sekolah -->
   <div class="w-1/3 text-center">
     <h1 class="text-3xl font-bold mb-4">KEPALA SEKOLAH</h1>
-    <img src="{{ asset('storage/kepsek.jpg') }}" alt="Foto Kepala Sekolah" class="w-full h-96 object-cover rounded-lg shadow-lg">
+    <img src="{{ asset('storage/pasugiyo.jpg') }}" alt="Foto Kepala Sekolah" class="w-full h-96 object-cover rounded-lg shadow-lg">
   </div>
 
   <!-- Bagian Kanan: Deskripsi Kepala Sekolah -->
