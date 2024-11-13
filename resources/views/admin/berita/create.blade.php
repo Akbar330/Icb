@@ -6,7 +6,7 @@
     <div class="px-4 py-8">
         <h1 class="text-3xl font-bold text-gray-700">Berita</h1>
 
-        <form action="{{ route('admin.berita.store') }}" method="POST" class="mt-6">
+        <form action="{{ route('admin.berita.store') }}" method="POST" enctype="multipart/form-data" class="mt-6">
             @csrf
             <div class="mb-4">
                 <label for="judul" class="block text-gray-700">Judul:</label>
@@ -21,6 +21,11 @@
             <div class="mb-4">
                 <label for="konten" class="block text-gray-700">Konten:</label>
                 <textarea id="konten" name="konten" class="w-full p-2 border border-gray-300 rounded"></textarea>
+            </div>
+
+            <div class="mb-4">
+                <label for="gambar" class="block text-gray-700">Gambar:</label>
+                <input type="file" id="gambar" name="gambar" class="w-full p-2 border border-gray-300 rounded">
             </div>
 
             <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Simpan Berita</button>
