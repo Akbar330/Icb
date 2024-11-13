@@ -7,210 +7,173 @@
     <title>@yield('title', 'SMK ICB CT')</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
     <style>
         body {
-    font-family: 'Inter', sans-serif;
-    background-color: #F9FAFB;
-    color: #333;
-}
+            font-family: 'Inter', sans-serif;
+            background-color: #F9FAFB;
+            color: #333;
+        }
 
-/* Navigation */
-nav a {
-    position: relative;
-    padding: 8px 0; /* Reduced padding */
-    text-transform: uppercase;
-    font-weight: 600;
-    color: #E2E8F0;
-    font-size: 0.875rem; /* Smaller font size */
-    transition: color 0.3s, border-bottom 0.3s;
-}
+        .navbar-nav .nav-item.active .nav-link {
+            color: black;
+            font-weight: bold;
+            border-bottom: 3px solid black;
+            padding-bottom: 5px;
+        }
 
-nav a:hover,
-nav a.active {
-    color: #000000;
-    border-bottom: 2px solid #000000;
-}
+        /* Footer */
+        footer {
+            background-color: #2D3748;
+            padding: 15px 0;
+            color: #CBD5E0;
+        }
 
-/* Header */
-header {
-    background: linear-gradient(to right, #00bceb, #F1C40F);
-    padding: 10px 0; /* Reduced padding */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+        footer a {
+            color: #CBD5E0;
+            font-size: 0.875rem;
+            transition: color 0.3s;
+        }
 
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        footer a:hover {
+            color: #F1C40F;
+        }
 
-header h1 {
-    font-size: 1.25rem; /* Smaller font size */
-    color: white;
-}
+        /* Buttons */
+        .btn {
+            font-weight: 600;
+            text-transform: uppercase;
+        }
 
-header p {
-    font-size: 0.75rem; /* Smaller font size */
-    color: white;
-}
-
-header img {
-    height: 35px; /* Smaller logo size */
-}
-
-/* Main Content */
-.main-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Footer */
-footer {
-    background-color: #2D3748;
-    padding: 15px 0;
-    color: #CBD5E0;
-}
-
-footer a {
-    color: #CBD5E0;
-    font-size: 0.875rem; /* Smaller font size */
-    transition: color 0.3s;
-}
-
-footer a:hover {
-    color: #F1C40F;
-}
-
-/* Buttons */
-.btn {
-    display: inline-block;
-    padding: 8px 18px;
-    background-color: #F1C40F;
-    color: white;
-    font-weight: 600;
-    font-size: 0.875rem; /* Smaller font size */
-    border-radius: 6px;
-    text-transform: uppercase;
-    transition: background-color 0.3s ease;
-}
-
-.btn:hover {
-    background-color: #D39A00;
-}
-
-/* Responsiveness */
-@media (max-width: 768px) {
-    header .container {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    nav {
-        margin-top: 10px;
-    }
-
-    nav a {
-        display: inline-block;
-        margin: 0 10px;
-    }
-}
-
-
+        /* Loading Bar */
+        #loading-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 5px;
+            background-color: #4CAF50;
+            z-index: 9999;
+            transition: width 0.5s ease-in-out;
+        }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 </head>
 
-<body>
+<body class="font-sans bg-gray-100 text-gray-800">
 
-    <!-- Header with Navigation -->
-    <header class="bg-transparent">
-        <div class="container mx-auto px-4 flex items-center justify-between">
-            <div class="flex items-center space-x-4">
-                <img src="{{ asset('storage/icb.png') }}" alt="Logo" class="h-12 w-auto">
-                <div>
-                    <h1>SMK ICB CINTA TEKNIKA</h1>
-                    <p>Tempat di mana pendidikan berkualitas menjadi prioritas kami</p>
+    <!-- Loading Bar -->
+    <div id="loading-bar"></div>
+
+    <!-- Header with Tailwind CSS Navbar and Overlay -->
+    <header class="bg-blue-900 py-2 shadow-lg relative">
+        <div class="container mx-auto flex items-center justify-between">
+            <h1 class="text-xl font-bold text-white">NEWS UPDATE:</h1>
+            <div class="absolute top-0 right-0 z-30 w-full max-w-lg">
+                <div class="bg-black bg-opacity-90 text-white px-8 py-4 transform skew-x-12 w-full">
+                    <p class="transform -skew-x-12 text-sm">Pelaksanaan Uji Kompetensi 2021 sedang berlangsung!</p>
                 </div>
             </div>
-            <nav class="flex space-x-6 ml-auto">
-                <a href="/" class="text-white">Home</a>
-                <a href="/visi-misi" class="text-white">Visi-Misi</a>
-                <a href="/informasi" class="text-white">Informasi</a>
-                <a href="/galeri" class="text-white">Galeri</a>
-                <a href="/data" class="text-white">Data</a>
-                <a href="/kontak" class="text-white">Kontak</a>
-                <a href="/artikel" class="text-white">Artikel</a>
-                <a href="/berita" class="text-white">Berita</a>
-                <a href="/pendaftaran" class="text-white">Pendaftaran</a>
-            </nav>
         </div>
     </header>
 
-
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 shadow-md z-10">
+        <div class="container">
+            <div class="navbar-logo">
+                <img src="{{ asset('storage/icb.png') }}" alt="Logo SMK ICB Cinta Technika" class="h-10 w-10">
+            </div>
+            <div class="ml-4">
+                <a class="navbar-brand d-block text-right" style="font-size: 1.5rem; color: black;">
+                    SMK ICB CINTA TEKNIKA
+                </a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto space-x-4">
+                <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/' ? 'active' : ''); ?>">
+                    <a class="nav-link text-lg text-black" href="/">Home</a>
+                </li>
+                <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/visi-misi' ? 'active' : ''); ?>">
+                    <a class="nav-link text-lg text-black" href="/visi-misi">Visi-Misi</a>
+                </li>
+                <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/informasi' ? 'active' : ''); ?>">
+                    <a class="nav-link text-lg text-black" href="/informasi">Informasi</a>
+                </li>
+                <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/galeri' ? 'active' : ''); ?>">
+                    <a class="nav-link text-lg text-black" href="/galeri">Galeri</a>
+                </li>
+                <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/data' ? 'active' : ''); ?>">
+                    <a class="nav-link text-lg text-black" href="/data">Data</a>
+                </li>
+                <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/kontak' ? 'active' : ''); ?>">
+                    <a class="nav-link text-lg text-black" href="/kontak">Kontak</a>
+                </li>
+                <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/artikel' ? 'active' : ''); ?>">
+                    <a class="nav-link text-lg text-black" href="/artikel">Artikel</a>
+                </li>
+                <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/berita' ? 'active' : ''); ?>">
+                    <a class="nav-link text-lg text-black" href="/berita">Berita</a>
+                </li>
+                <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/pendaftaran' ? 'active' : ''); ?>">
+                    <a class="nav-link text-lg text-black" href="/pendaftaran">Pendaftaran</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
     <!-- Main Content -->
-    <main class="container mx-auto mt-10 px-4">
-        <div class="main-content">
+    <main class="container mt-4">
+        <div class="main-content p-4 bg-white rounded shadow">
             @yield('content')
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300 text-center py-6 mt-10">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Contact Info -->
-            <div>
-                <h3 class="text-xl font-semibold mb-4">Kontak</h3>
-                <ul class="space-y-2">
-                    <li>📍 Alamat: Jalan Raya No. 123, Jakarta</li>
-                    <li>📞 Telepon: (021) 123-4567</li>
-                    <li>📧 Email: info@smkicbct.com</li>
-                </ul>
-            </div>
+    <footer class="text-center mt-4 py-4">
+        <div class="container">
+            <div class="row">
+                <!-- Contact Info -->
+                <div class="col-md-4">
+                    <h3 class="text-light">Kontak</h3>
+                    <ul class="list-unstyled text-light">
+                        <li>📍 Jalan Raya No. 123, Jakarta</li>
+                        <li>📞 (021) 123-4567</li>
+                        <li>📧 info@smkicbct.com</li>
+                    </ul>
+                </div>
 
-            <!-- Social Media Links -->
-            <div>
-                <h3 class="text-xl font-semibold mb-4">Ikuti Kami</h3>
-                    <a href="#" class="text-blue-400 hover:text-blue-600 mx-3"><i class="fab fa-facebook-f fa-2x"></i></a>
-                    <a href="#" class="text-blue-400 hover:text-blue-600 mx-3"><i class="fab fa-instagram fa-2x"></i></a>
-                    <a href="#" class="text-blue-400 hover:text-blue-600 mx-3"><i class="fab fa-twitter fa-2x"></i></a>
-                    <a href="#" class="text-blue-400 hover:text-blue-600 mx-3"><i class="fab fa-linkedin-in fa-2x"></i></a>
-            </div>
+                <!-- Social Media Links -->
+                <div class="col-md-4">
+                    <h3 class="text-light">Ikuti Kami</h3>
+                    <a href="#" class="text-light mx-2"><i class="fab fa-facebook-f fa-lg"></i></a>
+                    <a href="#" class="text-light mx-2"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#" class="text-light mx-2"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="text-light mx-2"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                </div>
 
-            <!-- Quick Links -->
-            <div>
-                <h3 class="text-xl font-semibold mb-4">Tautan Cepat</h3>
-                <ul class="space-y-2">
-                    <a href="/tentang" class="hover:text-yellow-200">Tentang Kami</a></li>
-                    <li><a href="/kontak" class="hover:text-yellow-200">Kontak Kami</a></li>
-                    <li><a href="/berita" class="hover:text-yellow-200">Berita</a></li>
-                    <li><a href="/pendaftaran" class="hover:text-yellow-200">Pendaftaran</a></li>
-                </ul>
+                <!-- Quick Links -->
+                <div class="col-md-4">
+                    <h3 class="text-light">Tautan Cepat</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="/tentang" class="text-light">Tentang Kami</a></li>
+                        <li><a href="/kontak" class="text-light">Kontak Kami</a></li>
+                        <li><a href="/berita" class="text-light">Berita</a></li>
+                        <li><a href="/pendaftaran" class="text-light">Pendaftaran</a></li>
+                    </ul>
+                </div>
             </div>
+            <p class="mt-4">&copy; 2024 SMK ICB CT. All rights reserved.</p>
         </div>
-
-        <p>&copy; 2024 SMK ICB CT. All rights reserved.</p>
     </footer>
 
-    <script>
-        // JavaScript to add active class to the clicked link in the navigation
-    // Add active class to the current page link based on the current URL
-    document.addEventListener('DOMContentLoaded', function () {
-        const navLinks = document.querySelectorAll('nav a');
-        navLinks.forEach(link => {
-            if (window.location.pathname === link.getAttribute('href')) {
-                link.classList.add('active');
-            }
-            link.addEventListener('click', function () {
-                navLinks.forEach(link => link.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-    });
-
-    </script>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
