@@ -29,7 +29,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             // Redirect ke halaman yang diminta setelah login
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');  // Ganti dengan route dashboard admin Anda
+            return redirect()->intended('/admin');  // Ganti dengan route dashboard admin Anda
         }
 
         // Jika login gagal, kembalikan error
