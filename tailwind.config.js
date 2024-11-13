@@ -23,8 +23,6 @@ export default {
 
 // tailwind.config.js
 module.exports = {
-    prefix: 'tw-',
-
     content: [
       './resources/**/*.blade.php',
       './resources/**/*.js',
