@@ -61,21 +61,13 @@
     <div class="w-full mt-10">
         <h3 class="text-2xl font-semibold mb-4 text-gray-800">Berita Terbaru</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- News Card 1 -->
-            <div class="bg-white p-4 shadow-lg rounded-lg hover:shadow-xl transition duration-300">
-                <h4 class="text-lg font-semibold text-gray-800 mb-2">Berita 1</h4>
-                <p class="text-gray-600 text-sm">Deskripsi singkat berita terbaru yang menarik perhatian pembaca.</p>
-            </div>
-            <!-- News Card 2 -->
-            <div class="bg-white p-4 shadow-lg rounded-lg hover:shadow-xl transition duration-300">
-                <h4 class="text-lg font-semibold text-gray-800 mb-2">Berita 2</h4>
-                <p class="text-gray-600 text-sm">Deskripsi singkat berita terbaru yang menarik perhatian pembaca.</p>
-            </div>
-            <!-- News Card 3 -->
-            <div class="bg-white p-4 shadow-lg rounded-lg hover:shadow-xl transition duration-300">
-                <h4 class="text-lg font-semibold text-gray-800 mb-2">Berita 3</h4>
-                <p class="text-gray-600 text-sm">Deskripsi singkat berita terbaru yang menarik perhatian pembaca.</p>
-            </div>
+            @foreach($berita as $item)
+                <div class="bg-white p-4 shadow-lg rounded-lg hover:shadow-xl transition duration-300">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-2">{{ $item->judul }}</h4>
+                    <p class="text-gray-600 text-sm">{{ \Illuminate\Support\Str::limit($item->konten, 100) }}</p>
+                    <a href="{{ route('berita.show', $item->id) }}" class="text-blue-600 mt-2 inline-block">Baca Selengkapnya</a>
+                </div>
+            @endforeach
         </div>
     </div>
 </section>
