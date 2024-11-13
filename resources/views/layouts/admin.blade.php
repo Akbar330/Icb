@@ -138,6 +138,7 @@
                 <a href="/admin" class="text-white">Home</a>
                 <a href="/admin/artikel" class="text-white">Artikel</a>
                 <a href="/admin/berita" class="text-white">Berita</a>
+                <a href="/admin/informasi" class="text-white">Informasi</a>
 
                 <!-- Tombol Logout -->
                 <form action="{{ route('logout') }}" method="POST" class="inline">

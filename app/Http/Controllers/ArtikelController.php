@@ -14,5 +14,12 @@ class ArtikelController extends Controller
         // Return view with articles data
         return view('artikel.index', compact('artikels'));
     }
+
+    public function show($id)
+{
+    $artikels = Artikel::findOrFail($id);
+    return view('artikel.show', compact('artikels'));
+}
+
 }
 
