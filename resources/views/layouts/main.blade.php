@@ -82,7 +82,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 shadow-md z-10">
         <div class="container">
             <div class="navbar-logo">
-                <img src="{{ asset('storage/icb.png') }}" alt="Logo SMK ICB Cinta Technika" class="h-10 w-10">
+                <img src="{{ asset('icb.png') }}" alt="Logo SMK ICB Cinta Technika" class="h-10 w-10">
             </div>
             <div class="ml-4">
                 <a class="navbar-brand d-block text-right" style="font-size: 1.5rem; color: black;">
