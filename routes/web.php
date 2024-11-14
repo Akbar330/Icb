@@ -14,9 +14,11 @@ use App\Http\Controllers\GuruSiswaController;
 use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminBeritaController;
+use App\Http\Controllers\AdminGaleriController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\AdminArtikelController;
 use App\Http\Controllers\AdminInformasiController;
+use App\Http\Controllers\AdminPendaftaranController;
 
 // Landing Page Route
 Route::view('/', 'welcome');
@@ -88,6 +90,18 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::put('/admin/informasi/{id}', [InformasiController::class, 'update'])->name('admin.informasi.update');
     Route::delete('/admin/informasi/{id}', [InformasiController::class, 'destroy'])->name('admin.informasi.destroy');
 
+    // Admin PPDB
+    Route::get('/pendaftaran', [AdminPendaftaranController::class, 'index'])->name('admin.pendaftaran.index');
+    Route::get('/pendaftaran/{id}', [AdminPendaftaranController::class, 'show'])->name('admin.pendaftaran.show');
+
+    // Admin Galeri
+    Route::get('/galeri', [AdminGaleriController::class, 'index'])->name('admin.galeri.index');
+
+    // Route untuk menampilkan form upload gambar (GET)
+    Route::get('/galeri/create', [AdminGaleriController::class, 'create'])->name('admin.galeri.create');
+
+    // Route untuk menyimpan gambar yang diunggah (POST)
+    Route::post('/galeri', [AdminGaleriController::class, 'store'])->name('admin.galeri.store');
 
 });
 

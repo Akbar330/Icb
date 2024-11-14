@@ -138,7 +138,9 @@
                 <a href="/admin" class="text-white">Home</a>
                 <a href="/admin/artikel" class="text-white">Artikel</a>
                 <a href="/admin/berita" class="text-white">Berita</a>
+                <a href="/admin/galeri" class="text-white">Galeri</a>
                 <a href="/admin/informasi" class="text-white">Informasi</a>
+                <a href="/admin/pendaftaran" class="text-white">PPDB</a>
 
                 <!-- Tombol Logout -->
                 <form action="{{ route('logout') }}" method="POST" class="inline">
@@ -170,6 +172,7 @@
 
         <p>&copy; 2024 SMK ICB CT. All rights reserved.</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
         // JavaScript to add active class to the clicked link in the navigation
