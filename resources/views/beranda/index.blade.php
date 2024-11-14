@@ -80,6 +80,8 @@
 </section>
 
 <!-- Artikel Section -->
+<div class="w-full mt-10">
+    <h3 class="text-2xl font-semibold mb-4 text-gray-800">Galeri</h3>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-10">
     <section id="artikel-1" class="bg-white text-black shadow-xl overflow-hidden">
         <div class="p-6">
@@ -126,6 +128,21 @@
                 <p class="mt-2 text-lg font-medium">Bendahara</p>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Embedded YouTube Videos Section -->
+<div class="w-full mt-10">
+    <h3 class="text-2xl font-semibold mb-4 text-gray-800">Activity oncam</h3>
+<div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="rounded-lg overflow-hidden shadow-lg">
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/l7n9k8Rzq3s?=1&mute=1" title="YouTube video" allowfullscreen></iframe>
+    </div>
+    <div class="rounded-lg overflow-hidden shadow-lg">
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/l7n9k8Rzq3s?=1&mute=1" title="YouTube video" allowfullscreen></iframe>
+    </div>
+    <div class="rounded-lg overflow-hidden shadow-lg">
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/l7n9k8Rzq3s?=1&mute=1" title="YouTube video" allowfullscreen></iframe>
     </div>
 </div>
 </body>
