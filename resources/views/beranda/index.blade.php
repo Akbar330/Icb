@@ -74,7 +74,19 @@
         </div>
     </div>
 
-
+    <div class="w-full mt-10">
+        <h3 class="text-2xl font-semibold mb-4 text-gray-800">Galeri</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-10">
+            @foreach($gambarGaleri as $gambar)
+                <section class="bg-white text-black shadow-xl overflow-hidden">
+                    <div class="p-6">
+                        <!-- Menampilkan gambar dari database -->
+                        <img src="{{ asset('storage/' . $gambar->filename) }}" alt="Galeri Gambar" class="w-full h-64 object-cover rounded-lg">
+                    </div>
+                </section>
+            @endforeach
+        </div>
+    </div>
 
         <!-- Embedded YouTube Videos Section -->
         <div class="w-full mt-10">
