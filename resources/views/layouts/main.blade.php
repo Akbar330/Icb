@@ -71,9 +71,27 @@
     <div class="container mx-auto flex items-center justify-between">
         <h1 class="text-xl font-bold text-white">NEWS UPDATE:</h1>
         <div class="absolute top-0 right-0 z-30 w-full max-w-lg">
-            <div class="bg-black bg-opacity-90 text-white px-8 py-4 transform skew-x-12 w-full">
-                <p class="transform -skew-x-12 text-sm">Pelaksanaan Uji Kompetensi 2021 sedang berlangsung!</p>
-            </div>
+        <div class="bg-black bg-opacity-90 text-white px-8 py-4 transform skew-x-12 w-full">
+    <p id="datetime" class="transform -skew-x-12 text-sm"></p>
+    </div>
+        <script>
+            // Fungsi untuk memperbarui tanggal dan waktu
+            function updateDateTime() {
+                const now = new Date();
+                const options = { 
+                    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', 
+                    hour: '2-digit', minute: '2-digit', second: '2-digit' 
+                };
+                document.getElementById('datetime').textContent = now.toLocaleDateString('id-ID', options);
+            }
+
+            // Jalankan fungsi saat halaman dimuat dan setiap detik
+            document.addEventListener('DOMContentLoaded', () => {
+                updateDateTime();
+                setInterval(updateDateTime, 1000);
+            });
+        </script>
+
         </div>
     </div>
 </header>
