@@ -44,6 +44,9 @@ Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show
 // Informasi Publik
 Route::get('/informasi/{id}', [InformasiController::class, 'show'])->name('informasi.show');
 
+// Pendaftaran
+Route::resource('pendaftaran', PendaftaranController::class);
+Route::get('/pendaftaran/success', [PendaftaranController::class, 'success'])->name('pendaftaran.success');
 
 
 // Auth Routes
