@@ -65,35 +65,34 @@
 
     <!-- Loading Bar -->
     <div id="loading-bar"></div>
-
-    <!-- Header with Tailwind CSS Navbar and Overlay -->
-    <header class="bg-blue-900 py-2 shadow-lg relative">
-        <div class="container mx-auto flex items-center justify-between">
-            <h1 class="text-xl font-bold text-white">NEWS UPDATE:</h1>
-            <div class="absolute top-0 right-0 z-30 w-full max-w-lg">
-                <div class="bg-black bg-opacity-90 text-white px-8 py-4 transform skew-x-12 w-full">
-                    <p class="transform -skew-x-12 text-sm">Pelaksanaan Uji Kompetensi 2021 sedang berlangsung!</p>
-                </div>
+<!-- Header with Tailwind CSS Navbar and Overlay -->
+<header class="bg-blue-900 py-2 shadow-lg relative" id="header">
+    <div class="container mx-auto flex items-center justify-between">
+        <h1 class="text-xl font-bold text-white">NEWS UPDATE:</h1>
+        <div class="absolute top-0 right-0 z-30 w-full max-w-lg">
+            <div class="bg-black bg-opacity-90 text-white px-8 py-4 transform skew-x-12 w-full">
+                <p class="transform -skew-x-12 text-sm">Pelaksanaan Uji Kompetensi 2021 sedang berlangsung!</p>
             </div>
         </div>
-    </header>
+    </div>
+</header>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 shadow-md z-10">
-        <div class="container">
-            <div class="navbar-logo">
-                <img src="{{ asset('icb.png') }}" alt="Logo SMK ICB Cinta Technika" class="h-10 w-10">
-            </div>
-            <div class="ml-4">
-                <a class="navbar-brand d-block text-right" style="font-size: 1.5rem; color: black;">
-                    SMK ICB CINTA TEKNIKA
-                </a>
-            </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto space-x-4">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-4 shadow-md z-10" id="navbar">
+    <div class="container">
+        <div class="navbar-logo">
+            <img src="{{ asset('icb.png') }}" alt="Logo SMK ICB Cinta Technika" class="h-10 w-10">
+        </div>
+        <div class="ml-4">
+            <a class="navbar-brand d-block text-right" style="font-size: 1.5rem; color: black;">
+                SMK ICB CINTA TEKNIKA
+            </a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto space-x-4">
                 <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/' ? 'active' : ''); ?>">
                     <a class="nav-link text-lg text-black" href="/">Home</a>
                 </li>
@@ -119,12 +118,26 @@
                     <a class="nav-link text-lg text-black" href="/berita">Berita</a>
                 </li>
                 <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/pendaftaran' ? 'active' : ''); ?>">
-                    <a class="nav-link text-lg text-black" href="/pendaftaran">Pendaftaran</a>
+                    <a class="nav-link text-lg text-black" href="/pendaftaran">PPBD</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<script>
+    window.addEventListener('scroll', function() {
+        const header = document.getElementById('header');
+        const navbar = document.getElementById('navbar');
+        const headerHeight = header.offsetHeight;
+
+        if (window.scrollY > headerHeight) {
+            navbar.classList.add('fixed', 'top-0', 'w-full');
+        } else {
+            navbar.classList.remove('fixed', 'top-0', 'w-full');
+        }
+    });
+</script>
     <!-- Main Content -->
     <main class="container mt-4">
         <div class="main-content p-4 bg-white rounded shadow">
@@ -149,11 +162,14 @@
                 <!-- Social Media Links -->
                 <div class="col-md-4">
                     <h3 class="text-light">Ikuti Kami</h3>
-                    <a href="#" class="text-light mx-2"><i class="fab fa-facebook-f fa-lg"></i></a>
-                    <a href="#" class="text-light mx-2"><i class="fab fa-instagram fa-lg"></i></a>
-                    <a href="#" class="text-light mx-2"><i class="fab fa-twitter fa-lg"></i></a>
-                    <a href="#" class="text-light mx-2"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                    <div class="mt-2">
+                        <a href="#" class="text-light mx-1"><i class="fab fa-facebook-f fa-2x"></i></a>
+                        <a href="#" class="text-light mx-1"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#" class="text-light mx-1"><i class="fab fa-twitter fa-2x"></i></a>
+                        <a href="#" class="text-light mx-1"><i class="fab fa-linkedin-in fa-2x"></i></a>
+                    </div>
                 </div>
+
 
                 <!-- Quick Links -->
                 <div class="col-md-4">
