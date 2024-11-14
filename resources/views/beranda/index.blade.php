@@ -82,25 +82,16 @@
 <!-- Artikel Section -->
 <div class="w-full mt-10">
     <h3 class="text-2xl font-semibold mb-4 text-gray-800">Galeri</h3>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-10">
-    <section id="artikel-1" class="bg-white text-black shadow-xl overflow-hidden">
-        <div class="p-6">
-            <img src="{{ asset('icibos.jpeg') }}" alt="">
-        </div>
-    </section>
-
-    <section id="artikel-2" class="bg-white text-black shadow-xl overflow-hidden">
-        <div class="p-6">
-            <img src="{{ asset('icibos.jpeg') }}" alt="">
-        </div>
-    </section>
-
-    <!-- Section: Pendaftaran -->
-    <section id="pendaftaran" class="bg-white text-black shadow-xl overflow-hidden transform transition hover:scale-105 duration-300">
-        <div class="p-6">
-            <img src="{{ asset('icibos.jpeg') }}" alt="" class="h-150 w-150">
-        </div>
-    </section>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-10">
+        @foreach($gambarGaleri as $gambar)
+            <section class="bg-white text-black shadow-xl overflow-hidden">
+                <div class="p-6">
+                    <!-- Menampilkan gambar dari database -->
+                    <img src="{{ asset('storage/' . $gambar->filename) }}" alt="Galeri Gambar" class="w-full h-64 object-cover rounded-lg">
+                </div>
+            </section>
+        @endforeach
+    </div>
 </div>
 
 <!-- Kepala Sekolah Section -->

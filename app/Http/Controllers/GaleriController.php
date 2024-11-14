@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Galeri;
 class GaleriController extends Controller
 {
     //
     public function index() {
-        return view('galeri.index');
+        $gambarGaleri = Galeri::all();
+        return view('galeri.index', compact('gambarGaleri'));
     }
 }
