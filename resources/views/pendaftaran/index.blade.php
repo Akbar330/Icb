@@ -3,52 +3,166 @@
 @section('title', 'Pendaftaran')
 
 @section('content')
-    <div class="px-4 py-12">
-        <h1 class="text-4xl font-extrabold text-blue-600 text-center mb-6">Pendaftaran Siswa Baru</h1>
-        <p class="text-lg text-gray-600 text-center mb-8">Silakan lengkapi data diri untuk melakukan pendaftaran siswa baru di sekolah kami.</p>
 
-        <form action="/pendaftaran-submit" method="POST" enctype="multipart/form-data" class="space-y-6 max-w-3xl mx-auto">
-            @csrf
-
-            <!-- Grid for form fields -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- Nama Siswa -->
-                <div class="flex flex-col text-left">
-                    <label for="nama_siswa" class="text-sm font-medium text-black">Nama Lengkap Siswa</label>
-                    <input type="text" name="nama_siswa" id="nama_siswa" placeholder="Masukkan nama lengkap siswa" class="mt-1 p-2 border border-gray-300 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300" required>
-                </div>
-
-                <!-- Nomor Telepon -->
-                <div class="flex flex-col text-left">
-                    <label for="no_telepon" class="text-sm font-medium text-black">Nomor Telepon</label>
-                    <input type="text" name="no_telepon" id="no_telepon" placeholder="Masukkan nomor telepon siswa" class="mt-1 p-2 border border-gray-300 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300" required>
-                </div>
-            </div>
-
-            <!-- Foto Siswa -->
-            <div class="flex flex-col text-left">
-                <label for="foto_siswa" class="text-sm font-medium text-black">Foto Siswa</label>
-                <input type="file" name="foto_siswa" id="foto_siswa" class="mt-1 p-2 border border-gray-300 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300" accept="image/*" required>
-            </div>
-
-            <!-- Nilai Raport -->
-            <div class="flex flex-col text-left">
-                <label for="nilai_raport" class="text-sm font-medium text-black">Nilai Raport</label>
-                <input type="file" name="nilai_raport" id="nilai_raport" class="mt-1 p-2 border border-gray-300 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300" accept="application/pdf, image/*" required>
-            </div>
-
-            <!-- Ijazah -->
-            <div class="flex flex-col text-left">
-                <label for="ijazah" class="text-sm font-medium text-black">Ijazah</label>
-                <input type="file" name="ijazah" id="ijazah" class="mt-1 p-2 border border-gray-300 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300" accept="application/pdf, image/*" required>
-            </div>
-
-            <!-- Submit Button -->
-            <div class="flex justify-center mt-6">
-                <button type="submit" class="inline-block bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 hover:bg-yellow-200">
-                    Daftar Sekarang
-                </button>
-            </div>
-        </form>
+<div class="container mt-5">
+    <div class="text-2xl font-bold text-blue-700 leading-tight mb-4">
+        <h3>PENERIMAAN SISWA BARU SMK ICB CINTA TEKNIKA KOTA BANDUNG TAHUN AKADEMIK 2024/2025</h3>
     </div>
+
+    <h1 class="text-center mt-4 font-bold text-blue-700">Formulir Pendaftaran</h1>
+
+    <form action="{{ route('pendaftaran.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+        @csrf
+
+        <!-- Data Siswa -->
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="nama_siswa">Nama Lengkap Siswa</label>
+                <input type="text" class="form-control" id="nama_siswa" name="nama_siswa" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="alamat">Alamat</label>
+                <textarea class="form-control" id="alamat" name="alamat" required></textarea>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="ttl">Tanggal Lahir</label>
+                <input type="date" class="form-control" id="ttl" name="ttl" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="jenis_kelamin">Jenis Kelamin</label>
+                <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" required>
+                    <option value="">Pilih</option>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="agama">Agama</label>
+                <select class="form-control" id="agama" name="agama" required>
+                    <option value="">Pilih</option>
+                    <option value="Islam">Islam</option>
+                    <option value="Kristen Protestan">Kristen Protestan</option>
+                    <option value="Katolik">Katolik</option>
+                    <option value="Hindu">Hindu</option>
+                    <option value="Buddha">Buddha</option>
+                    <option value="Konghucu">Konghucu</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="asal_sekolah">Asal Sekolah</label>
+                <input type="text" class="form-control" id="asal_sekolah" name="asal_sekolah" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="jalur_pendaftaran">Jalur Pendaftaran</label>
+                <select class="form-control" id="jalur_pendaftaran" name="jalur_pendaftaran" required>
+                    <option value="">Pilih</option>
+                    <option value="Reguler">Reguler</option>
+                    <option value="RMP">RMP</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="jurusan">Jurusan</label>
+                <select class="form-control" id="jurusan" name="jurusan" required>
+                    <option value="">Pilih Jurusan</option>
+                    <option value="TKR">TKR (Teknik Kendaraan Ringan)</option>
+                    <option value="TSM">TSM (Teknik Sepeda Motor)</option>
+                    <option value="RPL">RPL (Rekayasa Perangkat Lunak)</option>
+                    <option value="TKJ">TKJ (Teknik Komputer dan Jaringan)</option>
+                    <option value="FAR">FAR (Farmasi)</option>
+                    <option value="KEP">KEP (Asisten Keperawatan)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="no_hp">No HP</label>
+                <input type="text" class="form-control" id="no_hp" name="no_hp" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="abk">Anak Berkebutuhan Khusus?</label>
+                <select class="form-control" id="abk" name="abk" required>
+                    <option value="">Pilih</option>
+                    <option value="Y">Ya</option>
+                    <option value="N">Tidak</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Informasi Orang Tua/Wali -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="nama_ortu_wali">Nama Orang Tua/Wali</label>
+                <input type="text" class="form-control" id="nama_ortu_wali" name="nama_ortu_wali" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="alamat_wali">Alamat Wali</label>
+                <textarea class="form-control" id="alamat_wali" name="alamat_wali" required></textarea>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="pekerjaan_wali">Pekerjaan Wali</label>
+                <input type="text" class="form-control" id="pekerjaan_wali" name="pekerjaan_wali" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="no_hp_wali">No HP Wali</label>
+                <input type="text" class="form-control" id="no_hp_wali" name="no_hp_wali" required>
+            </div>
+        </div>
+
+        <!-- MGM (Member Get Member) -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="mgm">MGM</label>
+                <select class="form-control" id="mgm" name="mgm" required>
+                    <option value="">Pilih</option>
+                    <option value="Y">Ya</option>
+                    <option value="N">Tidak</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="nama_mgm">Nama MGM</label>
+                <input type="text" class="form-control" id="nama_mgm" name="nama_mgm">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="asal_mgm">Keterangan MGM</label>
+                <input type="text" class="form-control" id="asal_mgm" name="asal_mgm">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Daftar</button>
+    </form>
+</div>
+<script>
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Pendaftaran Berhasil!',
+            text: 'Selamat, pendaftaran Anda telah berhasil!',
+            showConfirmButton: true,
+            timer: 1500
+        });
+    @endif
+</script>
 @endsection
