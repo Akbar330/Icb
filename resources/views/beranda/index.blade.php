@@ -88,6 +88,34 @@
         </div>
     </div>
 
+     <!-- Kepala Sekolah Section -->
+     <div class="mt-8 flex items-start space-x-6">
+        <div class="w-1/3 text-center">
+            <h1 class="text-3xl font-bold mb-4">KEPALA SEKOLAH</h1>
+            <img src="{{ asset('pasugiyo.jpg') }}" alt="Foto Kepala Sekolah" class="w-full h-96 object-cover rounded-lg shadow-lg">
+        </div>
+
+        <div class="w-2/3 pl-6">
+            <h2 class="text-2xl font-semibold mb-2">Nama Kepala Sekolah</h2>
+            <p class="text-lg mb-6">Deskripsi Kepala Sekolah yang dapat mencakup visi, misi, serta pengalaman atau latar belakang beliau di bidang pendidikan. Ini adalah tempat untuk memperkenalkan Kepala Sekolah dan nilai-nilai yang mereka bawa ke Sekolah Harapan Bangsa. Deskripsi dapat lebih panjang untuk memberikan gambaran yang jelas dan inspiratif.</p>
+
+            <div class="flex space-x-4 justify-center mx-5">
+                <div class="text-center">
+                    <img src="{{ asset('kepsek.jpg') }}" alt="Foto Wakasek" class="w-32 h-40 object-cover rounded-lg shadow-lg">
+                    <p class="mt-2 text-lg font-medium">Wakasek</p>
+                </div>
+                <div class="text-center">
+                    <img src="{{ asset('kepsek.jpg') }}" alt="Foto Sekretaris" class="w-32 h-40 object-cover rounded-lg shadow-lg">
+                    <p class="mt-2 text-lg font-medium">Sekretaris</p>
+                </div>
+                <div class="text-center">
+                    <img src="{{ asset('kepsek.jpg') }}" alt="Foto Bendahara" class="w-32 h-40 object-cover rounded-lg shadow-lg">
+                    <p class="mt-2 text-lg font-medium">Bendahara</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
         <!-- Embedded YouTube Videos Section -->
         <div class="w-full mt-10">
             <h3 class="text-2xl font-semibold mb-4 text-gray-800">Activity oncam</h3>
