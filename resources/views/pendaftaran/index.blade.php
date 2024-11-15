@@ -10,6 +10,12 @@
     </div>
 
     <h1 class="text-center mt-4 font-bold text-blue-700">Formulir Pendaftaran</h1>
+    <!-- Alert jika pendaftaran berhasil -->
+    @if(session('success'))
+        <div class="alert alert-success mt-4">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <form action="{{ route('pendaftaran.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
         @csrf
@@ -154,15 +160,4 @@
         <button type="submit" class="btn btn-primary">Daftar</button>
     </form>
 </div>
-<script>
-    @if(session('success'))
-        Swal.fire({
-            icon: 'success',
-            title: 'Pendaftaran Berhasil!',
-            text: 'Selamat, pendaftaran Anda telah berhasil!',
-            showConfirmButton: true,
-            timer: 1500
-        });
-    @endif
-</script>
 @endsection

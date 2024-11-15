@@ -72,6 +72,6 @@ class PendaftaranController extends Controller
 
         $pendaftaran->save();
 
-        return redirect()->route('pendaftaran.success')->with('success', 'Pendaftaran berhasil!');
+        return redirect()->back()->with('success', 'Pendaftaran berhasil!');
     }
 }
