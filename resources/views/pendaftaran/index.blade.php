@@ -118,18 +118,18 @@
                 <input type="text" class="form-control" id="nama_ortu_wali" name="nama_ortu_wali" required>
             </div>
             <div class="form-group col-md-6">
-                <label for="alamat_wali">Alamat Wali</label>
+                <label for="alamat_wali">Alamat Orang Tua/Wali</label>
                 <textarea class="form-control" id="alamat_wali" name="alamat_wali" required></textarea>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="pekerjaan_wali">Pekerjaan Wali</label>
+                <label for="pekerjaan_wali">Pekerjaan Orang Tua/Wali</label>
                 <input type="text" class="form-control" id="pekerjaan_wali" name="pekerjaan_wali" required>
             </div>
             <div class="form-group col-md-6">
-                <label for="no_hp_wali">No HP Wali</label>
+                <label for="no_hp_wali">No HP Orang Tua/Wali</label>
                 <input type="text" class="form-control" id="no_hp_wali" name="no_hp_wali" required>
             </div>
         </div>

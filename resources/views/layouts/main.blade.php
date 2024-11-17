@@ -172,9 +172,9 @@
                 <div class="col-md-4">
                     <h3 class="text-light">Kontak</h3>
                     <ul class="list-unstyled text-light">
-                        <li>📍 Jalan Raya No. 123, Jakarta</li>
-                        <li>📞 (021) 123-4567</li>
-                        <li>📧 info@smkicbct.com</li>
+                        <li>📍 Jl. Atlas Tengah No.2, Babakan Surabaya, Kec. Kiaracondong, Kota Bandung, Jawa Barat 40281</li>
+                        <li>📞 (022) 7234924</li>
+                        <li>📧 icbcintateknika@gmail.com</li>
                     </ul>
                 </div>
 
@@ -194,7 +194,7 @@
                 <div class="col-md-4">
                     <h3 class="text-light">Tautan Cepat</h3>
                     <ul class="list-unstyled">
-                        <li><a href="/tentang" class="text-light">Tentang Kami</a></li>
+                        <li><a href="/data" class="text-light">Tentang Kami</a></li>
                         <li><a href="/kontak" class="text-light">Kontak Kami</a></li>
                         <li><a href="/berita" class="text-light">Berita</a></li>
                         <li><a href="/pendaftaran" class="text-light">Pendaftaran</a></li>
