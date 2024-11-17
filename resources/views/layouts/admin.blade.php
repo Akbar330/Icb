@@ -172,7 +172,7 @@
 
         <p>&copy; 2024 SMK ICB CT. All rights reserved.</p>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 
     <script>
         // JavaScript to add active class to the clicked link in the navigation

@@ -160,4 +160,23 @@
         <button type="submit" class="btn btn-primary">Daftar</button>
     </form>
 </div>
+
+<script>
+    (function() {
+        'use strict'
+        // Cegah pengiriman form jika ada input yang tidak valid
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+
 @endsection

@@ -48,6 +48,7 @@ Route::get('/informasi/{id}', [InformasiController::class, 'show'])->name('infor
 
 // Pendaftaran
 Route::resource('pendaftaran', PendaftaranController::class);
+Route::post('/pendaftaran', [PendaftaranController::class, 'store'])->name('pendaftaran.store');
 Route::get('/pendaftaran/success', [PendaftaranController::class, 'success'])->name('pendaftaran.success');
 
 
@@ -102,6 +103,7 @@ Route::prefix('admin')->middleware('auth')->group(function() {
 
     // Route untuk menyimpan gambar yang diunggah (POST)
     Route::post('/galeri', [AdminGaleriController::class, 'store'])->name('admin.galeri.store');
+
 
 });
 
