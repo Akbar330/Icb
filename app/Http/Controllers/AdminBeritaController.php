@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Berita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\BeritaExport;
+use Barryvdh\DomPDF\Facade\Pdf;
 class AdminBeritaController extends Controller
 {
     public function index()
@@ -87,4 +89,33 @@ class AdminBeritaController extends Controller
 
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil dihapus!');
     }
+        // Export Excel
+
+        public function exportExcel()
+        {
+            return Excel::download(new beritaExport, 'data_berita.xlsx');
+        }
+
+        // Export PDF
+        public function exportPdf()
+        {
+            $beritas = berita::all();
+            $pdf = Pdf::loadView('admin.berita.pdf', compact('beritas'));
+            return $pdf->download('data_berita.pdf');
+        }
+
+        public function search(Request $request)
+        {
+            $query = $request->get('query');
+
+            // Pencarian berita berdasarkan judul, konten, atau penulis
+            $beritas = berita::where('judul', 'LIKE', "%{$query}%")
+                ->orWhere('konten', 'LIKE', "%{$query}%")
+                ->orWhere('penulis', 'LIKE', "%{$query}%")
+                ->orWhere('gambar', 'LIKE', "%{$query}%")
+                ->get();
+
+            return response()->json($beritas);  // Returning data as JSON for AJAX to handle
+        }
+
 }

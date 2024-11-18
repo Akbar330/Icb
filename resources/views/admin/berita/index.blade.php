@@ -9,7 +9,7 @@
 
         <!-- Dashboard Actions -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            <!-- Tambah Artikel -->
+            <!-- Tambah Berita -->
 
             <!-- Tambah Berita -->
             <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
@@ -21,10 +21,31 @@
             </div>
         </div>
 
-        <!-- Daftar Artikel dan Berita -->
+        <!-- Daftar Berita dan Berita -->
         <div class="mt-8">
             <h2 class="text-2xl font-semibold text-gray-700 mb-4">Daftar Berita</h2>
 
+    <!-- Search and Export Section -->
+    <div class="mb-6 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+        <!-- Input Live Search -->
+        <input
+            type="text"
+            id="search"
+            class="border px-4 py-2 rounded-lg w-full sm:w-1/3"
+            placeholder="Cari data berita...">
+
+        <!-- Tombol Export -->
+        <div class="flex space-x-4">
+            <a href="{{ route('admin.berita.exportExcel') }}"
+               class="btn btn-success">
+               Export Excel
+            </a>
+            <a href="{{ route('admin.berita.exportPdf') }}"
+               class="btn btn-danger">
+               Export PDF
+            </a>
+        </div>
+    </div>
             <!-- Daftar Berita -->
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold text-gray-700">Berita</h3>
@@ -38,7 +59,7 @@
                             <th class="border-b px-4 py-2">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="beritaTable">
                         <!-- Loop berita dari database -->
                         @foreach($beritas as $berita)
                             <tr>
@@ -68,4 +89,44 @@
             </div>
         </div>
     </div>
+
+</div>
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    // Live Search
+    $('#search').on('keyup', function() {
+        let query = $(this).val();
+        $.ajax({
+            url: "{{ route('admin.berita.search') }}",
+            type: "GET",
+            data: { query: query },
+            success: function(data) {
+                let rows = '';
+                // Accessing the asset URL in Blade outside the JS template
+                let assetPath = "{{ asset('storage/') }}"; // Store asset URL path
+
+                // Loop through search results
+                data.forEach(function(item) {
+                    rows += `
+                        <tr class="border-t">
+                            <td class="px-4 py-2">
+                                ${item.gambar ? `<img src="${assetPath}/${item.gambar}" alt="${item.judul}" class="w-20 h-20 object-cover rounded">` : '<span class="text-gray-500">Tidak ada gambar</span>'}
+                            </td>
+                            <td class="px-4 py-2">${item.judul}</td>
+                            <td class="px-4 py-2">${item.penulis}</td>
+                            <td class="px-4 py-2">${item.created_at}</td>
+                            <td class="px-4 py-2">
+                                <a href="/admin/berita/${item.id}" class="text-blue-600 hover:underline">Lihat</a>
+                            </td>
+                        </tr>`;
+                });
+                // Update the table body with the rows generated
+                $('#beritaTable').html(rows);
+            }
+        });
+    });
+</script>
+
 @endsection

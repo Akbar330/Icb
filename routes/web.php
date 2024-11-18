@@ -108,6 +108,13 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('/admin/pendaftaran/export-pdf', [AdminPendaftaranController::class, 'exportPdf'])->name('admin.pendaftaran.exportPdf');
     Route::get('/admin/pendaftaran/search', [AdminPendaftaranController::class, 'search'])->name('admin.pendaftaran.search');
 
+    Route::get('/admin/artikel/export-excel', [AdminartikelController::class, 'exportExcel'])->name('admin.artikel.exportExcel');
+    Route::get('/admin/artikel/export-pdf', [AdminartikelController::class, 'exportPdf'])->name('admin.artikel.exportPdf');
+    Route::get('/admin/artikel/search', [AdminartikelController::class, 'search'])->name('admin.artikel.search');
+
+    Route::get('/admin/berita/export-excel', [AdminBeritaController::class, 'exportExcel'])->name('admin.berita.exportExcel');
+    Route::get('/admin/berita/export-pdf', [AdminBeritaController::class, 'exportPdf'])->name('admin.berita.exportPdf');
+    Route::get('/admin/berita/search', [AdminBeritaController::class, 'search'])->name('admin.berita.search');
 
 });
 
