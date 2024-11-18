@@ -41,6 +41,7 @@ class AdminPendaftaranController extends Controller
         return view('admin.pendaftaran.index', compact('pendaftarans', 'chartData'));
     }
 
+    // Export Excel
     public function exportExcel()
 {
     return Excel::download(new PendaftaranExport, 'data_pendaftar.xlsx');
