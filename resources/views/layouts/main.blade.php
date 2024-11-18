@@ -66,35 +66,124 @@
     @yield('scripts')
     <!-- Loading Bar -->
     <div id="loading-bar"></div>
-<!-- Header with Tailwind CSS Navbar and Overlay -->
-<header class="bg-blue-900 py-2 shadow-lg relative" id="header">
-    <div class="container mx-auto flex items-center justify-between">
-        <h1 class="text-xl font-bold text-white">NEWS UPDATE:</h1>
-        <div class="absolute top-0 right-0 z-30 w-full max-w-lg">
-        <div class="bg-black bg-opacity-90 text-white px-8 py-4 transform skew-x-12 w-full">
-    <p id="datetime" class="transform -skew-x-12 text-sm"></p>
-    </div>
-        <script>
-            // Fungsi untuk memperbarui tanggal dan waktu
-            function updateDateTime() {
-                const now = new Date();
-                const options = { 
-                    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', 
-                    hour: '2-digit', minute: '2-digit', second: '2-digit' 
-                };
-                document.getElementById('datetime').textContent = now.toLocaleDateString('id-ID', options);
-            }
+    <header class="bg-blue-900 py-2 shadow-lg relative" id="header">
+        <div class="container mx-auto flex items-center justify-between">
+            <!-- Bagian kiri: "NEWS UPDATE" -->
+            <h1 class="text-xl font-bold text-white">NEWS UPDATE:</h1>
 
-            // Jalankan fungsi saat halaman dimuat dan setiap detik
-            document.addEventListener('DOMContentLoaded', () => {
-                updateDateTime();
-                setInterval(updateDateTime, 1000);
-            });
-        </script>
+            <!-- Bagian kanan: Waktu dan Tanggal -->
+            <div class="absolute top-0 right-0 z-30 w-full max-w-lg">
+                <div class="bg-black bg-opacity-90 text-white px-8 py-4 transform skew-x-12 w-full">
+                    <p id="datetime" class="transform -skew-x-12 text-sm"></p>
+                </div>
+            </div>
 
+            <!-- Bagian untuk judul berita yang bergerak -->
+            <div class="overflow-hidden flex-grow max-w-full ml-8">
+                <ul class="marquee-list flex space-x-12"> <!-- Menambahkan jarak antar judul -->
+                    @foreach ($beritas as $berita)
+                        <li class="text-lg marquee-item">
+                            <a href="{{ route('berita.show', $berita->id) }}" class="text-white hover:underline">
+                                {{ $berita->judul }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
-    </div>
-</header>
+    </header>
+
+    <script>
+        // Fungsi untuk memperbarui tanggal dan waktu
+        function updateDateTime() {
+            const now = new Date();
+            const options = {
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+                hour: '2-digit', minute: '2-digit', second: '2-digit'
+            };
+            document.getElementById('datetime').textContent = now.toLocaleDateString('id-ID', options);
+        }
+
+        // Jalankan fungsi saat halaman dimuat dan setiap detik
+        document.addEventListener('DOMContentLoaded', () => {
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+        });
+    </script>
+
+    <style>
+        /* Set untuk judul-judul yang berjalan */
+        .marquee-list {
+            display: flex;
+            animation: marquee 15s linear infinite;  /* Atur durasi animasi */
+        }
+
+        /* Set animasi marquee */
+        @keyframes marquee {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Menambahkan penundaan untuk setiap item supaya tampil bergantian */
+        .marquee-item {
+            opacity: 0;
+            animation: fadeIn 12s linear infinite;  /* Durasi lebih lama agar animasi lambat */
+        }
+
+        /* Animasi untuk munculnya judul */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            30% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Penundaan untuk setiap item agar tampil bergantian */
+        .marquee-item:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .marquee-item:nth-child(2) {
+            animation-delay: 2s;
+        }
+
+        .marquee-item:nth-child(3) {
+            animation-delay: 4s;
+        }
+
+        .marquee-item:nth-child(4) {
+            animation-delay: 6s;
+        }
+
+        .marquee-item:nth-child(5) {
+            animation-delay: 8s;
+        }
+
+        .marquee-item:nth-child(6) {
+            animation-delay: 10s;
+        }
+
+        /* Perbesar ukuran font untuk judul */
+        .marquee-item a {
+            font-size: 1.5rem; /* Ukuran font yang lebih besar */
+        }
+    </style>
+
+
+
+
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 shadow-md z-10" id="navbar">
@@ -169,7 +258,7 @@
         <div class="container">
             <div class="row">
                 <!-- Contact Info -->
-                <div class="col-md-4">
+                <div class="col-md-4 text-left">
                     <h3 class="text-light">Kontak</h3>
                     <ul class="list-unstyled text-light">
                         <li>📍 Jl. Atlas Tengah No.2, Babakan Surabaya, Kec. Kiaracondong, Kota Bandung, Jawa Barat 40281</li>
