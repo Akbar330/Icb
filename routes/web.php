@@ -104,6 +104,10 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     // Route untuk menyimpan gambar yang diunggah (POST)
     Route::post('/galeri', [AdminGaleriController::class, 'store'])->name('admin.galeri.store');
 
+    Route::get('/admin/pendaftaran/export-excel', [AdminPendaftaranController::class, 'exportExcel'])->name('admin.pendaftaran.exportExcel');
+    Route::get('/admin/pendaftaran/export-pdf', [AdminPendaftaranController::class, 'exportPdf'])->name('admin.pendaftaran.exportPdf');
+    Route::get('/admin/pendaftaran/search', [AdminPendaftaranController::class, 'search'])->name('admin.pendaftaran.search');
+
 
 });
 
