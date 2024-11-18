@@ -21,7 +21,7 @@
             <a href="{{ route('berita.index') }}" class="text-blue-500 hover:underline">← Kembali ke Daftar Berita</a>
         </div>
         <div class="mt-8">
-            <a href="/" class="text-blue-500 hover:underline">← Kembali ke Home</a>
+            <a href="/" class="btn btn-primary">← Kembali ke Home</a>
         </div>
     </div>
 @endsection

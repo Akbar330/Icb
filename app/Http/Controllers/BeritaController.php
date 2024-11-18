@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
+use App\Models\Artikel;
 use Illuminate\Http\Request;
 
 class BeritaController extends Controller
 {
     //
     public function index() {
-        $beritas = Berita::all(); // Mengambil semua data berita
-        return view('berita.index', compact('beritas'));
+        $beritas = Berita::all();
+        $artikels = Artikel::latest()->take(5)->get(); // Ambil artikel terkini (limit 5)
+
+        // Return view dengan data
+        return view('berita.index', compact('beritas', 'artikels'));
+
     }
 
     public function show($id) {

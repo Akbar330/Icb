@@ -18,7 +18,7 @@
         </div>
 
         <div class="mt-8">
-            <a href="{{ route('artikel.index') }}" class="text-blue-500 hover:underline">← Kembali ke daftar artikel</a>
+            <a href="{{ route('artikel.index') }}" class="btn btn-primary">← Kembali ke daftar artikel</a>
         </div>
     </div>
 @endsection

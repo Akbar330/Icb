@@ -38,6 +38,7 @@ Route::get('/guru-siswa', [GuruSiswaController::class, 'index']);
 
 // Artikel Publik - Show Individual Artikel
 Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
+Route::get('/artikel-search', [ArtikelController::class, 'search'])->name('artikel.search');
 
 // Berita Publik
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
