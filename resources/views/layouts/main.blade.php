@@ -66,123 +66,102 @@
     @yield('scripts')
     <!-- Loading Bar -->
     <div id="loading-bar"></div>
-    <header class="bg-blue-900 py-2 shadow-lg relative" id="header">
-        <div class="container mx-auto flex items-center justify-between">
-            <!-- Bagian kiri: "NEWS UPDATE" -->
-            <h1 class="text-xl font-bold text-white">NEWS UPDATE:</h1>
+<!-- Elemen untuk menyimpan data berita -->
+<div id="berita-data" data-beritas='@json($beritas)'></div>
 
-            <!-- Bagian kanan: Waktu dan Tanggal -->
-            <div class="absolute top-0 right-0 z-30 w-full max-w-lg">
-                <div class="bg-black bg-opacity-90 text-white px-8 py-4 transform skew-x-12 w-full">
-                    <p id="datetime" class="transform -skew-x-12 text-sm"></p>
-                </div>
-            </div>
+<header class="bg-blue-900 py-2 shadow-lg relative" id="header">
+    <div class="container mx-auto flex items-center justify-between">
+        <!-- Bagian kiri: "NEWS UPDATE" -->
+        <h1 class="text-xl font-bold text-white">NEWS UPDATE:</h1>
 
-            <!-- Bagian untuk judul berita yang bergerak -->
-            <div class="overflow-hidden flex-grow max-w-full ml-8">
-                <ul class="marquee-list flex space-x-12"> <!-- Menambahkan jarak antar judul -->
-                    @foreach ($beritas as $berita)
-                        <li class="text-lg marquee-item">
-                            <a href="{{ route('berita.show', $berita->id) }}" class="text-white hover:underline">
-                                {{ $berita->judul }}
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
+        <!-- Bagian kanan: Waktu dan Tanggal -->
+        <div class="absolute top-0 right-0 z-30 w-full max-w-lg">
+            <div class="bg-black bg-opacity-90 text-white px-8 py-4 transform skew-x-12 w-full">
+                <p id="datetime" class="transform -skew-x-12 text-sm"></p>
             </div>
         </div>
-    </header>
 
-    <script>
-        // Fungsi untuk memperbarui tanggal dan waktu
-        function updateDateTime() {
-            const now = new Date();
-            const options = {
-                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-                hour: '2-digit', minute: '2-digit', second: '2-digit'
-            };
-            document.getElementById('datetime').textContent = now.toLocaleDateString('id-ID', options);
+        <!-- Bagian untuk judul berita -->
+        <div class="flex-grow max-w-full ml-8 text-lg text-white font-medium overflow-hidden">
+            <p id="news-item" class="news-text"></p>
+        </div>
+    </div>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Ambil data berita dari elemen HTML
+    const beritaElement = document.getElementById('berita-data');
+    const berita = JSON.parse(beritaElement.getAttribute('data-beritas')).slice(0, 3);
+
+    // Fungsi untuk memperbarui tanggal dan waktu
+    function updateDateTime() {
+        const now = new Date();
+        const options = {
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+            hour: '2-digit', minute: '2-digit', second: '2-digit'
+        };
+        document.getElementById('datetime').textContent = now.toLocaleDateString('id-ID', options);
+    }
+
+    // Fungsi untuk menampilkan berita dengan animasi masuk dan keluar
+    function displayNews() {
+        const newsElement = document.getElementById('news-item');
+        let index = 0;
+
+        function updateNews() {
+            // Tambahkan kelas fade-out untuk animasi keluar
+            newsElement.classList.remove('fade-in');
+            newsElement.classList.add('fade-out');
+
+            // Tunggu sampai animasi keluar selesai sebelum mengganti berita
+            setTimeout(() => {
+                newsElement.textContent = berita[index]?.judul || "No more news!";
+                newsElement.classList.remove('fade-out'); // Hapus kelas fade-out
+                newsElement.classList.add('fade-in'); // Tambahkan kelas fade-in
+
+                // Pindah ke berita berikutnya, atau kembali ke awal
+                index = (index + 1) % berita.length;
+            }, 2000); // Durasi sama dengan transisi di CSS
         }
 
-        // Jalankan fungsi saat halaman dimuat dan setiap detik
-        document.addEventListener('DOMContentLoaded', () => {
-            updateDateTime();
-            setInterval(updateDateTime, 1000);
-        });
-    </script>
+        // Tampilkan berita pertama dengan animasi masuk
+        newsElement.textContent = berita[index]?.judul || "No more news!";
+        newsElement.classList.add('fade-in');
+        index++;
 
-    <style>
-        /* Set untuk judul-judul yang berjalan */
-        .marquee-list {
-            display: flex;
-            animation: marquee 15s linear infinite;  /* Atur durasi animasi */
-        }
+        // Ganti berita setiap 5 detik
+        setInterval(updateNews, 5000);
+    }
 
-        /* Set animasi marquee */
-        @keyframes marquee {
-            0% {
-                transform: translateX(-100%);
-            }
-            100% {
-                transform: translateX(100%);
-            }
-        }
+    // Jalankan fungsi saat halaman dimuat
+    updateDateTime();
+    setInterval(updateDateTime, 1000); // Update waktu setiap detik
+    displayNews();
+});
+</script>
 
-        /* Menambahkan penundaan untuk setiap item supaya tampil bergantian */
-        .marquee-item {
+<style>
+        /* Untuk animasi fade-out + bergerak ke kiri */
+        .news-text {
             opacity: 0;
-            animation: fadeIn 12s linear infinite;  /* Durasi lebih lama agar animasi lambat */
+            transform: translateX(100%);
+            transition: opacity 1s ease, transform 1s ease;
         }
 
-        /* Animasi untuk munculnya judul */
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            30% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0;
-            }
+        /* Saat berita masuk (fade-in + bergerak ke posisi semula) */
+        .news-text.fade-in {
+            opacity: 1;
+            transform: translateX(0);
         }
 
-        /* Penundaan untuk setiap item agar tampil bergantian */
-        .marquee-item:nth-child(1) {
-            animation-delay: 0s;
+        /* Saat berita keluar (fade-out + bergerak ke kiri) */
+        .news-text.fade-out {
+            opacity: 0;
+            transform: translateX(-100%);
         }
 
-        .marquee-item:nth-child(2) {
-            animation-delay: 2s;
-        }
-
-        .marquee-item:nth-child(3) {
-            animation-delay: 4s;
-        }
-
-        .marquee-item:nth-child(4) {
-            animation-delay: 6s;
-        }
-
-        .marquee-item:nth-child(5) {
-            animation-delay: 8s;
-        }
-
-        .marquee-item:nth-child(6) {
-            animation-delay: 10s;
-        }
-
-        /* Perbesar ukuran font untuk judul */
-        .marquee-item a {
-            font-size: 1.5rem; /* Ukuran font yang lebih besar */
-        }
-    </style>
-
-
-
+</style>
 
 
 <!-- Navbar -->
