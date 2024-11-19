@@ -12,14 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('carousels', function (Blueprint $table) {
-            $table->string('image_path')->nullable(); // Menambahkan kolom image_path
+            //
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
         Schema::table('carousels', function (Blueprint $table) {
-            $table->dropColumn('image_path');
+            //
         });
     }
 };

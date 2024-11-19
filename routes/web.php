@@ -104,26 +104,12 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     // Route untuk menampilkan form upload gambar (GET)
     Route::get('/galeri/create', [AdminGaleriController::class, 'create'])->name('admin.galeri.create');
 
-    // Route untuk menyimpan gambar yang diunggah (POST)
-    Route::post('/galeri', [AdminGaleriController::class, 'store'])->name('admin.galeri.store');
-
-    //admin carousel 
-        Route::prefix('admin')->group(function () {
-        Route::get('/carousel', [CarouselController::class, 'index'])->name('carousel.index');
-        Route::get('/carousel/create', [CarouselController::class, 'create'])->name('carousel.create');
-        Route::post('/carousel/store', [CarouselController::class, 'store'])->name('carousel.store');
-        Route::delete('/carousel/{carousel}', [CarouselController::class, 'destroy'])->name('carousel.destroy');
-    });
-    
-        Route::prefix('admin')->group(function () {
-        Route::get('/carousel', [CarouselController::class, 'index'])->name('admin.carousel.index');
-
-        // Route untuk membuat carousel
-        Route::get('/carousel/create', [CarouselController::class, 'create'])->name('admin.carousel.create');
-        Route::post('/carousel/store', [CarouselController::class, 'store'])->name('admin.carousel.store');
-        
-    });
-
+    Route::get('/carousel', [CarouselController::class, 'index'])->name('admin.carousel.index');
+    Route::get('/carousel/create', [CarouselController::class, 'create'])->name('admin.carousel.create');
+    Route::post('/carousel/store', [CarouselController::class, 'store'])->name('admin.carousel.store');
+    Route::get('/carousel/{carousel}/edit', [CarouselController::class, 'edit'])->name('admin.carousel.edit');
+    Route::put('/carousel/{carousel}', [CarouselController::class, 'update'])->name('admin.carousel.update');
+    Route::delete('/carousel/{carousel}', [CarouselController::class, 'destroy'])->name('admin.carousel.destroy');
 
     //EXPORT
     Route::get('/admin/pendaftaran/export-excel', [AdminPendaftaranController::class, 'exportExcel'])->name('admin.pendaftaran.exportExcel');
