@@ -37,6 +37,25 @@
             </div>
 
 
+        <!-- Kelola Carousel -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+            <h2 class="text-xl font-semibold text-gray-700">Kelola Carousel</h2>
+            <p class="text-gray-600 mt-2">Lihat dan kelola carousel yang ditampilkan di halaman utama.</p>
+            <a href="{{ route('admin.carousel.index') }}" class="mt-4 inline-block bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 hover:bg-blue-700">
+                Kelola Carousel
+            </a>
+        </div>
+
+        <!-- Tambah Carousel -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+            <h2 class="text-xl font-semibold text-gray-700">Tambah Carousel</h2>
+            <p class="text-gray-600 mt-2">Tambahkan carousel baru untuk memperindah tampilan website.</p>
+            <a href="{{ route('admin.carousel.create') }}" class="mt-4 inline-block bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 hover:bg-blue-700">
+                Tambah Carousel
+            </a>
+        </div>
+    </div>
+
         </div>
 
         <!-- Daftar Artikel dan Berita -->
