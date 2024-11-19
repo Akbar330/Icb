@@ -12,6 +12,8 @@
             font-family: 'Inter', sans-serif;
             background-color: #F9FAFB;
             color: #333;
+            margin-top: 80px; /* Adjust according to your header height */
+
         }
 
         /* Navigation */
@@ -20,7 +22,7 @@
             padding: 8px 0; /* Reduced padding */
             text-transform: uppercase;
             font-weight: 600;
-            color: #E2E8F0;
+            color: #black;
             font-size: 0.875rem; /* Smaller font size */
             transition: color 0.3s, border-bottom 0.3s;
         }
@@ -32,11 +34,19 @@
         }
 
         /* Header */
+/* Make the whole header fixed at the top */
         header {
-            background: linear-gradient(to right, #00bceb, #F1C40F);
-            padding: 10px 0; /* Reduced padding */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white; /* Ensure the header has a background */
+            z-index: 1000; /* Keeps the header above other content */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow for better visibility */
+            padding: 10px 0; /* Adjust padding */
         }
+
+
 
         header .container {
             display: flex;
@@ -46,12 +56,12 @@
 
         header h1 {
             font-size: 1.25rem; /* Smaller font size */
-            color: white;
+            color: black;
         }
 
         header p {
             font-size: 0.75rem; /* Smaller font size */
-            color: white;
+            color: black;
         }
 
         header img {
@@ -64,6 +74,8 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px; /* Add a top margin so the content is not hidden behind the fixed header */
+
         }
 
         /* Footer */
@@ -128,24 +140,25 @@
     <header class="bg-transparent">
         <div class="container mx-auto px-4 flex items-center justify-between">
             <div class="flex items-center space-x-4">
-                <img src="{{ asset('storage/icb.png') }}" alt="Logo" class="h-12 w-auto">
+                <img src="{{ asset('icb.png') }}" alt="Logo" class="h-12 w-auto">
                 <div>
                     <h1>ADMIN DASHBOARD SMK ICB CINTA TEKNIKA</h1>
                     <p>Admin Page</p>
                 </div>
             </div>
             <nav class="flex space-x-6 ml-auto items-center">
-                <a href="/admin" class="text-white">Home</a>
-                <a href="/admin/artikel" class="text-white">Artikel</a>
-                <a href="/admin/berita" class="text-white">Berita</a>
-                <a href="/admin/galeri" class="text-white">Galeri</a>
-                <a href="/admin/informasi" class="text-white">Informasi</a>
-                <a href="/admin/pendaftaran" class="text-white">PPDB</a>
+                <a href="/admin" class="text-black">Home</a>
+                <a href="/admin/artikel" class="text-black">Artikel</a>
+                <a href="/admin/berita" class="text-black">Berita</a>
+                <a href="/admin/galeri" class="text-black">Galeri</a>
+                <a href="/admin/informasi" class="text-black">Informasi</a>
+                <a href="/admin/carousel" class="text-black">Carousel</a>
+                <a href="/admin/pendaftaran" class="text-black">PPDB</a>
 
                 <!-- Tombol Logout -->
                 <form action="{{ route('logout') }}" method="POST" class="inline">
                     @csrf
-                    <button type="submit" class="text-white hover:text-gray-300 flex items-center space-x-2 font-bold">
+                    <button type="submit" class="text-black hover:text-gray-600 flex items-center space-x-2 font-bold">
                         <span>Logout</span>
                         <i class="fas fa-sign-out-alt"></i>
                     </button>

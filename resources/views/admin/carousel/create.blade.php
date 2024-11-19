@@ -1,3 +1,8 @@
+@extends('layouts.admin')
+
+@section('title', 'Admin Carousel')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +23,18 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.carousel.store') }}" method="POST">
+    <form action="{{ route('admin.carousel.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <label for="order">Order:</label>
-        <input type="number" id="order" name="order"
+        <input type="number" id="order" name="order" value="{{ old('order') }}" required>
+        <br><br>
+
+        <label for="image">Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+        <br><br>
+
+        <button type="submit" class="btn btn-primary">Create Carousel</button>
+    </form>
+</body>
+</html>
+@endsection

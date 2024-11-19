@@ -9,5 +9,5 @@ class Artikel extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['judul', 'konten', 'penulis', 'gambar'];
+    protected $fillable = ['judul', 'konten', 'penulis'];
 }
