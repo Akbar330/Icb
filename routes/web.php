@@ -30,7 +30,8 @@ Route::get('/visi-misi', [VisiMisiController::class, 'index']);
 Route::get('/informasi', [InformasiController::class, 'index']);
 Route::get('/galeri', [GaleriController::class, 'index']);
 Route::get('/data', [DataController::class, 'index']);
-Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index'); // Public route for articles
+Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.index');
+ // Public route for articles
 Route::get('/kontak', [KontakController::class, 'index']);
 Route::get('/pendaftaran', [PendaftaranController::class, 'index']);
 Route::get('/berita', [BeritaController::class, 'index']); // Public route for berita
@@ -39,6 +40,7 @@ Route::get('/guru-siswa', [GuruSiswaController::class, 'index']);
 
 // Artikel Publik - Show Individual Artikel
 Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
+
 Route::get('/artikel-search', [ArtikelController::class, 'search'])->name('artikel.search');
 
 // Berita Publik

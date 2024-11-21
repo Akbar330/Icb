@@ -9,5 +9,9 @@ class Artikel extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['judul', 'konten', 'penulis'];
+    protected $table = 'artikels'; // Nama tabel
+    protected $primaryKey = 'id'; // Primary key
+    public $timestamps = true; // Otomatis untuk created_at & updated_at
+
+    protected $fillable = ['judul', 'konten', 'penulis', 'gambar'];
 }

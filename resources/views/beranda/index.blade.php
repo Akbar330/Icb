@@ -53,6 +53,54 @@
             <img src="{{ asset('smk_icb_ct.jpeg') }}" alt="Gambar Sambutan" class="w-full h-32 object-cover rounded-lg shadow-md">
         </div>
     </div>
+<!-- Container untuk Artikel dan Kontak Sekolah -->
+<div class="container py-4">
+    <div class="row">
+        <!-- Left Section: Daftar Artikel (70%) -->
+        <div class="col-md-8 mb-4">
+            <h1 class="display-4 font-bold">Artikel Terbaru</h1>
+            <p class="text-center text-muted mb-4">Berikut adalah beberapa artikel terbaru untuk Anda.</p>
+
+            <ul class="list-group list-group-flush">
+                @if ($artikel->isEmpty())
+                    <p>Tidak ada artikel tersedia.</p>
+                @else
+                    @foreach ($artikel as $item)
+                        <li class="list-group-item">
+                            <a href="{{ route('artikel.show', $item->id) }}">
+                                {{ $item->judul }}
+                            </a>
+                            <p class="text-muted">{{ \Illuminate\Support\Str::limit($item->konten, 150) }}</p>
+                            <a href="{{ route('artikel.show', $item->id) }}" class="btn btn-primary mt-2">Baca Selengkapnya</a><br>
+                            <small class="text-secondary">Penulis: {{ $item->penulis }}</small> 
+                            <small class="text-secondary">{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>    
+                        </li>
+                    @endforeach
+                @endif
+            </ul>
+        </div>
+
+        <!-- Right Section: Kontak Sekolah (30%) -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Kontak Sekolah -->
+                    <h3 class="text-primary font-bold">
+                        SAPAAN KEPALA SEKOLAH
+                    </h3>
+                    <p>
+                    Duis ultrices dui justo, ac commodo metus placerat non. Nam nulla lorem, imperdiet lacinia ipsum vitae, suscipit ullamcorper dui. Sed nibh justo, luctus vel nulla ut, rhoncus facilisis ipsum. Sed at blandit urna, facilisis posuere odio. Integer sollicitudin justo tellus, nec semper libero bibendum sed. Etiam quis lacus pretium, luctus est a, congue orci. Pellentesque mattis hendrerit ante eget pretium. Etiam ornare, libero ac hendrerit suscipit, risus leo condimentum tortor, vulputate placerat purus diam in nunc. Maecenas tristique aliquam vulputate. Quisque id ante sapien. Nulla sed lacinia massa, et pellentesque purus. Aliquam lacinia euismod urna, sit amet interdum libero consequat et. Pellentesque ut ante ut risus fringilla blandit.
+                    </p>
+                    <!-- Form Pencarian Artikel -->
+                    <h5 class="text-blue font-bold mt-10"> POLLING SEKOLAH </h5>
+
+                    <!-- Daftar Artikel -->
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
     <!-- Berita Section -->
@@ -60,7 +108,7 @@
         <div class="row">
             <!-- Left Section: Daftar Berita (70%) -->
             <div class="col-md-8 mb-4">
-                <h1 class="display-4 text-primary text-center font-bold">Berita Sekolah</h1>
+                <h1 class="display-4 font-bold">Berita Sekolah</h1>
                 <p class="text-center text-muted mb-4">Berikut adalah berita terbaru dari sekolah.</p>
 
                 <div class="d-flex flex-column">
@@ -85,57 +133,7 @@
                     </div>
                     @endforeach
                 </div>
-            </div>
-            <!-- Right Section: Kontak Sekolah (30%) -->
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <!-- Kontak Sekolah -->
-                        <h5 class="card-title text-primary">Kontak Sekolah</h5>
-                        <p class="card-text text-muted">
-                            Alamat: Jalan Raya No. 123, Bandung, Jawa Barat
-                        </p>
-                        <p class="card-text text-muted">
-                            Telepon: (022) 123-4567
-                        </p>
-                        <p class="card-text text-muted">
-                            Email: info@sekolahku.sch.id
-                        </p>
-                        <p class="card-text text-muted">
-                            Jam Operasional: Senin - Jumat, 08.00 - 15.00
-                        </p>
-                        <hr>
-
-                        <!-- Form Pencarian Artikel -->
-                        <h5 class="card-title text-primary">Cari Artikel</h5>
-                        <form action="{{ route('artikel.search') }}" method="GET">
-                            <div class="input-group mb-3">
-                                <input type="text" name="query" class="form-control" placeholder="Cari artikel..." required>
-                                <button class="btn btn-primary" type="submit">Cari</button>
-                            </div>
-                        </form>
-                        <hr>
-
-                        <!-- Daftar Artikel -->
-                        <h5 class="card-title text-primary">Artikel Terkini</h5>
-                        <ul class="list-group list-group-flush">
-                            @foreach ($artikel as $artikel)
-                            <li class="list-group-item">
-                                <a href="{{ route('artikel.show', $artikel->id) }}" class="text-decoration-none text-black">
-                                    <strong>{{ $artikel->judul }}</strong>
-                                </a>
-                                <p class="text-muted mb-0" style="font-size: 0.85rem;">
-                                    {{ Str::limit($artikel->konten, 100) }}
-                                </p>
-                                <small class="text-secondary">
-                                    {{ \Carbon\Carbon::parse($artikel->created_at)->format('d M Y') }}
-                                </small>
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            </div>     
         </div>
     </div>
 
