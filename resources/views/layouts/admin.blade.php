@@ -153,6 +153,7 @@
                 <a href="/admin/galeri" class="text-black">Galeri</a>
                 <a href="/admin/informasi" class="text-black">Informasi</a>
                 <a href="/admin/carousel" class="text-black">Carousel</a>
+                <a href="/admin/oncam" class="text-black">On Cam</a>
                 <a href="/admin/pendaftaran" class="text-black">PPDB</a>
 
                 <!-- Tombol Logout -->
