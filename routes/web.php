@@ -20,6 +20,7 @@ use App\Http\Controllers\AdminArtikelController;
 use App\Http\Controllers\AdminInformasiController;
 use App\Http\Controllers\AdminPendaftaranController;
 use App\Http\Controllers\CarouselController;
+use App\Http\Controllers\OncamController;
 
 // Landing Page Route
 Route::view('/', 'welcome');
@@ -94,6 +95,12 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::delete('/informasi/{informasi}', [AdminInformasiController::class, 'destroy'])->name('admin.info.destroy');
     Route::put('/admin/informasi/{id}', [InformasiController::class, 'update'])->name('admin.informasi.update');
     Route::delete('/admin/informasi/{id}', [InformasiController::class, 'destroy'])->name('admin.informasi.destroy');
+
+    // Oncam
+    Route::get('/oncam', [OncamController::class, 'index'])->name('admin.oncam.index');
+    Route::get('/oncam', [OncamController::class, 'store'])->name('admin.oncam.store');
+    Route::get('/oncam/create', [OncamController::class, 'create'])->name('admin.oncam.create');
+    Route::get('/oncam/edit', [OncamController::class, 'edit'])->name('admin.oncam.edit');
 
     // Admin PPDB
     Route::get('/pendaftaran', [AdminPendaftaranController::class, 'index'])->name('admin.pendaftaran.index');
