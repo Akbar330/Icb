@@ -198,12 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/kontak' ? 'active' : ''); ?>">
                     <a class="nav-link text-lg text-black" href="/kontak">Kontak</a>
                 </li>
-                <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/artikel' ? 'active' : ''); ?>">
-                    <a class="nav-link text-lg text-black" href="/artikel">Artikel</a>
-                </li>
-                <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/berita' ? 'active' : ''); ?>">
-                    <a class="nav-link text-lg text-black" href="/berita">Berita</a>
-                </li>
                 <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/pendaftaran' ? 'active' : ''); ?>">
                     <a class="nav-link text-lg text-black" href="/pendaftaran">PPBD</a>
                 </li>
@@ -251,9 +245,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h3 class="text-light">Ikuti Kami</h3>
                     <div class="mt-2">
                         <a href="#" class="text-light mx-1"><i class="fab fa-facebook-f fa-2x"></i></a>
-                        <a href="#" class="text-light mx-1"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="https://www.instagram.com/smkicbcintateknika?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="text-light mx-1"><i class="fab fa-instagram fa-2x"></i></a>
                         <a href="#" class="text-light mx-1"><i class="fab fa-twitter fa-2x"></i></a>
-                        <a href="#" class="text-light mx-1"><i class="fab fa-linkedin-in fa-2x"></i></a>
+                        <a href="https://youtu.be/l7n9k8Rzq3s?si=yoHf38XKqmHwY_p6" class="text-light mx-1"><i class="fab fa-youtube fa-2x"></i></a>
                     </div>
                 </div>
 
