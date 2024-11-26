@@ -72,8 +72,8 @@
                             </a>
                             <p class="text-muted">{{ \Illuminate\Support\Str::limit($item->konten, 150) }}</p>
                             <a href="{{ route('artikel.show', $item->id) }}" class="btn btn-primary mt-2">Baca Selengkapnya</a><br>
-                            <small class="text-secondary">Penulis: {{ $item->penulis }}</small> 
-                            <small class="text-secondary">{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>    
+                            <small class="text-secondary">Penulis: {{ $item->penulis }}</small>
+                            <small class="text-secondary">{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
                         </li>
                     @endforeach
                 @endif
@@ -95,7 +95,7 @@
                     <h5 class="text-blue font-bold mt-10"> POLLING SEKOLAH </h5>
 
                     <!-- Daftar Artikel -->
-                    
+
                 </div>
             </div>
         </div>
@@ -133,7 +133,7 @@
                     </div>
                     @endforeach
                 </div>
-            </div>     
+            </div>
         </div>
     </div>
 
@@ -181,18 +181,22 @@
 
         <!-- Embedded YouTube Videos Section -->
         <div class="w-full mt-10">
-            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Activity oncam</h3>
+            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Activity Oncam</h3>
             <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="rounded-lg overflow-hidden shadow-lg">
-                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/l7n9k8Rzq3s?=1&mute=1" title="YouTube video" allowfullscreen></iframe>
-                </div>
-                <div class="rounded-lg overflow-hidden shadow-lg">
-                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/l7n9k8Rzq3s?=1&mute=1" title="YouTube video" allowfullscreen></iframe>
-                </div>
-                <div class="rounded-lg overflow-hidden shadow-lg">
-                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/l7n9k8Rzq3s?=1&mute=1" title="YouTube video" allowfullscreen></iframe>
-                </div>
+                @foreach($oncams as $oncam)
+                    <div class="rounded-lg overflow-hidden shadow-lg">
+                        <iframe
+                            width="100%"
+                            height="315"
+                            src="{{ $oncam->embed_link }}"
+                            title="Oncam Video"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                @endforeach
             </div>
+        </div>
+
 
 </body>
 @endsection
