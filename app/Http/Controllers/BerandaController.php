@@ -17,8 +17,8 @@ class BerandaController extends Controller
         $gambarGaleri = Galeri::all();
         $berita = Berita::latest()->paginate(3, ['*'], 'berita_page');
         $artikel = Artikel::latest()->paginate(3, ['*'], 'artikel_page');
-     // atau Artikel::paginate(3)
-
+        $oncams = Oncam::latest()->paginate(3, ['*'], 'oncam_page'); // Pagination untuk Oncam    
+        
         return view('beranda.index', compact('berita', 'gambarGaleri', 'carousels', 'artikel', 'oncams'));
     }
 

@@ -9,7 +9,7 @@ class OncamController extends Controller
 {
     //
     public function index() {
-        $oncams = Oncam::all();
+        $oncams = Oncam::latest()->paginate(3);
         return view('admin.oncam.index', compact('oncams'));
     }
 

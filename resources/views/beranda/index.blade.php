@@ -91,9 +91,10 @@
             </ul>
 
             <!-- Pagination -->
-            <div class="d-flex justify-content-center mt-4">
-                {{ $artikel->links('pagination::bootstrap-4') }}
+            <div class="d-flex justify-content mt-4">
+            {{ $artikel->appends(['berita_page' => request('berita_page')])->links('pagination::bootstrap-4') }}
             </div>
+
         </div>
 
         <!-- Right Section: Kontak Sekolah (30%) -->
@@ -158,7 +159,7 @@
 
             <!-- Pagination -->
             <div class="d-flex justify-content mt-4">
-                {{ $berita->links('pagination::bootstrap-4') }}
+            {{ $berita->appends(['artikel_page' => request('artikel_page')])->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </div>
@@ -208,24 +209,31 @@
         </div>
     </div>
 
-        <!-- Embedded YouTube Videos Section -->
-        <div class="w-full mt-10">
-            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Activity Oncam</h3>
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-                @foreach($oncams as $oncam)
-                    <div class="rounded-lg overflow-hidden shadow-lg">
-                        <iframe
-                            width="100%"
-                            height="315"
-                            src="{{ $oncam->embed_link }}"
-                            title="Oncam Video"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                @endforeach
+<!-- Embedded YouTube Videos Section -->
+<div class="w-full mt-10">
+    <h3 class="text-2xl font-semibold mb-4 text-gray-800">Activity Oncam</h3>
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+        @foreach($oncams as $oncam)
+            <div class="rounded-lg overflow-hidden shadow-lg">
+                <iframe
+                    width="100%"
+                    height="315"
+                    src="{{ $oncam->embed_link }}"
+                    title="Oncam Video"
+                    allowfullscreen>
+                </iframe>
             </div>
-        </div>
+        @endforeach
+    </div>
 
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center mt-4">
+        {{ $oncams->appends([
+            'berita_page' => request('berita_page'),
+            'artikel_page' => request('artikel_page'),
+        ])->links('pagination::bootstrap-4') }}
+    </div>
+</div>
 
 </body>
 @endsection
