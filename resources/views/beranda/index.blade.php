@@ -9,17 +9,27 @@
 <!-- Carousel Section -->
 <div class="relative w-full overflow-hidden" style="height: 450px;">
     <div id="carousel" class="flex transition-transform duration-700 ease-in-out" style="width: 100%; height: 450px;">
-        @foreach ($carousels as $carousel)
+        @foreach ($carousels as $index => $carousel)
         <div class="w-full flex-shrink-0" style="height: 450px; position: relative;">
             <!-- Gambar Carousel -->
             <img src="{{ asset('storage/' . $carousel->image_path) }}" class="w-full h-full object-cover" alt="Gambar Carousel">
 
             <!-- Overlay tetap di posisi kiri -->
             <div class="absolute top-0 left-0 w-[45%] h-full bg-black opacity-45" style="clip-path: polygon(0 0, 100% 0%, 100% 100%, 30% 100%); z-index: 20;"></div>
+
+            <!-- Overlay Teks -->
+            <div class="absolute top-1/2 left-10 transform -translate-y-1/2 text-white z-30">
+                @if ($index == 0)
+                    <h1 class="text-4xl font-bold">SELAMAT DATANG DI SMK ICB</h1>
+                    <p class="text-lg mt-2">Pusat pendidikan kejuruan yang unggul.</p>
+                @endif
+                <!-- Anda dapat menambahkan teks berbeda untuk slide lain di sini -->
+            </div>
         </div>
         @endforeach
     </div>
 </div>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -89,7 +99,7 @@
                         SAPAAN KEPALA SEKOLAH
                     </h3>
                     <p>
-                    Duis ultrices dui justo, ac commodo metus placerat non. Nam nulla lorem, imperdiet lacinia ipsum vitae, suscipit ullamcorper dui. Sed nibh justo, luctus vel nulla ut, rhoncus facilisis ipsum. Sed at blandit urna, facilisis posuere odio. Integer sollicitudin justo tellus, nec semper libero bibendum sed. Etiam quis lacus pretium, luctus est a, congue orci. Pellentesque mattis hendrerit ante eget pretium. Etiam ornare, libero ac hendrerit suscipit, risus leo condimentum tortor, vulputate placerat purus diam in nunc. Maecenas tristique aliquam vulputate. Quisque id ante sapien. Nulla sed lacinia massa, et pellentesque purus. Aliquam lacinia euismod urna, sit amet interdum libero consequat et. Pellentesque ut ante ut risus fringilla blandit.
+                    SEMANGAT PAGI!!!
                     </p>
                     <!-- Form Pencarian Artikel -->
                     <h5 class="text-blue font-bold mt-10"> POLLING SEKOLAH </h5>
@@ -102,40 +112,49 @@
     </div>
 </div>
 
+<!-- Berita Section -->
+<div class="container py-4">
+    <div class="row">
+        <!-- Left Section: Daftar Berita (70%) -->
+        <div class="col-md-8 mb-4">
+            <h1 class="display-4 font-bold">Berita Sekolah</h1>
+            <p class="text-center text-muted mb-4">Berikut adalah berita terbaru dari sekolah.</p>
 
-    <!-- Berita Section -->
-    <div class="container py-4">
-        <div class="row">
-            <!-- Left Section: Daftar Berita (70%) -->
-            <div class="col-md-8 mb-4">
-                <h1 class="display-4 font-bold">Berita Sekolah</h1>
-                <p class="text-center text-muted mb-4">Berikut adalah berita terbaru dari sekolah.</p>
-
-                <div class="d-flex flex-column">
-                    @foreach ($berita as $item)
-                    <div class="d-flex py-3 border-bottom">
-                        @if ($item->gambar)
-                        <img src="{{ asset('storage/' . $item->gambar) }}" alt="Gambar Berita" class="img-fluid rounded me-3" style="width: 150px; height: 150px; object-fit: cover;">
-                        @endif
-                        <div>
-                            <h3 class="text-primary">
-                                <a href="{{ route('berita.show', $item->id) }}" class="text-decoration-none text-black">
-                                    {{ $item->judul }}
-                                </a>
-                            </h3>
-                            <p class="text-muted mb-2">{{ \Illuminate\Support\Str::limit($item->konten, 150) }}</p>
-                            <small class="text-secondary">Penulis: {{ $item->penulis ?? 'Anonim' }}</small> |
-                            <small class="text-secondary">{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
-                            <br><a href="{{ route('berita.show', $item->id) }}" class="btn btn-primary mt-2">
-                                Lihat Selengkapnya
-                            </a>
-                        </div>
+            <div class="d-flex flex-column">
+                @foreach ($berita as $item)
+                <div class="d-flex py-3 border-bottom">
+                    @if ($item->gambar)
+                    <!-- Card untuk gambar -->
+                    <div class="card me-3" style="width: 150px; height: 150px; overflow: hidden;">
+                        <img src="{{ asset('storage/' . $item->gambar) }}" 
+                             alt="Gambar Berita" 
+                             class="img-fluid w-100 h-100" 
+                             style="object-fit: cover;">
                     </div>
-                    @endforeach
+                    @endif
+                    <div>
+                        <h3 class="text-primary">
+                            <a href="{{ route('berita.show', $item->id) }}" class="text-decoration-none text-black">
+                                {{ $item->judul }}
+                            </a>
+                        </h3>
+                        <p class="text-muted mb-2">{{ \Illuminate\Support\Str::limit($item->konten, 150) }}</p>
+                        <small class="text-secondary">Penulis: {{ $item->penulis ?? 'Anonim' }}</small> |
+                        <small class="text-secondary">{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
+                        <br>
+                        <a href="{{ route('berita.show', $item->id) }}" class="btn btn-primary mt-2">
+                            Lihat Selengkapnya
+                        </a>
+                    </div>
                 </div>
+
+                @endforeach
+
             </div>
         </div>
     </div>
+</div>
+
 
     <!-- Bagian Galeri -->
     <div class="w-full mt-10">
