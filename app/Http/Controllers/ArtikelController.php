@@ -10,7 +10,8 @@ class ArtikelController extends Controller
     public function index()
     {
         // Fetch all articles
-        $artikels = Artikel::all();
+        $artikels = Artikel::latest()->paginate(3); // Mengembalikan LengthAwarePaginator
+
 
         // Return view with articles data
         return view('artikel.index', compact('artikels'));

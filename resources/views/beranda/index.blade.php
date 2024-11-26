@@ -63,6 +63,7 @@
             <img src="{{ asset('smk_icb_ct.jpeg') }}" alt="Gambar Sambutan" class="w-full h-32 object-cover rounded-lg shadow-md">
         </div>
     </div>
+
 <!-- Container untuk Artikel dan Kontak Sekolah -->
 <div class="container py-4">
     <div class="row">
@@ -88,6 +89,11 @@
                     @endforeach
                 @endif
             </ul>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-center mt-4">
+                {{ $artikel->links('pagination::bootstrap-4') }}
+            </div>
         </div>
 
         <!-- Right Section: Kontak Sekolah (30%) -->
@@ -105,12 +111,12 @@
                     <h5 class="text-blue font-bold mt-10"> POLLING SEKOLAH </h5>
 
                     <!-- Daftar Artikel -->
-
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Berita Section -->
 <div class="container py-4">
@@ -147,13 +153,17 @@
                         </a>
                     </div>
                 </div>
-
                 @endforeach
+            </div>
 
+            <!-- Pagination -->
+            <div class="d-flex justify-content mt-4">
+                {{ $berita->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </div>
 </div>
+
 
 
     <!-- Bagian Galeri -->
