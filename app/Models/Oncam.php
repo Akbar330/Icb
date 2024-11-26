@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Oncam extends Model
 {
-    //
     use HasFactory;
 
-    // Menambahkan 'filename' ke dalam properti fillable
+    // Kolom yang dapat diisi secara mass-assignment
     protected $fillable = ['embed_link'];
 }

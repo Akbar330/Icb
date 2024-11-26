@@ -3,15 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OncamController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\VisiMisiController;
 use App\Http\Controllers\GuruSiswaController;
 use App\Http\Controllers\InformasiController;
+use App\Http\Controllers\AdminOncamController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminBeritaController;
 use App\Http\Controllers\AdminGaleriController;
@@ -19,8 +22,6 @@ use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\AdminArtikelController;
 use App\Http\Controllers\AdminInformasiController;
 use App\Http\Controllers\AdminPendaftaranController;
-use App\Http\Controllers\CarouselController;
-use App\Http\Controllers\OncamController;
 
 // Landing Page Route
 Route::view('/', 'welcome');
@@ -97,10 +98,11 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::delete('/admin/informasi/{id}', [InformasiController::class, 'destroy'])->name('admin.informasi.destroy');
 
     // Oncam
-    Route::get('/oncam', [OncamController::class, 'index'])->name('admin.oncam.index');
-    Route::get('/oncam', [OncamController::class, 'store'])->name('admin.oncam.store');
-    Route::get('/oncam/create', [OncamController::class, 'create'])->name('admin.oncam.create');
-    Route::get('/oncam/edit', [OncamController::class, 'edit'])->name('admin.oncam.edit');
+    Route::get('/oncam', [AdminOncamController::class, 'index'])->name('oncam.index');
+    Route::get('/oncam/create', [AdminOncamController::class, 'create'])->name('oncam.create');
+    Route::get('/oncam/edit', [AdminOncamController::class, 'edit'])->name('oncam.edit');
+    Route::get('/oncam/{oncam}', [AdminOncamController::class, 'destroy'])->name('oncam.destroy');
+    Route::post('/oncam', [AdminOncamController::class, 'store'])->name('oncam.store');
 
     // Admin PPDB
     Route::get('/pendaftaran', [AdminPendaftaranController::class, 'index'])->name('admin.pendaftaran.index');
