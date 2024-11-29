@@ -11,6 +11,15 @@
                 <p class="text-center text-muted mb-4">Berikut adalah beberapa informasi terbaru yang ada.</p>
 
                 <ul class="list-group list-group-flush">
+                    <li>
+                        <li class="list-group-item">
+                            <h5 class="font-weight-bold text-primary">
+                                <p class="text-decoration-none text-black">
+                                   VISI-MISI
+                            </h5>
+                                <p class="text-muted">Lihat Visi-Misi kami</p>
+                            <a href="/visi-misi" class="btn btn-primary mt-2 mb-2">Lihat selengkapnya</a>
+                    </li>
                     @foreach($informasi as $item)
                         <li class="list-group-item">
                             <h5 class="font-weight-bold text-primary">
@@ -35,19 +44,18 @@
                         <!-- Kontak Sekolah -->
                         <h5 class="card-title text-primary">Kontak Sekolah</h5>
                         <p class="card-text text-muted">
-                            Alamat: Jalan Raya No. 123, Bandung, Jawa Barat
+                            Alamat: Jl. Atlas Tengah No.2, Babakan Surabaya, Kec. Kiaracondong, Kota Bandung, Jawa Barat 40281
                         </p>
                         <p class="card-text text-muted">
-                            Telepon: (022) 123-4567
+                            Telepon: (022) 7234924
                         </p>
                         <p class="card-text text-muted">
-                            Email: info@sekolahku.sch.id
+                            Email: icbcintateknika@gmail.com
                         </p>
                         <p class="card-text text-muted">
-                            Jam Operasional: Senin - Jumat, 08.00 - 15.00
+                            Jam Operasional: Senin - Jumat, 06.50 - 15.20
                         </p>
                         <hr>
-
                         <!-- Form Pencarian Artikel -->
                         <h5 class="card-title text-primary">Cari Artikel</h5>
                         <form action="{{ route('artikel.search') }}" method="GET">

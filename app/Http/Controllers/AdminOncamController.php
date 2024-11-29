@@ -19,6 +19,12 @@ class AdminOncamController extends Controller
         return view('admin.oncam.create');
     }
 
+    public function edit($id)
+    {
+        $oncams = Oncam::findOrFail($id);
+        return view('admin.oncam.edit', compact('oncams'));
+    }
+
     public function store(Request $request) {
         // Validasi input
         $request->validate([
@@ -32,5 +38,36 @@ class AdminOncamController extends Controller
 
         // Redirect ke halaman daftar Oncam dengan pesan sukses
         return redirect()->route('oncam.index')->with('success', 'Data Oncam berhasil ditambahkan.');
+    }
+
+    public function destroy($id)
+    {
+        // Mencari data Oncam berdasarkan ID
+        $oncams = Oncam::findOrFail($id);
+
+        // Menghapus data Oncam
+        $oncams->delete();
+
+        // Redirect kembali ke halaman daftar Oncam dengan pesan sukses
+        return redirect()->route('oncam.index')->with('success', 'Data Oncam berhasil dihapus.');
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Validasi input
+        $request->validate([
+            'embed_link' => 'required|url' // Validasi bahwa embed_link adalah URL yang valid
+        ]);
+
+        // Mencari data Oncam berdasarkan ID
+        $oncams = Oncam::findOrFail($id);
+
+        // Mengupdate data Oncam
+        $oncams->update([
+            'embed_link' => $request->embed_link
+        ]);
+
+        // Redirect kembali ke halaman daftar Oncam dengan pesan sukses
+        return redirect()->route('oncam.index')->with('success', 'Data Oncam berhasil diperbarui.');
     }
 }

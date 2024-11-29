@@ -152,15 +152,16 @@
                 <a href="/admin/berita" class="text-black">Berita</a>
                 <a href="/admin/galeri" class="text-black">Galeri</a>
                 <a href="/admin/informasi" class="text-black">Informasi</a>
-                <a href="/admin/carousel" class="text-black">Carousel</a>
-                <a href="/admin/oncam" class="text-black">On Cam</a>
+                <a href="/admin/carousel" class="text-black">Banner</a>
+                <a href="/admin/oncam" class="text-black">Youtube</a>
                 <a href="/admin/pendaftaran" class="text-black">PPDB</a>
+                <a href="/admin/biaya" class="text-black">Biaya</a>
 
                 <!-- Tombol Logout -->
                 <form action="{{ route('logout') }}" method="POST" class="inline">
                     @csrf
                     <button type="submit" class="text-black hover:text-gray-600 flex items-center space-x-2 font-bold">
-                        <span>Logout</span>
+
                         <i class="fas fa-sign-out-alt"></i>
                     </button>
                 </form>

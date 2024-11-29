@@ -70,7 +70,7 @@
         <!-- Left Section: Daftar Artikel (70%) -->
         <div class="col-md-8 mb-4">
             <h1 class="display-4 font-bold">Artikel Terbaru</h1>
-            <p class="text-center text-muted mb-4">Berikut adalah beberapa artikel terbaru untuk Anda.</p>
+            <p class="text-left text-muted mb-4">Berikut adalah beberapa artikel terbaru untuk Anda.</p>
 
             <ul class="list-group list-group-flush">
                 @if ($artikel->isEmpty())
@@ -125,7 +125,7 @@
         <!-- Left Section: Daftar Berita (70%) -->
         <div class="col-md-8 mb-4">
             <h1 class="display-4 font-bold">Berita Sekolah</h1>
-            <p class="text-center text-muted mb-4">Berikut adalah berita terbaru dari sekolah.</p>
+            <p class="text-left text-muted mb-4">Berikut adalah berita terbaru dari sekolah.</p>
 
             <div class="d-flex flex-column">
                 @foreach ($berita as $item)
@@ -133,9 +133,9 @@
                     @if ($item->gambar)
                     <!-- Card untuk gambar -->
                     <div class="card me-3" style="width: 150px; height: 150px; overflow: hidden;">
-                        <img src="{{ asset('storage/' . $item->gambar) }}" 
-                             alt="Gambar Berita" 
-                             class="img-fluid w-100 h-100" 
+                        <img src="{{ asset('storage/' . $item->gambar) }}"
+                             alt="Gambar Berita"
+                             class="img-fluid w-100 h-100"
                              style="object-fit: cover;">
                     </div>
                     @endif
@@ -149,7 +149,7 @@
                         <small class="text-secondary">Penulis: {{ $item->penulis ?? 'Anonim' }}</small> |
                         <small class="text-secondary">{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
                         <br>
-                        <a href="{{ route('berita.show', $item->id) }}" class="btn btn-primary mt-2">
+                        <a href="{{ route('berita.show', $item->id) }}" class="btn btn-primary mt-2 text-left">
                             Lihat Selengkapnya
                         </a>
                     </div>
@@ -178,6 +178,9 @@
                     </div>
                 </section>
             @endforeach
+            <div class="d-flex justify-content mt-4">
+                {{ $gambarGaleri->appends(['galeri_page' => request('galeri_page')])->links('pagination::bootstrap-4') }}
+            </div>
         </div>
     </div>
 
@@ -231,7 +234,8 @@
         {{ $oncams->appends([
             'berita_page' => request('berita_page'),
             'artikel_page' => request('artikel_page'),
-        ])->links('pagination::bootstrap-4') }}
+            'galeri_page' => request('galeri_page'),
+            ])->links('pagination::bootstrap-4') }}
     </div>
 </div>
 

@@ -20,8 +20,10 @@ use App\Http\Controllers\AdminBeritaController;
 use App\Http\Controllers\AdminGaleriController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\AdminArtikelController;
+use App\Http\Controllers\BiayaSekolahController;
 use App\Http\Controllers\AdminInformasiController;
 use App\Http\Controllers\AdminPendaftaranController;
+use App\Http\Controllers\AdminBiayaSekolahController;
 
 // Landing Page Route
 Route::view('/', 'welcome');
@@ -56,6 +58,9 @@ Route::get('/informasi/{id}', [InformasiController::class, 'show'])->name('infor
 Route::resource('pendaftaran', PendaftaranController::class);
 Route::post('/pendaftaran', [PendaftaranController::class, 'store'])->name('pendaftaran.store');
 Route::get('/pendaftaran/success', [PendaftaranController::class, 'success'])->name('pendaftaran.success');
+
+// Biaya
+Route::get('/biaya', [BiayaSekolahController::class, 'index']);
 
 
 // Auth Routes
@@ -98,22 +103,54 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::delete('/admin/informasi/{id}', [InformasiController::class, 'destroy'])->name('admin.informasi.destroy');
 
     // Oncam
+    // Daftar Oncam
     Route::get('/oncam', [AdminOncamController::class, 'index'])->name('oncam.index');
+
+    // Form untuk menambah Oncam
     Route::get('/oncam/create', [AdminOncamController::class, 'create'])->name('oncam.create');
-    Route::get('/oncam/edit', [AdminOncamController::class, 'edit'])->name('oncam.edit');
-    Route::get('/oncam/{oncam}', [AdminOncamController::class, 'destroy'])->name('oncam.destroy');
+
+    // Menyimpan Oncam
     Route::post('/oncam', [AdminOncamController::class, 'store'])->name('oncam.store');
+
+    // Form untuk mengedit Oncam
+    Route::get('/oncam/{id}/edit', [AdminOncamController::class, 'edit'])->name('oncam.edit');
+
+    // Menyimpan perubahan Oncam
+    Route::put('/oncam/{id}', [AdminOncamController::class, 'update'])->name('oncam.update');
+
+    // Menghapus data Oncam
+    Route::delete('/oncam/{id}', [AdminOncamController::class, 'destroy'])->name('oncam.destroy');
 
     // Admin PPDB
     Route::get('/pendaftaran', [AdminPendaftaranController::class, 'index'])->name('admin.pendaftaran.index');
     Route::get('/pendaftaran/{id}', [AdminPendaftaranController::class, 'show'])->name('admin.pendaftaran.show');
 
+    // Admin Biaya
+     Route::get('/biaya', [AdminBiayaSekolahController::class, 'index'])->name('admin.biaya.index');
 
-    // Admin Galeri
+     // Menampilkan form untuk menambah biaya sekolah
+     Route::get('/biaya/create', [AdminBiayaSekolahController::class, 'create'])->name('admin.biaya.create');
+
+     // Menyimpan biaya sekolah yang baru
+     Route::post('/biaya', [AdminBiayaSekolahController::class, 'store'])->name('admin.biaya.store');
+
+     // Menampilkan form untuk mengedit biaya sekolah
+     Route::get('/biaya/{id}/edit', [AdminBiayaSekolahController::class, 'edit'])->name('admin.biaya.edit');
+
+     // Memperbarui data biaya sekolah
+     Route::put('/biaya/{id}', [AdminBiayaSekolahController::class, 'update'])->name('admin.biaya.update');
+
+     // Menghapus biaya sekolah
+     Route::delete('/biaya/{id}', [AdminBiayaSekolahController::class, 'destroy'])->name('admin.biaya.destroy');
+
+    // Galeri
     Route::get('/galeri', [AdminGaleriController::class, 'index'])->name('admin.galeri.index');
 
-    // Route untuk menampilkan form upload gambar (GET)
+    // Menampilkan form upload gambar
     Route::get('/galeri/create', [AdminGaleriController::class, 'create'])->name('admin.galeri.create');
+
+    // Menyimpan gambar yang diunggah
+    Route::post('/galeri', [AdminGaleriController::class, 'store'])->name('admin.galeri.store');
 
     Route::get('/carousel', [CarouselController::class, 'index'])->name('admin.carousel.index');
     Route::get('/carousel/create', [CarouselController::class, 'create'])->name('admin.carousel.create');

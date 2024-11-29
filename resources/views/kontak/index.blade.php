@@ -8,9 +8,9 @@
         <div class="mt-8">
             <p class="text-lg text-gray-600">Untuk pertanyaan atau informasi lebih lanjut, silakan hubungi kami melalui informasi berikut:</p>
             <ul class="list-none mt-4 text-gray-700">
-                <li><strong>Email:</strong> info@smkicbct.sch.id</li>
-                <li><strong>Telepon:</strong> (021) 123-4567</li>
-                <li><strong>Alamat:</strong> Jl. Pendidikan No. 123, Kota Pendidikan</li>
+                <li><strong>Email:</strong> icbcintateknika@gmail.com</li>
+                <li><strong>Telepon:</strong> (022) 7234924</li>
+                <li><strong>Alamat:</strong> Jl. Atlas Tengah No.2, Babakan Surabaya, Kec. Kiaracondong, Kota Bandung, Jawa Barat 40281</li>
             </ul>
         </div>
     </div>
