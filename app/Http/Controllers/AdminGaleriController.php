@@ -25,12 +25,12 @@ class AdminGaleriController extends Controller
     public function store(Request $request) {
         // Validasi file gambar
         $request->validate([
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // maksimal 2MB
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:50000', // maksimal 2MB
         ]);
 
         // Menyimpan gambar ke folder storage/galeri
         $gambar = $request->file('gambar');
-        $gambarPath = $gambar->store('galeri', 'public');
+        $gambarPath = $gambar->store('galeri', 'public'); // Simpan ke folder galeri di disk public
 
         // Menyimpan informasi gambar ke database
         Galeri::create(['filename' => $gambarPath]);
@@ -39,5 +39,6 @@ class AdminGaleriController extends Controller
         return redirect()->route('admin.galeri.index')->with('success', 'Gambar berhasil diunggah.');
     }
 }
+
 
 

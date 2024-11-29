@@ -41,7 +41,7 @@ class CarouselController extends Controller
         // Validasi data yang diterima
         $validated = $request->validate([
             'order' => 'required|integer|min:0',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:50000',
         ]);
 
         // Tentukan path penyimpanan
@@ -85,7 +85,7 @@ public function update(Request $request, $id)
     // Validasi input
     $request->validate([
         'order' => 'required|integer',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:50000',
     ]);
 
     // Update order

@@ -183,9 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/' ? 'active' : ''); ?>">
                     <a class="nav-link text-lg text-black" href="/">Home</a>
                 </li>
-                <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/visi-misi' ? 'active' : ''); ?>">
-                    <a class="nav-link text-lg text-black" href="/visi-misi">Visi-Misi</a>
-                </li>
                 <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/informasi' ? 'active' : ''); ?>">
                     <a class="nav-link text-lg text-black" href="/informasi">Informasi</a>
                 </li>
@@ -194,6 +191,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 </li>
                 <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/data' ? 'active' : ''); ?>">
                     <a class="nav-link text-lg text-black" href="/data">Data</a>
+                </li>
+                <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/biaya' ? 'active' : ''); ?>">
+                    <a class="nav-link text-lg text-black" href="/biaya">Biaya Sekolah</a>
                 </li>
                 <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] == '/kontak' ? 'active' : ''); ?>">
                     <a class="nav-link text-lg text-black" href="/kontak">Kontak</a>

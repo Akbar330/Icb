@@ -15,9 +15,12 @@ class AdminController extends Controller
         $artikels = Artikel::all();
         $beritas = Berita::all();
         $informasis = Informasi::all();
+        $totalArtikels = Artikel::count(); // Hitung total artikel
+        $totalBeritas = Berita::count();   // Hitung total berita
+        $totalInformasis = Informasi::count(); // Hitung total pengumuman
 
         // Kirim data ke view index
-        return view('admin.index', compact('artikels', 'beritas', 'informasis'));
+        return view('admin.index', compact('artikels', 'beritas', 'informasis','totalArtikels', 'totalBeritas', 'totalInformasis'));
     }
 }
 
