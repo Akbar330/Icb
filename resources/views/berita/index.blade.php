@@ -22,7 +22,7 @@
                                         {{ $berita->judul }}
                                     </a>
                                 </h3>
-                                <p class="text-muted mb-2">{{ \Illuminate\Support\Str::limit($berita->konten, 150) }}</p>
+                                <p class="text-muted mb-2">{{ \Illuminate\Support\Str::limit($berita->deskripsi, 150) }}</p>
                                 <small class="text-secondary">Penulis: {{ $berita->penulis }}</small> |
                                 <small class="text-secondary">{{ \Carbon\Carbon::parse($berita->created_at)->format('d M Y') }}</small>
                                 <br><a href="{{ route('berita.show', $berita->id) }}" class="btn btn-primary mt-2">
@@ -74,7 +74,7 @@
                                         <strong>{{ $artikel->judul }}</strong>
                                     </a>
                                     <p class="text-muted mb-0" style="font-size: 0.85rem;">
-                                        {{ Str::limit($artikel->konten, 100) }}
+                                        {{ Str::limit($artikel->deskripsi, 100) }}
                                     </p>
                                     <small class="text-secondary">
                                         {{ \Carbon\Carbon::parse($artikel->created_at)->format('d M Y') }}

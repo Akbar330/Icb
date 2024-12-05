@@ -28,14 +28,11 @@ class AdminArtikelController extends Controller
             'judul' => 'required|string|max:255',
             'konten' => 'required',
             'penulis' => 'required|string|max:255',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $data = $request->all();
-
-        if ($request->hasFile('gambar')) {
-            $data['gambar'] = $request->file('gambar')->store('images/artikels', 'public');
-        }
+        // dd($data);
 
         Artikel::create($data);
 
@@ -53,19 +50,18 @@ class AdminArtikelController extends Controller
         $request->validate([
             'judul' => 'required|string|max:255',
             'penulis' => 'required|string|max:255',
-            'konten' => 'required',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $artikel = Artikel::findOrFail($id);
-        $data = $request->only(['judul', 'penulis', 'konten']);
+        $data = $request->only(['judul', 'penulis', 'deskripsi','konten']);
 
-        if ($request->hasFile('gambar')) {
-            if ($artikel->gambar) {
-                Storage::disk('public')->delete($artikel->gambar);
-            }
-            $data['gambar'] = $request->file('gambar')->store('images/artikels', 'public');
-        }
+        // if ($request->hasFile('gambar')) {
+        //     if ($artikel->gambar) {
+        //         Storage::disk('public')->delete($artikel->gambar);
+        //     }
+        //     $data['gambar'] = $request->file('gambar')->store('images/artikels', 'public');
+        // }
 
         $artikel->update($data);
 

@@ -75,7 +75,7 @@
                                         <strong>{{ $artikel->judul }}</strong>
                                     </a>
                                     <p class="text-muted mb-0" style="font-size: 0.85rem;">
-                                        {{ Str::limit($artikel->konten, 100) }}
+                                        {{ Str::limit($artikel->deskripsi, 100) }}
                                     </p>
                                     <small class="text-secondary">
                                         {{ \Carbon\Carbon::parse($artikel->created_at)->format('d M Y') }}

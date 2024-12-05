@@ -11,9 +11,10 @@ class CreateArtikelsTable extends Migration
         Schema::create('artikels', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->text('konten');
             $table->string('penulis');
-            $table->string('gambar')->nullable(); // Menambahkan kolom gambar
+            $table->string('deskripsi');
+            $table->text('konten');
+            // $table->string('gambar')->nullable(); // Menambahkan kolom gambar
             $table->timestamps();
         });
     }

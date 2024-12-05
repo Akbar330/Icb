@@ -25,16 +25,14 @@ class AdminBeritaController extends Controller
     {
         $request->validate([
             'judul' => 'required|string|max:255',
-            'konten' => 'required',
-            'penulis' => 'required|string|max:255',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
+            'penulis' => 'required|string|max:255'
         ]);
 
         // Simpan gambar jika ada
         $data = $request->all();
-        if ($request->hasFile('gambar')) {
-            $data['gambar'] = $request->file('gambar')->store('images/beritas', 'public');
-        }
+        // if ($request->hasFile('gambar')) {
+        //     $data['gambar'] = $request->file('gambar')->store('images/beritas', 'public');
+        // }
 
         Berita::create($data);
 
@@ -53,23 +51,22 @@ class AdminBeritaController extends Controller
             'judul' => 'required|string|max:255',
             'penulis' => 'required|string|max:255',
             'konten' => 'required',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
         ]);
 
         $berita = Berita::findOrFail($id);
 
         // Update data berita
-        $data = $request->only(['judul', 'penulis', 'konten']);
+        $data = $request->only(['judul', 'penulis', 'konten','deskripsi']);
 
         // Cek apakah ada gambar baru yang diupload
-        if ($request->hasFile('gambar')) {
-            // Hapus gambar lama jika ada
-            if ($berita->gambar) {
-                Storage::disk('public')->delete($berita->gambar);
-            }
-            // Simpan gambar baru
-            $data['gambar'] = $request->file('gambar')->store('images/beritas', 'public');
-        }
+        // if ($request->hasFile('gambar')) {
+        //     // Hapus gambar lama jika ada
+        //     if ($berita->gambar) {
+        //         Storage::disk('public')->delete($berita->gambar);
+        //     }
+        //     // Simpan gambar baru
+        //     $data['gambar'] = $request->file('gambar')->store('images/beritas', 'public');
+        // }
 
         $berita->update($data);
 

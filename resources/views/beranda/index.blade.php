@@ -69,7 +69,7 @@
     <div class="row">
         <!-- Left Section: Daftar Artikel (70%) -->
         <div class="col-md-8 mb-4">
-            <h1 class="display-4 font-bold">Artikel Terbaru</h1>
+            <h1 class="display-4 font-bold">Artikel Terbarua</h1>
             <p class="text-left text-muted mb-4">Berikut adalah beberapa artikel terbaru untuk Anda.</p>
 
             <ul class="list-group list-group-flush">
@@ -81,7 +81,7 @@
                             <a href="{{ route('artikel.show', $item->id) }}">
                                 {{ $item->judul }}
                             </a>
-                            <p class="text-muted">{{ \Illuminate\Support\Str::limit($item->konten, 150) }}</p>
+                            <p class="text-muted">{{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}</p>
                             <a href="{{ route('artikel.show', $item->id) }}" class="btn btn-primary mt-2">Baca Selengkapnya</a><br>
                             <small class="text-secondary">Penulis: {{ $item->penulis }}</small>
                             <small class="text-secondary">{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
@@ -110,13 +110,14 @@
                     </p>
                     <!-- Form Pencarian Artikel -->
                     <h5 class="text-blue font-bold mt-10"> POLLING SEKOLAH </h5>
-
+                    <p>Coming Soon!</p>
                     <!-- Daftar Artikel -->
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 
 <!-- Berita Section -->
@@ -145,7 +146,7 @@
                                 {{ $item->judul }}
                             </a>
                         </h3>
-                        <p class="text-muted mb-2">{{ \Illuminate\Support\Str::limit($item->konten, 150) }}</p>
+                        <p class="text-muted mb-2">{{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}</p>
                         <small class="text-secondary">Penulis: {{ $item->penulis ?? 'Anonim' }}</small> |
                         <small class="text-secondary">{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
                         <br>

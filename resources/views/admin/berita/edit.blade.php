@@ -32,12 +32,20 @@
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
                 </div>
+                <div class="mb-4">
+                    <label for="penulis" class="block text-gray-700 font-semibold">Deskripsi Singkat</label>
+                    <input type="text" id="penulis" name="penulis" value="{{ old('penulis', $berita->penulis) }}"
+                           class="w-full mt-2 p-2 border border-gray-300 rounded-md" required>
+                    @error('penulis')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
 
                 <!-- Konten Berita -->
                 <div class="mb-4">
                     <label for="konten" class="block text-gray-700 font-semibold">Konten Berita</label>
-                    <textarea id="konten" name="konten" rows="6"
-                              class="w-full mt-2 p-2 border border-gray-300 rounded-md" required>{{ old('konten', $berita->konten) }}</textarea>
+                    <textarea id="editor" name="konten" rows="6"
+                              class="w-full mt-2 p-2 border border-gray-300 rounded-md" >{{ old('konten', $berita->konten) }}</textarea>
                     @error('konten')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
@@ -52,4 +60,19 @@
             </form>
         </div>
     </div>
+    <script src="{{ asset('tinymce/js/tinymce/tinymce.min.js') }}"></script>
+    <script>
+        const base64_img_handler = (blobInfo) => new Promise((resolve) => {
+            resolve("data:image/png;base64," + blobInfo.base64());
+        });    
+     tinymce.init({
+    selector: '#editor',
+    plugins: 'lists link image',
+    toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | outdent indent | link image',
+    menubar: false,
+    images_upload_handler: base64_img_handler,
+});
+
+
+    </script>
 @endsection
