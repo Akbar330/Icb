@@ -13,5 +13,5 @@ class Artikel extends Model
     protected $primaryKey = 'id'; // Primary key
     public $timestamps = true; // Otomatis untuk created_at & updated_at
 
-    protected $fillable = ['judul', 'konten', 'penulis', 'gambar'];
+    protected $fillable = ['judul','deskripsi', 'konten', 'penulis'];
 }

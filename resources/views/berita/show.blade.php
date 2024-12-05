@@ -8,12 +8,12 @@
             <h1 class="text-4xl font-bold text-blue-600">{{ $berita->judul }}</h1>
             <p class="text-gray-500 text-sm mb-4">Penulis: {{ $berita->penulis }} | Tanggal: {{ $berita->created_at->format('d M Y') }}</p>
 
-            @if ($berita->gambar)
+            {{-- @if ($berita->gambar)
                 <img src="{{ asset('storage/' . $berita->gambar) }}" alt="Gambar Berita" class="mt-4 w-full h-96 object-cover rounded-lg">
-            @endif
+            @endif --}}
 
             <div class="mt-6 text-gray-700 leading-relaxed">
-                {{ $berita->konten }}
+                {!! $artikels->konten !!}
             </div>
         </div>
 

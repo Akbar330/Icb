@@ -43,6 +43,7 @@ Route::get('/profil', [ProfilController::class, 'index']);
 Route::get('/guru-siswa', [GuruSiswaController::class, 'index']);
 
 // Artikel Publik - Show Individual Artikel
+Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
 Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
 
 Route::get('/artikel-search', [ArtikelController::class, 'search'])->name('artikel.search');
@@ -72,7 +73,6 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
 
     // Authentication Routes for Admin
-    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('login', [LoginController::class, 'login']);
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 

@@ -18,7 +18,7 @@
                                     {{ $artikel->judul }}
                                 </p>
                             </h5>
-                            <p class="text-muted">{{ \Illuminate\Support\Str::limit($artikel->konten, 150) }}</p>
+                            <p class="text-muted">{{ \Illuminate\Support\Str::limit($artikel->deskripsi, 150) }}</p>
 
                             <a href="{{ route('artikel.show', $artikel->id) }}" class="btn btn-primary mt-2">Baca Selengkapnya</a><br>
                             <small class="text-secondary">Penulis: {{ $artikel->penulis }}</small> |
@@ -68,7 +68,7 @@
                                         <strong>{{ $artikel->judul }}</strong>
                                     </a>
                                     <p class="text-muted mb-0" style="font-size: 0.85rem;">
-                                        {{ Str::limit($artikel->konten, 100) }}
+                                        {{ Str::limit($artikel->deskripsi, 100) }}
                                     </p>
                                     <small class="text-secondary">
                                         {{ \Carbon\Carbon::parse($artikel->created_at)->format('d M Y') }}
