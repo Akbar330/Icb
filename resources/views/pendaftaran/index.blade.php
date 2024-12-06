@@ -144,14 +144,14 @@
                     <option value="N">Tidak</option>
                 </select>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6" id="nama_mgm_group">
                 <label for="nama_mgm">Nama MGM</label>
                 <input type="text" class="form-control" id="nama_mgm" name="nama_mgm">
             </div>
         </div>
-
+        
         <div class="form-row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-12" id="asal_mgm_group">
                 <label for="asal_mgm">Keterangan MGM</label>
                 <input type="text" class="form-control" id="asal_mgm" name="asal_mgm">
             </div>
@@ -160,8 +160,17 @@
         <button type="submit" class="btn btn-primary">Daftar</button>
     </form>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+      @if(session('success'))
+        Swal.fire({
+            title: 'Berhasil!',
+            text: '{{ session('success') }}',
+            icon: 'success',
+            confirmButtonText: 'Tutup'
+        });
+    @endif
     (function() {
         'use strict'
         // Cegah pengiriman form jika ada input yang tidak valid
@@ -177,6 +186,19 @@
                 }, false)
             })
     })()
+    document.getElementById('mgm').addEventListener('change', function() {
+        var mgmValue = this.value;
+        var namaMgmGroup = document.getElementById('nama_mgm_group');
+        var asalMgmGroup = document.getElementById('asal_mgm_group');
+        
+        if (mgmValue === 'N') {
+            namaMgmGroup.style.display = 'none';
+            asalMgmGroup.style.display = 'none';
+        } else {
+            namaMgmGroup.style.display = 'block';
+            asalMgmGroup.style.display = 'block';
+        }
+    });
 </script>
 
 @endsection

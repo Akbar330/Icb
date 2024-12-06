@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\OncamController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\KontakController;
@@ -24,6 +23,7 @@ use App\Http\Controllers\BiayaSekolahController;
 use App\Http\Controllers\AdminInformasiController;
 use App\Http\Controllers\AdminPendaftaranController;
 use App\Http\Controllers\AdminBiayaSekolahController;
+use App\Http\Controllers\PollingController;
 
 // Landing Page Route
 Route::view('/', 'welcome');
@@ -35,7 +35,7 @@ Route::get('/informasi', [InformasiController::class, 'index']);
 Route::get('/galeri', [GaleriController::class, 'index']);
 Route::get('/data', [DataController::class, 'index']);
 Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.index');
- // Public route for articles
+// Public route for articles
 Route::get('/kontak', [KontakController::class, 'index']);
 Route::get('/pendaftaran', [PendaftaranController::class, 'index']);
 Route::get('/berita', [BeritaController::class, 'index']); // Public route for berita
@@ -62,14 +62,15 @@ Route::get('/pendaftaran/success', [PendaftaranController::class, 'success'])->n
 
 // Biaya
 Route::get('/biaya', [BiayaSekolahController::class, 'index']);
-
+// kirim vote
+Route::post('/vote', [PollingController::class, 'vote'])->name('vote.store');
 
 // Auth Routes
 Route::view('dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
 Route::view('profile', 'profile')->middleware(['auth'])->name('profile');
 
 // Admin Routes
-Route::prefix('admin')->middleware('auth')->group(function() {
+Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
 
     // Authentication Routes for Admin
@@ -126,22 +127,22 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('/pendaftaran/{id}', [AdminPendaftaranController::class, 'show'])->name('admin.pendaftaran.show');
 
     // Admin Biaya
-     Route::get('/biaya', [AdminBiayaSekolahController::class, 'index'])->name('admin.biaya.index');
+    Route::get('/biaya', [AdminBiayaSekolahController::class, 'index'])->name('admin.biaya.index');
 
-     // Menampilkan form untuk menambah biaya sekolah
-     Route::get('/biaya/create', [AdminBiayaSekolahController::class, 'create'])->name('admin.biaya.create');
+    // Menampilkan form untuk menambah biaya sekolah
+    Route::get('/biaya/create', [AdminBiayaSekolahController::class, 'create'])->name('admin.biaya.create');
 
-     // Menyimpan biaya sekolah yang baru
-     Route::post('/biaya', [AdminBiayaSekolahController::class, 'store'])->name('admin.biaya.store');
+    // Menyimpan biaya sekolah yang baru
+    Route::post('/biaya', [AdminBiayaSekolahController::class, 'store'])->name('admin.biaya.store');
 
-     // Menampilkan form untuk mengedit biaya sekolah
-     Route::get('/biaya/{id}/edit', [AdminBiayaSekolahController::class, 'edit'])->name('admin.biaya.edit');
+    // Menampilkan form untuk mengedit biaya sekolah
+    Route::get('/biaya/{id}/edit', [AdminBiayaSekolahController::class, 'edit'])->name('admin.biaya.edit');
 
-     // Memperbarui data biaya sekolah
-     Route::put('/biaya/{id}', [AdminBiayaSekolahController::class, 'update'])->name('admin.biaya.update');
+    // Memperbarui data biaya sekolah
+    Route::put('/biaya/{id}', [AdminBiayaSekolahController::class, 'update'])->name('admin.biaya.update');
 
-     // Menghapus biaya sekolah
-     Route::delete('/biaya/{id}', [AdminBiayaSekolahController::class, 'destroy'])->name('admin.biaya.destroy');
+    // Menghapus biaya sekolah
+    Route::delete('/biaya/{id}', [AdminBiayaSekolahController::class, 'destroy'])->name('admin.biaya.destroy');
 
     // Galeri
     Route::get('/galeri', [AdminGaleriController::class, 'index'])->name('admin.galeri.index');
@@ -171,8 +172,7 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('/admin/berita/export-excel', [AdminBeritaController::class, 'exportExcel'])->name('admin.berita.exportExcel');
     Route::get('/admin/berita/export-pdf', [AdminBeritaController::class, 'exportPdf'])->name('admin.berita.exportPdf');
     Route::get('/admin/berita/search', [AdminBeritaController::class, 'search'])->name('admin.berita.search');
-
 });
 
 // Authentication Routes
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

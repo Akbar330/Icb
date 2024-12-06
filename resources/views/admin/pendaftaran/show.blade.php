@@ -19,6 +19,10 @@
             <table class="min-w-full table-auto border-collapse border border-gray-300">
                 <tbody>
                     <tr>
+                        <td class="px-4 py-2 font-semibold">Nis</td>
+                        <td class="px-4 py-2">{{ $pendaftaran->nis }}</td>
+                    </tr>
+                    <tr>
                         <td class="px-4 py-2 font-semibold">Nama Siswa</td>
                         <td class="px-4 py-2">{{ $pendaftaran->nama_siswa }}</td>
                     </tr>
@@ -68,7 +72,7 @@
                     </tr>
                     <tr>
                         <td class="px-4 py-2 font-semibold">ABK</td>
-                        <td class="px-4 py-2">{{ $pendaftaran->abk }}</td>
+                        <td class="px-4 py-2">{{ $pendaftaran->abk == 'N' ? 'Tidak' : 'Ya' }}</td>
                     </tr>
                 </tbody>
             </table>

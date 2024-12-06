@@ -19,6 +19,7 @@
     <table>
         <thead>
             <tr>
+                <th>Nis</th>
                 <th>Nama Siswa</th>
                 <th>Alamat</th>
                 <th>TTL</th>
@@ -32,6 +33,7 @@
         <tbody>
             @foreach ($pendaftarans as $pendaftaran)
             <tr>
+                <td>{{ $pendaftaran->nis }}</td>
                 <td>{{ $pendaftaran->nama_siswa }}</td>
                 <td>{{ $pendaftaran->alamat }}</td>
                 <td>{{ \Carbon\Carbon::parse($pendaftaran->ttl)->format('d-m-Y') }}</td>
