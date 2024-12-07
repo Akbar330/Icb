@@ -43,6 +43,7 @@
             <table class="min-w-full table-auto border-collapse border border-gray-300">
                 <thead>
                     <tr class="bg-gray-100">
+                        <th class="px-4 py-2 text-left text-gray-700">Nis</th>
                         <th class="px-4 py-2 text-left text-gray-700">Nama Siswa</th>
                         <th class="px-4 py-2 text-left text-gray-700">Alamat</th>
                         <th class="px-4 py-2 text-left text-gray-700">TTL</th>
@@ -57,6 +58,7 @@
                 <tbody id="pendaftarTable">
                     @foreach ($pendaftarans as $pendaftaran)
                     <tr class="border-t">
+                        <td class="px-4 py-2">{{ $pendaftaran->nis }}</td>
                         <td class="px-4 py-2">{{ $pendaftaran->nama_siswa }}</td>
                         <td class="px-4 py-2">{{ $pendaftaran->alamat }}</td>
                         <td class="px-4 py-2">{{ \Carbon\Carbon::parse($pendaftaran->ttl)->format('d-m-Y') }}</td>

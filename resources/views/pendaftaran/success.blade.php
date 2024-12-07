@@ -4,6 +4,7 @@
 @section('title', 'Pendaftaran Berhasil')
 
 @section('content')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <div class="container mt-5">
     @if(session('success'))
         <script>

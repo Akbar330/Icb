@@ -110,7 +110,70 @@
                     </p>
                     <!-- Form Pencarian Artikel -->
                     <h5 class="text-blue font-bold mt-10"> POLLING SEKOLAH </h5>
-                    <p>Coming Soon!</p>
+                    <div class="container mt-3" id="hasilVote" style="display: none;">
+                        <p><strong>Bagus</strong>: <span id="bagusPercentage">0%</span></p>
+
+                        <div class="progress mb-3">
+                          <div
+                            class="progress-bar bg-success"
+                            role="progressbar"
+                            id="bagusProgress"
+                            style="width: 0%"
+                            aria-valuenow="0"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                          ></div>
+                        </div>
+                        <p><strong>Kurang Bagus</strong>: <span id="kurangBagusPercentage">0%</span></p>
+
+                        <div class="progress mb-3">
+                          <div
+                            class="progress-bar bg-warning"
+                            role="progressbar"
+                            id="kurangBagusProgress"
+                            style="width: 0%"
+                            aria-valuenow="0"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                          ></div>
+                        </div>
+                        <p><strong>Buruk</strong>: <span id="burukPercentage">0%</span></p>
+
+                        <div class="progress mb-3">
+                          <div
+                            class="progress-bar bg-danger"
+                            role="progressbar"
+                            id="burukProgress"
+                            style="width: 0%"
+                            aria-valuenow="0"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                          ></div>
+                        </div>
+                      </div>
+                    <form action="{{ route('vote.store') }}" method="post" class="mt-2"  id="formPoll">
+                        @csrf
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="pilihan" id="flexRadioDefault1" value="1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                             Baik
+                            </label>
+                          </div>
+                          
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="pilihan" id="flexRadioDefault2" value="2" >
+                            <label class="form-check-label" for="flexRadioDefault2">
+                              Kurang Baik
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="pilihan" id="flexRadioDefault2" value="3">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                              Buruk
+                            </label>
+                          </div>
+                          <button type="submit" class="btn btn-primary mt-2">Kirim</button>
+                    </form>
                     <!-- Daftar Artikel -->
                 </div>
             </div>
@@ -239,6 +302,57 @@
             ])->links('pagination::bootstrap-4') }}
     </div>
 </div>
+<script>
+    // Data hasil polling (ini bisa diambil dari API atau backend)
+    const totalVotes = {{$totalVotes}};
+    const pilihan = @json($pilihan);
+    const isVoting = {{$isVoting}};
+    const resultPoll = document.getElementById('hasilVote')
+    const formPoll = document.getElementById('formPoll')
+    if(isVoting){
+        resultPoll.style.display = 'block'
+        formPoll.style.display = 'none'
+    }else{
+            resultPoll.style.display = 'none'
+        formPoll.style.display = 'block'
+    }
+    // Fungsi untuk menghitung persentase
+    function calculatePercentage(count, total) {
+      return total > 0 ? (count / total) * 100 : 0;
+    }
 
+    // Update progress bar secara dinamis
+    function updateProgressBar() {
+      // Ambil elemen progress bar
+      const bagusProgress = document.getElementById("bagusProgress");
+      const kurangBagusProgress = document.getElementById("kurangBagusProgress");
+      const burukProgress = document.getElementById("burukProgress");
+
+      // Ambil elemen untuk persentase
+      const bagusPercentage = document.getElementById("bagusPercentage");
+      const kurangBagusPercentage = document.getElementById("kurangBagusPercentage");
+      const burukPercentage = document.getElementById("burukPercentage");
+
+      // Hitung persentase
+      const bagusPercent = calculatePercentage(pilihan["1"]|| 0, totalVotes);
+      const kurangBagusPercent = calculatePercentage(pilihan['2'] || 0, totalVotes);
+      const burukPercent = calculatePercentage(pilihan['3'] || 0, totalVotes);
+
+      // Update progress bar
+      bagusProgress.style.width = `${bagusPercent}%`;
+      bagusProgress.setAttribute("aria-valuenow", bagusPercent);
+      bagusPercentage.textContent = `${Math.round(bagusPercent)}%`;
+
+      kurangBagusProgress.style.width = `${kurangBagusPercent}%`;
+      kurangBagusProgress.setAttribute("aria-valuenow", kurangBagusPercent);
+      kurangBagusPercentage.textContent = `${Math.round(kurangBagusPercent)}%`;
+
+      burukProgress.style.width = `${burukPercent}%`;
+      burukProgress.setAttribute("aria-valuenow", burukPercent);
+      burukPercentage.textContent = `${Math.round(burukPercent)}%`;
+    }
+    console.log(isVoting)
+    updateProgressBar();
+  </script>
 </body>
 @endsection
