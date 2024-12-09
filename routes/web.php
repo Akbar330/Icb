@@ -24,6 +24,7 @@ use App\Http\Controllers\AdminInformasiController;
 use App\Http\Controllers\AdminPendaftaranController;
 use App\Http\Controllers\AdminBiayaSekolahController;
 use App\Http\Controllers\PollingController;
+use App\Http\Controllers\SapaanController;
 
 // Landing Page Route
 Route::view('/', 'welcome');
@@ -172,6 +173,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/admin/berita/export-excel', [AdminBeritaController::class, 'exportExcel'])->name('admin.berita.exportExcel');
     Route::get('/admin/berita/export-pdf', [AdminBeritaController::class, 'exportPdf'])->name('admin.berita.exportPdf');
     Route::get('/admin/berita/search', [AdminBeritaController::class, 'search'])->name('admin.berita.search');
+
+    Route::prefix('sapaan')->group(function (){
+        Route::post('/', [SapaanController::class,'storeSapaan'] )->name('sapaan.store');
+        Route::put('/{id}', [SapaanController::class,'updateSapaan'] )->name('sapaan.update');
+    });
 });
 
 // Authentication Routes

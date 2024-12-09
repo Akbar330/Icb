@@ -16,6 +16,7 @@ return new class extends Migration
         $table->string('nama_biaya');
         $table->decimal('jumlah', 15, 2);
         $table->decimal('jumlah_non', 15, 2);
+        $table->string('keterangan')->nullable();
         $table->timestamps();
     });
 }

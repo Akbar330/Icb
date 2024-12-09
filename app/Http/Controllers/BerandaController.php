@@ -41,8 +41,9 @@ class BerandaController extends Controller
             ->groupBy('pilihan_id')
             ->get()
             ->pluck('count', 'pilihan_id');
+        $sapaan = DB::table('sapaan_kepalas')->get()->first();
 
 
-        return view('beranda.index', compact('berita', 'gambarGaleri', 'carousels', 'artikel', 'oncams', 'isVoting', 'pilihan', 'totalVotes'));
+        return view('beranda.index', compact('berita', 'gambarGaleri', 'carousels', 'artikel', 'oncams', 'isVoting', 'pilihan', 'totalVotes','sapaan'));
     }
 }

@@ -13,7 +13,7 @@ class BiayaSekolah extends Model
     protected $table = 'biaya_sekolah';
 
     // Tentukan kolom yang dapat diisi secara massal
-    protected $fillable = ['nama_biaya', 'jumlah', 'jumlah_non'];
+    protected $fillable = ['nama_biaya', 'jumlah', 'jumlah_non','keterangan'];
 
     // Tentukan tipe data untuk kolom 'jumlah'
     protected $casts = [

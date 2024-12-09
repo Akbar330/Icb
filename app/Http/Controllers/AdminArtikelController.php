@@ -56,12 +56,12 @@ class AdminArtikelController extends Controller
         $artikel = Artikel::findOrFail($id);
         $data = $request->only(['judul', 'penulis', 'deskripsi','konten']);
 
-        // if ($request->hasFile('gambar')) {
-        //     if ($artikel->gambar) {
-        //         Storage::disk('public')->delete($artikel->gambar);
-        //     }
-        //     $data['gambar'] = $request->file('gambar')->store('images/artikels', 'public');
-        // }
+        if ($request->hasFile('gambar')) {
+            if ($artikel->gambar) {
+                Storage::disk('public')->delete($artikel->gambar);
+            }
+            $data['gambar'] = $request->file('gambar')->store('images/artikels', 'public');
+        }
 
         $artikel->update($data);
 
