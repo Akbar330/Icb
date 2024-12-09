@@ -125,8 +125,8 @@
                         <img src="{{ asset('kepsek.jpg') }}" alt="Foto Kepala Sekolah"
                             class="card-img-top" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
-                    <p>
-                        SEMANGAT PAGI!!!
+                    <p id="sapaan_text">
+                       
                     </p>
                     <!-- Polling -->
                     <h5 class="text-blue font-bold mt-10"> POLLING SEKOLAH </h5>
@@ -325,9 +325,10 @@
     // Data hasil polling (ini bisa diambil dari API atau backend)
     const totalVotes = {{$totalVotes}};
     const pilihan = @json($pilihan);
-    const isVoting = {{$isVoting}};
-    const resultPoll = document.getElementById('hasilVote')
-    const formPoll = document.getElementById('formPoll')
+    const isVoting = @json($isVoting);
+    const resultPoll = document.getElementById('hasilVote');
+    const formPoll = document.getElementById('formPoll');
+    const sapaan= @json($sapaan);
     if(isVoting){
         resultPoll.style.display = 'block'
         formPoll.style.display = 'none'
@@ -339,6 +340,13 @@
     function calculatePercentage(count, total) {
       return total > 0 ? (count / total) * 100 : 0;
     }
+    const getRandomSapaan = () => {
+        const randomIndex = Math.floor(Math.random() * sapaan.length);
+        return sapaan[randomIndex].sapaan;
+    };
+
+    // Set the random sapaan text to the <p> element
+
 
     // Update progress bar secara dinamis
     function updateProgressBar() {
@@ -370,8 +378,11 @@
       burukProgress.setAttribute("aria-valuenow", burukPercent);
       burukPercentage.textContent = `${Math.round(burukPercent)}%`;
     }
-    console.log(isVoting)
-    updateProgressBar();
+ 
+    document.addEventListener('DOMContentLoaded', () => {
+    const sapaanTextElement = document.getElementById('sapaan_text');
+    sapaanTextElement.textContent = getRandomSapaan();
+});
   </script>
 </body>
 @endsection
