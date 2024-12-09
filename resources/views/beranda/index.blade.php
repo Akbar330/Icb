@@ -69,7 +69,7 @@
     <div class="row">
         <!-- Left Section: Daftar Artikel (70%) -->
         <div class="col-md-8 mb-4">
-            <h1 class="display-4 font-bold">Artikel Terbarua</h1>
+            <h1 class="display-4 font-weight-bold">Artikel Terbaru</h1>
             <p class="text-left text-muted mb-4">Berikut adalah beberapa artikel terbaru untuk Anda.</p>
 
             <ul class="list-group list-group-flush">
@@ -78,37 +78,57 @@
                 @else
                     @foreach ($artikel as $item)
                         <li class="list-group-item">
-                            <a href="{{ route('artikel.show', $item->id) }}">
-                                {{ $item->judul }}
-                            </a>
-                            <p class="text-muted">{{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}</p>
-                            <a href="{{ route('artikel.show', $item->id) }}" class="btn btn-primary mt-2">Baca Selengkapnya</a><br>
-                            <small class="text-secondary">Penulis: {{ $item->penulis }}</small>
-                            <small class="text-secondary">{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
+                            <div class="d-flex">
+                                <!-- Gambar Artikel -->
+                                @if ($item->gambar)
+                                <!-- Card untuk gambar -->
+                                <div class="card me-3" style="width: 150px; height: 150px; overflow: hidden;">
+                                    <img src="{{ asset('storage/' . $item->gambar) }}"
+                                         alt="Gambar Berita"
+                                         class="img-fluid w-100 h-100"
+                                         style="object-fit: cover;">
+                                </div>
+                                @endif
+                                <!-- Judul dan Deskripsi Artikel -->
+                                <div>
+                                    <h3 class="text-primary">
+                                        <a href="{{ route('artikel.show', $item->id) }}" class="text-decoration-none text-black">
+                                            {{ $item->judul }}
+                                        </a>
+                                    </h3>
+                                    <p class="text-muted">{{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}</p>
+                                    <a href="{{ route('artikel.show', $item->id) }}" class="btn btn-primary mt-2">Baca Selengkapnya</a><br>
+                                    <small class="text-secondary">Penulis: {{ $item->penulis }}</small>
+                                    <small class="text-secondary">{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
+                                </div>
+                            </div>
                         </li>
                     @endforeach
                 @endif
             </ul>
-
             <!-- Pagination -->
             <div class="d-flex justify-content mt-4">
-            {{ $artikel->appends(['berita_page' => request('berita_page')])->links('pagination::bootstrap-4') }}
+            {{ $artikel->appends(['artikel_page' => request('artikel_page')])->links('pagination::bootstrap-4') }}
             </div>
 
         </div>
 
-        <!-- Right Section: Kontak Sekolah (30%) -->
+        <!-- Right Section: Sapaan Sekolah (30%) -->
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
                     <!-- Kontak Sekolah -->
-                    <h3 class="text-primary font-bold">
+                    <h3 class="text-primary font-weight-bold">
                         SAPAAN KEPALA SEKOLAH
                     </h3>
+                    <div class="card mx-auto mt-3 mb-3" style="width: 200px; height: 200px;">
+                        <img src="{{ asset('kepsek.jpg') }}" alt="Foto Kepala Sekolah"
+                            class="card-img-top" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
                     <p>
-                    SEMANGAT PAGI!!!
+                        SEMANGAT PAGI!!!
                     </p>
-                    <!-- Form Pencarian Artikel -->
+                    <!-- Polling -->
                     <h5 class="text-blue font-bold mt-10"> POLLING SEKOLAH </h5>
                     <div class="container mt-3" id="hasilVote" style="display: none;">
                         <p><strong>Bagus</strong>: <span id="bagusPercentage">0%</span></p>
@@ -159,7 +179,7 @@
                              Baik
                             </label>
                           </div>
-                          
+
                           <div class="form-check">
                             <input class="form-check-input" type="radio" name="pilihan" id="flexRadioDefault2" value="2" >
                             <label class="form-check-label" for="flexRadioDefault2">
@@ -174,7 +194,6 @@
                           </div>
                           <button type="submit" class="btn btn-primary mt-2">Kirim</button>
                     </form>
-                    <!-- Daftar Artikel -->
                 </div>
             </div>
         </div>

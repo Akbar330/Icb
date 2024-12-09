@@ -11,8 +11,7 @@
                     <th class="py-2 px-4 border border-gray-300 text-left">Nama Biaya</th>
                     <th class="py-2 px-4 border border-gray-300 text-left">SPP</th>
                     <th class="py-2 px-4 border border-gray-300 text-left">Non-SPP</th>
-                    <th class="py-2 px-4 border border-gray-300 text-left">Tanggal Dibuat</th>
-                    <th class="py-2 px-4 border border-gray-300 text-left">Tanggal Diperbarui</th>
+                    <th class="py-2 px-4 border border-gray-300 text-left">Keterangan</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,8 +20,6 @@
                         <td class="py-2 px-4 border border-gray-300">{{ $biaya->nama_biaya }}</td>
                         <td class="py-2 px-4 border border-gray-300">{{ number_format($biaya->jumlah, 2, ',', '.') }}</td>
                         <td class="py-2 px-4 border border-gray-300">{{ number_format($biaya->jumlah_non, 2, ',', '.') }}</td>
-                        <td class="py-2 px-4 border border-gray-300">{{ $biaya->created_at->format('d M Y') }}</td>
-                        <td class="py-2 px-4 border border-gray-300">{{ $biaya->updated_at->format('d M Y') }}</td>
                     </tr>
                 @endforeach
             </tbody>
