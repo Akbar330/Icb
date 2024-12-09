@@ -88,20 +88,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const berita = JSON.parse(beritaElement.getAttribute('data-beritas')).slice(0, 3);
 
     // Fungsi untuk memperbarui tanggal dan waktu
-    function updateDateTime() {
-        const now = new Date();
-        const options = {
-            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-            hour: '2-digit', minute: '2-digit', second: '2-digit'
-        };
-        document.getElementById('datetime').textContent = now.toLocaleDateString('id-ID', options);
-    }
+
 
     // Fungsi untuk menampilkan berita dengan animasi masuk dan keluar
     function displayNews() {
         const newsElement = document.getElementById('news-item');
         let index = 0;
-
         function updateNews() {
             // Tambahkan kelas fade-out untuk animasi keluar
             newsElement.classList.remove('fade-in');
@@ -128,8 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Jalankan fungsi saat halaman dimuat
-    updateDateTime();
-    setInterval(updateDateTime, 1000); // Update waktu setiap detik
     displayNews();
 });
 </script>
