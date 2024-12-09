@@ -154,6 +154,14 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     // Menyimpan gambar yang diunggah
     Route::post('/galeri', [AdminGaleriController::class, 'store'])->name('admin.galeri.store');
 
+    // Sapaan Kepsek
+    Route::get('/sapaan', [SapaanController::class, 'index'])->name('admin.sapa.index');
+    Route::get('/sapaan/create', [SapaanController::class, 'create'])->name('admin.sapa.create');
+    Route::post('/sapaan', [SapaanController::class, 'storeSapaan'])->name('admin.sapa.store');
+    Route::get('/sapaan/edit/{id}', [SapaanController::class, 'editSapaan'])->name('admin.sapa.edit');
+    Route::put('/sapaan/{id}', [SapaanController::class, 'updateSapaan'])->name('admin.sapa.update');
+    Route::delete('/sapaan/{id}', [SapaanController::class, 'destroySapaan'])->name('admin.sapa.destroy');
+
     Route::get('/carousel', [CarouselController::class, 'index'])->name('admin.carousel.index');
     Route::get('/carousel/create', [CarouselController::class, 'create'])->name('admin.carousel.create');
     Route::post('/carousel/store', [CarouselController::class, 'store'])->name('admin.carousel.store');
@@ -174,10 +182,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/admin/berita/export-pdf', [AdminBeritaController::class, 'exportPdf'])->name('admin.berita.exportPdf');
     Route::get('/admin/berita/search', [AdminBeritaController::class, 'search'])->name('admin.berita.search');
 
-    Route::prefix('sapaan')->group(function (){
-        Route::post('/', [SapaanController::class,'storeSapaan'] )->name('sapaan.store');
-        Route::put('/{id}', [SapaanController::class,'updateSapaan'] )->name('sapaan.update');
-    });
 });
 
 // Authentication Routes
