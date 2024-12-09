@@ -74,13 +74,6 @@
         <!-- Bagian kiri: "NEWS UPDATE" -->
         <h1 class="text-xl font-bold text-white">NEWS UPDATE:</h1>
 
-        <!-- Bagian kanan: Waktu dan Tanggal -->
-        <div class="absolute top-0 right-0 z-30 w-full max-w-lg">
-            <div class="bg-black bg-opacity-90 text-white px-8 py-4 transform skew-x-12 w-full">
-                <p id="datetime" class="transform -skew-x-12 text-sm"></p>
-            </div>
-        </div>
-
         <!-- Bagian untuk judul berita -->
         <div class="flex-grow max-w-full ml-8 text-lg text-white font-medium overflow-hidden">
             <p id="news-item" class="news-text"></p>
