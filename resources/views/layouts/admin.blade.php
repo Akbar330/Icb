@@ -155,6 +155,7 @@
                 <a href="/admin/informasi" class="text-black">Informasi</a>
                 <a href="/admin/carousel" class="text-black">Banner</a>
                 <a href="/admin/oncam" class="text-black">Youtube</a>
+                <a href="/admin/sapaan" class="text-black">Sapaan</a>
                 <a href="/admin/pendaftaran" class="text-black">PPDB</a>
                 <a href="/admin/biaya" class="text-black">Biaya</a>
 
