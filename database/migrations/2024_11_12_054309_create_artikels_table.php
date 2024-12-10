@@ -14,7 +14,7 @@ class CreateArtikelsTable extends Migration
             $table->string('penulis');
             $table->string('deskripsi');
             $table->text('konten');
-            // $table->string('gambar')->nullable(); // Menambahkan kolom gambar
+            $table->string('gambar')->nullable(); // Menambahkan kolom gambar
             $table->timestamps();
         });
     }

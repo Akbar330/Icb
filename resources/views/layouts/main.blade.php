@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'SMK ICB CT')</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="shortcut icon" href="{{asset('icb.png')}}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -151,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 shadow-md z-10" id="navbar">
     <div class="container">
         <div class="navbar-logo">
-            <img src="{{ asset('icb.png') }}" alt="Logo SMK ICB Cinta Technika" class="h-10 w-10">
+            <img src="{{ asset('icb.png') }}" alt="Logo SMK ICB Cinta Technika" class="h-20 w-20">
         </div>
         <div class="ml-4">
             <a class="navbar-brand d-block text-right" style="font-size: 1.5rem; color: black;">

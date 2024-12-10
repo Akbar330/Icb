@@ -77,32 +77,39 @@
                     <p>Tidak ada artikel tersedia.</p>
                 @else
                     @foreach ($artikel as $item)
-                        <li class="list-group-item">
-                            <div class="d-flex">
-                                <!-- Gambar Artikel -->
-                                @if ($item->gambar)
-                                <!-- Card untuk gambar -->
-                                <div class="card me-3" style="width: 150px; height: 150px; overflow: hidden;">
-                                    <img src="{{ asset('storage/' . $item->gambar) }}"
-                                         alt="Gambar Berita"
-                                         class="img-fluid w-100 h-100"
-                                         style="object-fit: cover;">
-                                </div>
-                                @endif
-                                <!-- Judul dan Deskripsi Artikel -->
-                                <div>
-                                    <h3 class="text-primary">
-                                        <a href="{{ route('artikel.show', $item->id) }}" class="text-decoration-none text-black">
-                                            {{ $item->judul }}
-                                        </a>
-                                    </h3>
-                                    <p class="text-muted">{{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}</p>
-                                    <a href="{{ route('artikel.show', $item->id) }}" class="btn btn-primary mt-2">Baca Selengkapnya</a><br>
-                                    <small class="text-secondary">Penulis: {{ $item->penulis }}</small>
-                                    <small class="text-secondary">{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
-                                </div>
+                    <li class="list-group-item">
+                        <div class="d-flex align-items-start">
+                            <!-- Gambar Artikel -->
+                            {{-- @if ($item->gambar) --}}
+                            <div class="flex-shrink-0 me-3">
+                                <img src="{{ $item->gambar !== null ? asset('storage/' . $item->gambar): asset('foto_artikel.jpg') }}" 
+                                alt="Gambar Artikel" 
+                                     class="img-thumbnail" 
+                                     style="width: 150px; height: 150px; object-fit: cover;">
                             </div>
-                        </li>
+                            {{-- @endif --}}
+                    
+                            <!-- Judul dan Deskripsi Artikel -->
+                            <div class="flex-grow-1">
+                                <h3 class="text-primary mb-1">
+                                    <a href="{{ route('artikel.show', $item->id) }}" 
+                                       class="text-decoration-none text-black">
+                                        {{ $item->judul }}
+                                    </a>
+                                </h3>
+                                <p class="text-muted mb-2">
+                                    {{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}
+                                </p>
+                                <a href="{{ route('artikel.show', $item->id) }}" 
+                                   class="btn btn-primary btn-sm">
+                                    Baca Selengkapnya
+                                </a><br>
+                                <small class="text-secondary">Penulis: {{ $item->penulis }}</small><br>
+                                <small class="text-secondary">{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
+                            </div>
+                        </div>
+                    </li>
+                    
                     @endforeach
                 @endif
             </ul>
@@ -118,14 +125,14 @@
             <div class="card">
                 <div class="card-body">
                     <!-- Kontak Sekolah -->
-                    <h3 class="text-primary font-weight-bold">
+                    <h3 class="text-primary font-weight-bold text-center">
                         SAPAAN KEPALA SEKOLAH
                     </h3>
                     <div class="card mx-auto mt-3 mb-3" style="width: 200px; height: 200px;">
-                        <img src="{{ asset('kepsek.jpg') }}" alt="Foto Kepala Sekolah"
+                        <img src="{{ asset('pasugiyo.jpg') }}" alt="Foto Kepala Sekolah"
                             class="card-img-top" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
-                    <p id="sapaan_text">
+                    <p id="sapaan_text" class="text-center">
                        
                     </p>
                     <!-- Polling -->
@@ -213,15 +220,13 @@
             <div class="d-flex flex-column">
                 @foreach ($berita as $item)
                 <div class="d-flex py-3 border-bottom">
-                    @if ($item->gambar)
                     <!-- Card untuk gambar -->
-                    <div class="card me-3" style="width: 150px; height: 150px; overflow: hidden;">
-                        <img src="{{ asset('storage/' . $item->gambar) }}"
-                             alt="Gambar Berita"
-                             class="img-fluid w-100 h-100"
-                             style="object-fit: cover;">
+                    <div class="flex-shrink-0 me-3">
+                        <img src="{{ $item->gambar !== null ? asset('storage/' . $item->gambar): asset('foto_artikel.jpg') }}" 
+                        alt="Gambar Artikel" 
+                             class="img-thumbnail" 
+                             style="width: 150px; height: 150px; object-fit: cover;">
                     </div>
-                    @endif
                     <div>
                         <h3 class="text-primary">
                             <a href="{{ route('berita.show', $item->id) }}" class="text-decoration-none text-black">
@@ -268,29 +273,25 @@
     </div>
 
      <!-- Kepala Sekolah Section -->
-     <div class="mt-8 flex items-start space-x-6">
-        <div class="w-1/3 text-center">
-            <h1 class="text-3xl font-bold mb-4">KEPALA SEKOLAH</h1>
-            <img src="{{ asset('pasugiyo.jpg') }}" alt="Foto Kepala Sekolah" class="w-full h-96 object-cover rounded-lg shadow-lg">
+     <div class="mt-8 flex flex-col lg:flex-row items-center lg: space-y-6 lg:space-y-0 lg:space-x-6">
+        <!-- Foto Kepala Sekolah -->
+        <div class="w-full lg:w-1/3 ">
+            <h1 class="text-2xl md:text-3xl font-bold mb-4">KEPALA SEKOLAH</h1>
+            <img src="{{ asset('pasugiyo.jpg') }}" 
+                 alt="Foto Kepala Sekolah" 
+                 class="w-full h-72 md:h-80 lg:h-96 object-cover rounded-lg shadow-lg">
         </div>
 
-        <div class="w-2/3 pl-6">
-            <h2 class="text-2xl font-semibold mb-2">Nama Kepala Sekolah</h2>
-            <p class="text-lg mb-6">Deskripsi Kepala Sekolah yang dapat mencakup visi, misi, serta pengalaman atau latar belakang beliau di bidang pendidikan. Ini adalah tempat untuk memperkenalkan Kepala Sekolah dan nilai-nilai yang mereka bawa ke Sekolah Harapan Bangsa. Deskripsi dapat lebih panjang untuk memberikan gambaran yang jelas dan inspiratif.</p>
-
-            <div class="flex space-x-4 justify-center mx-5">
-                <div class="text-center">
-                    <img src="{{ asset('kepsek.jpg') }}" alt="Foto Wakasek" class="w-32 h-40 object-cover rounded-lg shadow-lg">
-                    <p class="mt-2 text-lg font-medium">Wakasek</p>
-                </div>
-                <div class="text-center">
-                    <img src="{{ asset('kepsek.jpg') }}" alt="Foto Sekretaris" class="w-32 h-40 object-cover rounded-lg shadow-lg">
-                    <p class="mt-2 text-lg font-medium">Sekretaris</p>
-                </div>
-                <div class="text-center">
-                    <img src="{{ asset('kepsek.jpg') }}" alt="Foto Bendahara" class="w-32 h-40 object-cover rounded-lg shadow-lg">
-                    <p class="mt-2 text-lg font-medium">Bendahara</p>
-                </div>
+        <!-- Deskripsi Kepala Sekolah -->
+        <div class="w-full lg:w-2/3 flex items-center justify-center  lg:text-left">
+            <div>
+                <h2 class="text-xl md:text-2xl font-semibold mb-4">Sugiyo,S.Sos,MM</h2>
+                <p class="text-sm md:text-base text-gray-700 leading-relaxed">
+                    Deskripsi Kepala Sekolah yang dapat mencakup visi, misi, serta pengalaman atau latar belakang 
+                    beliau di bidang pendidikan. Ini adalah tempat untuk memperkenalkan Kepala Sekolah dan nilai-nilai 
+                    yang mereka bawa ke Sekolah Harapan Bangsa. Deskripsi dapat lebih panjang untuk memberikan gambaran 
+                    yang jelas dan inspiratif.
+                </p>
             </div>
         </div>
     </div>
@@ -341,8 +342,12 @@
       return total > 0 ? (count / total) * 100 : 0;
     }
     const getRandomSapaan = () => {
-        const randomIndex = Math.floor(Math.random() * sapaan.length);
-        return sapaan[randomIndex].sapaan;
+        if(sapaan.length > 0 ){
+            const randomIndex = Math.floor(Math.random() * sapaan.length);
+            return sapaan[randomIndex].sapaan;
+        }else {
+            return "Selamat Pagi!";
+        }
     };
 
     // Set the random sapaan text to the <p> element
@@ -381,6 +386,7 @@
  
     document.addEventListener('DOMContentLoaded', () => {
     const sapaanTextElement = document.getElementById('sapaan_text');
+    updateProgressBar();
     sapaanTextElement.textContent = getRandomSapaan();
 });
   </script>

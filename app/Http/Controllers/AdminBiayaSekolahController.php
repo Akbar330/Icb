@@ -71,6 +71,7 @@ class AdminBiayaSekolahController extends Controller
             'nama_biaya' => $request->nama_biaya,
             'jumlah' => $request->jumlah,
             'jumlah_non' => $request->jumlah_non,
+            'keterangan'=> isset($request->keterangan) ? $request->keterangan : null    
         ]);
 
         // Redirect ke halaman index dengan pesan sukses
