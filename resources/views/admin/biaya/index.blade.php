@@ -21,6 +21,7 @@
                     <th class="border-b px-4 py-2">Nama Biaya</th>
                     <th class="border-b px-4 py-2">SPP</th>
                     <th class="border-b px-4 py-2">Non-SPP</th>
+                    <th class="border-b px-4 py-2">Keterangan</th>
                     <th class="border-b px-4 py-2">Aksi</th>
                 </tr>
             </thead>
@@ -30,6 +31,7 @@
                         <td class="border-b px-4 py-2">{{ $biaya->nama_biaya }}</td>
                         <td class="border-b px-4 py-2">{{ number_format($biaya->jumlah, 0, ',', '.') }}</td>
                         <td class="border-b px-4 py-2">{{ number_format($biaya->jumlah_non, 0, ',', '.') }}</td>
+                        <td class="border-b px-4 py-2">{{ $biaya->keterangan ?? 'Tidak Ada' }}</td>
                         <td class="border-b px-4 py-2">
                             <a href="{{ route('admin.biaya.edit', $biaya->id) }}" class="text-blue-500 hover:underline">Edit</a> |
                             <form action="{{ route('admin.biaya.destroy', $biaya->id) }}" method="POST" class="inline">

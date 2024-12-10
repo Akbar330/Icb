@@ -10,15 +10,7 @@
         <form action="{{ route('admin.artikel.store') }}" method="POST" enctype="multipart/form-data" class="mt-6">
             @csrf
 
-            <!-- Gambar Artikel -->
-            <div class="mb-4">
-                <label for="gambar" class="block text-gray-700 font-semibold">Gambar</label>
-                    <input type="file" id="gambar" name="gambar"
-                           class="w-full p-2 border border-gray-300 rounded mt-1" accept="image/*">
-                @error('gambar')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
+       
 
             <!-- Judul Artikel -->
             <div class="mb-4">
@@ -48,6 +40,15 @@
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
+                 <!-- Gambar Artikel -->
+                 <div class="mb-4">
+                    <label for="gambar" class="block text-gray-700 font-semibold">Gambar Cover</label>
+                        <input type="file" id="gambar" name="gambar"
+                               class="w-full p-2 border border-gray-300 rounded mt-1" accept="image/*">
+                    @error('gambar')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
             <!-- Konten Artikel -->
             <div class="mb-4">
                 <label for="konten" class="block text-gray-700 font-semibold">Konten</label>

@@ -9,7 +9,7 @@
 
         <!-- Form Edit Berita -->
         <div class="bg-white p-6 rounded-lg shadow-md mt-6">
-            <form action="{{ route('admin.berita.update', $berita->id) }}" method="POST">
+            <form action="{{ route('admin.berita.update', $berita->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -37,6 +37,14 @@
                     <input type="text" id="penulis" name="penulis" value="{{ old('penulis', $berita->penulis) }}"
                            class="w-full mt-2 p-2 border border-gray-300 rounded-md" required>
                     @error('penulis')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="mb-4">
+                    <label for="gambar" class="block text-gray-700 font-semibold">Gambar Cover</label>
+                    <input type="file" id="gambar" name="gambar" class="w-full p-2 border border-gray-300 rounded mt-1"
+                        accept="image/*">
+                    @error('gambar')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
                 </div>

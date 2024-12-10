@@ -33,6 +33,14 @@
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
+            <div class="mb-4">
+                <label for="keterangan" class="block text-gray-700 font-semibold">Keterangan</label>
+                <input type="text" id="keterangan" name="keterangan"
+                    class="w-full p-2 border border-gray-300 rounded mt-1" value="{{ old('keterangan', $biaya->keterangan) }}" >
+                @error('keterangan')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
 
             <button type="submit" class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 hover:bg-blue-700">
                 Perbarui Biaya

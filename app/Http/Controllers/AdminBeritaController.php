@@ -30,9 +30,9 @@ class AdminBeritaController extends Controller
 
         // Simpan gambar jika ada
         $data = $request->all();
-        // if ($request->hasFile('gambar')) {
-        //     $data['gambar'] = $request->file('gambar')->store('images/beritas', 'public');
-        // }
+        if ($request->hasFile('gambar')) {
+            $data['gambar'] = $request->file('gambar')->store('images/beritas', 'public');
+        }
 
         Berita::create($data);
 
@@ -59,14 +59,14 @@ class AdminBeritaController extends Controller
         $data = $request->only(['judul', 'penulis', 'konten','deskripsi']);
 
         // Cek apakah ada gambar baru yang diupload
-        // if ($request->hasFile('gambar')) {
-        //     // Hapus gambar lama jika ada
-        //     if ($berita->gambar) {
-        //         Storage::disk('public')->delete($berita->gambar);
-        //     }
-        //     // Simpan gambar baru
-        //     $data['gambar'] = $request->file('gambar')->store('images/beritas', 'public');
-        // }
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($berita->gambar) {
+                Storage::disk('public')->delete($berita->gambar);
+            }
+            // Simpan gambar baru
+            $data['gambar'] = $request->file('gambar')->store('images/beritas', 'public');
+        }
 
         $berita->update($data);
 

@@ -14,7 +14,7 @@ class CreateBeritasTable extends Migration
             $table->text('konten');
             $table->string('penulis');
             $table->string('deskripsi');
-            // $table->string('gambar')->nullable(); // Menambahkan kolom gambar
+            $table->string('gambar')->nullable(); // Menambahkan kolom gambar
             $table->timestamps();
         });
     }
