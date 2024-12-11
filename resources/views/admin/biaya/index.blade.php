@@ -15,34 +15,25 @@
             </div>
         @endif
 
-        <table class="mt-6 w-full text-left border-collapse">
-            <thead>
-                <tr>
-                    <th class="border-b px-4 py-2">Nama Biaya</th>
-                    <th class="border-b px-4 py-2">SPP</th>
-                    <th class="border-b px-4 py-2">Non-SPP</th>
-                    <th class="border-b px-4 py-2">Keterangan</th>
-                    <th class="border-b px-4 py-2">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($biayaSekolah as $biaya)
-                    <tr>
-                        <td class="border-b px-4 py-2">{{ $biaya->nama_biaya }}</td>
-                        <td class="border-b px-4 py-2">{{ number_format($biaya->jumlah, 0, ',', '.') }}</td>
-                        <td class="border-b px-4 py-2">{{ number_format($biaya->jumlah_non, 0, ',', '.') }}</td>
-                        <td class="border-b px-4 py-2">{{ $biaya->keterangan ?? 'Tidak Ada' }}</td>
-                        <td class="border-b px-4 py-2">
-                            <a href="{{ route('admin.biaya.edit', $biaya->id) }}" class="text-blue-500 hover:underline">Edit</a> |
-                            <form action="{{ route('admin.biaya.destroy', $biaya->id) }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-500 hover:underline">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <!-- Card Layout for Biaya Sekolah -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+            @foreach($biayaSekolah as $biaya)
+                <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-800">{{ $biaya->nama_biaya }}</h3>
+                    <p class="mt-2 text-gray-600">SPP: {{ number_format($biaya->jumlah, 0, ',', '.') }}</p>
+                    <p class="mt-2 text-gray-600">Non-SPP: {{ number_format($biaya->jumlah_non, 0, ',', '.') }}</p>
+                    <p class="mt-2 text-gray-600">Keterangan: {{ $biaya->keterangan ?? 'Tidak Ada' }}</p>
+
+                    <div class="mt-4 flex justify-between">
+                        <a href="{{ route('admin.biaya.edit', $biaya->id) }}" class="text-blue-500 hover:underline">Edit</a>
+                        <form action="{{ route('admin.biaya.destroy', $biaya->id) }}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-500 hover:underline">Hapus</button>
+                        </form>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
 @endsection
