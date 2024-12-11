@@ -13,132 +13,93 @@
             font-family: 'Inter', sans-serif;
             background-color: #F9FAFB;
             color: #333;
-            margin-top: 80px; /* Adjust according to your header height */
-
+            margin-top: 60px;
         }
-
-        /* Navigation */
-        nav a {
-            position: relative;
-            padding: 8px 0; /* Reduced padding */
-            text-transform: uppercase;
-            font-weight: 600;
-            color: #black;
-            font-size: 0.875rem; /* Smaller font size */
-            transition: color 0.3s, border-bottom 0.3s;
-        }
-
-        nav a:hover,
-        nav a.active {
-            color: #000000;
-            border-bottom: 2px solid #000000;
-        }
-
-        /* Header */
-/* Make the whole header fixed at the top */
+    
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: white; /* Ensure the header has a background */
-            z-index: 1000; /* Keeps the header above other content */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow for better visibility */
-            padding: 10px 0; /* Adjust padding */
+            background-color: white;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 5px 0;
         }
-
-
-
+    
         header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
-        header h1 {
-            font-size: 1.25rem; /* Smaller font size */
-            color: black;
+    
+        nav .navbar-collapse {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
         }
-
-        header p {
-            font-size: 0.75rem; /* Smaller font size */
-            color: black;
-        }
-
-        header img {
-            height: 35px; /* Smaller logo size */
-        }
-
-        /* Main Content */
-        .main-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px; /* Add a top margin so the content is not hidden behind the fixed header */
-
-        }
-
-        /* Footer */
-        footer {
-            background-color: #2D3748;
-            padding: 15px 0;
-            color: #CBD5E0;
-        }
-
-        footer a {
-            color: #CBD5E0;
-            font-size: 0.875rem; /* Smaller font size */
-            transition: color 0.3s;
-        }
-
-        footer a:hover {
-            color: #F1C40F;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-block;
-            padding: 8px 18px;
-            background-color: #F1C40F;
-            color: white;
-            font-weight: 600;
-            font-size: 0.875rem; /* Smaller font size */
-            border-radius: 6px;
+    
+        nav a {
+            padding: 6px 10px;
             text-transform: uppercase;
-            transition: background-color 0.3s ease;
+            font-weight: 500;
+            color: black;
+            font-size: 0.75rem;
+            transition: color 0.3s, border-bottom 0.3s;
         }
-
-        .btn:hover {
-            background-color: #D39A00;
+    
+        nav a:hover,
+        nav a.active {
+            color: #000000;
+            border-bottom: 2px solid #000000;
         }
-
-        /* Responsiveness */
+    
         @media (max-width: 768px) {
-            header .container {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            nav {
-                margin-top: 10px;
-            }
-
-            nav a {
+            nav .navbar-toggler {
                 display: inline-block;
-                margin: 0 10px;
+            }
+    
+            nav a {
+                display: block;
+                padding: 8px 10px;
+            }
+    
+            nav .navbar-collapse {
+                background-color: white;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                padding: 10px;
+                display: none;
+            }
+    
+            nav .navbar-collapse.show {
+                display: block;
             }
         }
-
+    
+        @media (min-width: 769px) {
+            nav .navbar-toggler {
+                display: none;
+            }
+    
+            nav .navbar-collapse {
+                display: flex;
+                justify-content: space-between;
+            }
+    
+            nav a {
+                padding: 6px 12px;
+            }
+        }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 </head>
 
 <body>
-
     <!-- Header with Navigation -->
-    <header class="bg-transparent">
+    <header>
         <div class="container mx-auto px-4 flex items-center justify-between">
             <div class="flex items-center space-x-4">
                 <img src="{{ asset('icb.png') }}" alt="Logo" class="h-12 w-auto">
@@ -147,29 +108,29 @@
                     <p>Admin Page</p>
                 </div>
             </div>
-            <nav class="flex space-x-6 ml-auto items-center">
-                <a href="/admin" class="text-black">Home</a>
-                <a href="/admin/artikel" class="text-black">Artikel</a>
-                <a href="/admin/berita" class="text-black">Berita</a>
-                <a href="/admin/galeri" class="text-black">Galeri</a>
-                <a href="/admin/informasi" class="text-black">Informasi</a>
-                <a href="/admin/carousel" class="text-black">Banner</a>
-                <a href="/admin/oncam" class="text-black">Youtube</a>
-                <a href="/admin/sapaan" class="text-black">Sapaan</a>
-                <a href="/admin/pendaftaran" class="text-black">PPDB</a>
-                <a href="/admin/biaya" class="text-black">Biaya</a>
-
-                <!-- Tombol Logout -->
-                <form action="{{ route('logout') }}" method="POST" class="inline">
-                    @csrf
-                    <button type="submit" class="text-black hover:text-gray-600 flex items-center space-x-2 font-bold">
-
-                        <i class="fas fa-sign-out-alt"></i>
-                    </button>
-                </form>
+            <nav class="navbar">
+                <button class="navbar-toggler" type="button">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="navbar-collapse" id="navbarNav">
+                    <a href="/admin" class="{{ request()->is('admin') ? 'active' : '' }}">Home</a>
+                    <a href="/admin/artikel" class="{{ request()->is('admin/artikel') ? 'active' : '' }}">Artikel</a>
+                    <a href="/admin/berita" class="{{ request()->is('admin/berita') ? 'active' : '' }}">Berita</a>
+                    <a href="/admin/galeri" class="{{ request()->is('admin/galeri') ? 'active' : '' }}">Galeri</a>
+                    <a href="/admin/informasi" class="{{ request()->is('admin/informasi') ? 'active' : '' }}">Informasi</a>
+                    <a href="/admin/carousel" class="{{ request()->is('admin/carousel') ? 'active' : '' }}">Banner</a>
+                    <a href="/admin/oncam" class="{{ request()->is('admin/oncam') ? 'active' : '' }}">Youtube</a>
+                    <a href="/admin/sapaan" class="{{ request()->is('admin/sapaan') ? 'active' : '' }}">Sapaan</a>
+                    <a href="/admin/pendaftaran" class="{{ request()->is('admin/pendaftaran') ? 'active' : '' }}">PPDB</a>
+                    <a href="/admin/biaya" class="{{ request()->is('admin/biaya') ? 'active' : '' }}">Biaya</a>
+                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="text-black hover:text-gray-600 flex items-center space-x-2 font-bold">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </form>
+                </div>
             </nav>
-
-
         </div>
     </header>
 
@@ -182,27 +143,24 @@
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-gray-300 text-center py-6 mt-10">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Contact Info -->
-
-        </div>
-
         <p>&copy; 2024 SMK ICB CT. All rights reserved.</p>
     </footer>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 
     <script>
-        // JavaScript to add active class to the clicked link in the navigation
-        // Add active class to the current page link based on the current URL
         document.addEventListener('DOMContentLoaded', function () {
-            const navLinks = document.querySelectorAll('nav a');
-            navLinks.forEach(link => {
-                if (window.location.pathname === link.getAttribute('href')) {
-                    link.classList.add('active');
-                }
+            const toggler = document.querySelector('.navbar-toggler');
+            const collapse = document.querySelector('.navbar-collapse');
+
+            toggler.addEventListener('click', function () {
+                collapse.classList.toggle('show');
+            });
+
+            // Menambahkan active class pada menu yang dipilih
+            const links = document.querySelectorAll('.navbar-collapse a');
+            links.forEach(link => {
                 link.addEventListener('click', function () {
-                    navLinks.forEach(link => link.classList.remove('active'));
-                    this.classList.add('active');
+                    links.forEach(link => link.classList.remove('active'));
+                    link.classList.add('active');
                 });
             });
         });

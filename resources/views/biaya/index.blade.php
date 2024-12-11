@@ -7,7 +7,7 @@
         <h1 class="text-3xl font-bold text-gray-700 text-center">Biaya Sekolah</h1>
         <p class="text-gray-600 text-center mb-6">Detail biaya SPP dan Non-SPP tersedia di sini.</p>
 
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
             @foreach($biayaSekolah as $biaya)
                 <div class="bg-white rounded-lg shadow-lg p-4">
                     <h2 class="text-lg font-semibold text-gray-700 mb-2">{{ $biaya->nama_biaya }}</h2>
