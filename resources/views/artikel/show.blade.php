@@ -5,8 +5,6 @@
 @section('content')
 
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Card Artikel -->
-        <div class="bg-white rounded-lg shadow-lg p-5 md:p-8">
             <div class="mt-4 md:mt-8">
                 <a href="/" 
                    class="text-primary text-sm sm:text-base">
