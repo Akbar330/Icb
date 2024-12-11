@@ -7,14 +7,14 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Card Artikel -->
         <div class="bg-white rounded-lg shadow-lg p-5 md:p-8">
-            <div class="mt-8">
-                <a href="{{ route('artikel.index') }}" 
+            <div class="mt-4 md:mt-8">
+                <a href="/" 
                    class="text-primary text-sm sm:text-base">
-                    ← Kembali ke daftar artikel
+                    ← Kembali ke Home
                 </a>
             </div>
             <!-- Judul Artikel -->
-            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600">
+            <h1 class="text-xl sm:text-2xl md:text-3xl font-semibold text-blue-600 mt-4 md:mt-6">
                 {{ $artikels->judul }}
             </h1>
             <!-- Informasi Penulis dan Tanggal -->
@@ -24,11 +24,12 @@
 
             <!-- Konten Artikel -->
             <div class="mt-6 text-gray-700 leading-relaxed text-sm sm:text-base">
-                {!! $artikels->konten !!}
+                <!-- Gunakan paragraf, heading, dan list untuk membuat artikel lebih terstruktur -->
+                {!! nl2br(e($artikels->konten)) !!}
             </div>
         </div>
 
         <!-- Tombol Kembali -->
-
     </div>
+    
 @endsection
