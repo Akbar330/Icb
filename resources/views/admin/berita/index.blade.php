@@ -43,45 +43,33 @@
             </div>
         </div>
 
-        <!-- Tabel Berita -->
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-gray-700">Berita</h3>
-            <table class="w-full mt-4 text-left border-collapse">
-                <thead>
-                    <tr>
-                        <th class="border-b px-4 py-2">Gambar</th>
-                        <th class="border-b px-4 py-2">Judul</th>
-                        <th class="border-b px-4 py-2">Penulis</th>
-                        <th class="border-b px-4 py-2">Tanggal</th>
-                        <th class="border-b px-4 py-2">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="beritaTable">
-                    <!-- Loop berita dari database -->
-                    @foreach($beritas as $berita)
-                        <tr>
-                            <td class="border-b px-4 py-2">
-                                @if($berita->gambar)
-                                    <img src="{{ asset('storage/' . $berita->gambar) }}" alt="{{ $berita->judul }}" class="w-20 h-20 object-cover rounded">
-                                @else
-                                    <span class="text-gray-500">Tidak ada gambar</span>
-                                @endif
-                            </td>
-                            <td class="border-b px-4 py-2">{{ $berita->judul }}</td>
-                            <td class="border-b px-4 py-2">{{ $berita->penulis }}</td>
-                            <td class="border-b px-4 py-2">{{ $berita->created_at->format('d M Y') }}</td>
-                            <td class="border-b px-4 py-2">
-                                <a href="{{ route('admin.berita.edit', $berita->id) }}" class="text-blue-500 hover:underline">Edit</a> |
-                                <form action="{{ route('admin.berita.destroy', $berita->id) }}" method="POST" class="inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:underline">Hapus</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        <!-- Daftar Berita Responsif -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Loop berita dari database -->
+            @foreach($beritas as $berita)
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="mb-4">
+                        @if($berita->gambar)
+                            <img src="{{ asset('storage/' . $berita->gambar) }}" alt="{{ $berita->judul }}" class="w-full h-40 object-cover rounded">
+                        @else
+                            <div class="w-full h-40 bg-gray-200 flex items-center justify-center rounded">
+                                <span class="text-gray-500">Tidak ada gambar</span>
+                            </div>
+                        @endif
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-700">{{ $berita->judul }}</h3>
+                    <p class="text-sm text-gray-500">Penulis: {{ $berita->penulis }}</p>
+                    <p class="text-sm text-gray-500">Tanggal: {{ $berita->created_at->format('d M Y') }}</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <a href="{{ route('admin.berita.edit', $berita->id) }}" class="text-blue-600 hover:underline">Edit</a>
+                        <form action="{{ route('admin.berita.destroy', $berita->id) }}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-500 hover:underline">Hapus</button>
+                        </form>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 </div>
@@ -97,31 +85,30 @@
             type: "GET",
             data: { query: query },
             success: function(data) {
-                let rows = '';
+                let container = '';
                 let assetPath = "{{ asset('storage/') }}"; // Path to assets
 
-                // Loop through search results and populate table rows
+                // Loop through search results and populate card content
                 data.forEach(function(item) {
-                    rows += `
-                        <tr class="border-t">
-                            <td class="px-4 py-2">
-                                ${item.gambar ? `<img src="${assetPath}/${item.gambar}" alt="${item.judul}" class="w-20 h-20 object-cover rounded">` : '<span class="text-gray-500">Tidak ada gambar</span>'}
-                            </td>
-                            <td class="px-4 py-2">${item.judul}</td>
-                            <td class="px-4 py-2">${item.penulis}</td>
-                            <td class="px-4 py-2">${item.created_at}</td>
-                            <td class="px-4 py-2">
+                    container += `
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <div class="mb-4">
+                                ${item.gambar ? `<img src="${assetPath}/${item.gambar}" alt="${item.judul}" class="w-full h-40 object-cover rounded">` : '<div class="w-full h-40 bg-gray-200 flex items-center justify-center rounded"><span class="text-gray-500">Tidak ada gambar</span></div>'}
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-700">${item.judul}</h3>
+                            <p class="text-sm text-gray-500">Penulis: ${item.penulis}</p>
+                            <p class="text-sm text-gray-500">Tanggal: ${item.created_at}</p>
+                            <div class="mt-4 flex justify-between items-center">
                                 <a href="/admin/berita/${item.id}" class="text-blue-600 hover:underline">Lihat</a>
-                            </td>
-                        </tr>`;
+                            </div>
+                        </div>`;
                 });
 
-                // Update the table body with new rows
-                $('#beritaTable').html(rows);
+                // Update the container with new cards
+                $('.grid').html(container);
             }
         });
     });
 </script>
-
 
 @endsection
