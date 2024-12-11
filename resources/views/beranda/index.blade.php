@@ -52,15 +52,20 @@
     </section>
 
     <!-- Welcome Section with Small Image -->
-    <div class="flex items-center bg-gray-100 text-gray-800 p-6 mb-10 shadow-lg rounded-lg">
-        <div class="w-3/4">
-            <h2 class="text-3xl font-semibold">Selamat Datang di SMK ICB Cinta Teknika</h2>
-            <!-- Garis Bawah -->
-            <div class="w-1/2 h-1 bg-blue-600 mt-2 mb-4"></div>
-            <p class="mt-4 text-lg">Kami adalah sekolah yang berkomitmen untuk memberikan pendidikan terbaik di bidang teknik. Di SMK ICB Cinta Teknika, siswa-siswa kami dibekali dengan pengetahuan dan keterampilan praktis yang akan mempersiapkan mereka untuk menjadi profesional di dunia industri. Bergabunglah dengan kami dan jadilah bagian dari masa depan teknologi.</p>
+    <div class="flex flex-col md:flex-row items-center bg-gray-100 text-gray-800 p-6 mb-10 shadow-lg rounded-lg">
+        <div class="md:w-1/3 w-full mb-4 md:mb-0">
+            <img
+                src="{{ asset('smk_icb_ct.jpeg') }}"
+                alt="Gambar Sambutan"
+                class="w-full h-auto object-cover rounded-lg shadow-md">
         </div>
-        <div class="w-1/4">
-            <img src="{{ asset('smk_icb_ct.jpeg') }}" alt="Gambar Sambutan" class="w-full h-32 object-cover rounded-lg shadow-md">
+        <div class="md:w-2/3 w-full md:pl-6">
+            <h2 class="text-2xl md:text-3xl font-semibold mt-3 text-center md:text-left">Selamat Datang di SMK ICB Cinta Teknika</h2>
+            <!-- Garis Bawah -->
+            <div class="w-1/2 h-1 bg-blue-600 mt-2 mb-4 mx-auto md:mx-0"></div>
+            <p class="mt-4 text-base md:text-lg text-center md:text-left">
+                Kami adalah sekolah yang berkomitmen untuk memberikan pendidikan terbaik di bidang teknik. Di SMK ICB Cinta Teknika, siswa-siswa kami dibekali dengan pengetahuan dan keterampilan praktis yang akan mempersiapkan mereka untuk menjadi profesional di dunia industri. Bergabunglah dengan kami dan jadilah bagian dari masa depan teknologi.
+            </p>
         </div>
     </div>
 
@@ -69,51 +74,53 @@
     <div class="row">
         <!-- Left Section: Daftar Artikel (70%) -->
         <div class="col-md-8 mb-4">
-            <h1 class="display-4 font-weight-bold">Artikel Terbaru</h1>
+            <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold">Artikel Terbaru</h1>
             <p class="text-left text-muted mb-4">Berikut adalah beberapa artikel terbaru untuk Anda.</p>
-
             <ul class="list-group list-group-flush">
                 @if ($artikel->isEmpty())
                     <p>Tidak ada artikel tersedia.</p>
                 @else
                     @foreach ($artikel as $item)
                     <li class="list-group-item">
-                        <div class="d-flex align-items-start">
+                        <div class="d-flex flex-column flex-md-row align-items-start">
                             <!-- Gambar Artikel -->
-                            {{-- @if ($item->gambar) --}}
-                            <div class="flex-shrink-0 me-3">
-                                <img src="{{ $item->gambar !== null ? asset('storage/' . $item->gambar): asset('foto_artikel.jpg') }}" 
-                                alt="Gambar Artikel" 
-                                     class="img-thumbnail" 
+                            <div class="flex-shrink-0 mb-3 mb-md-0 me-md-3 text-center">
+                                <img src="{{ $item->gambar !== null ? asset('storage/' . $item->gambar): asset('foto_artikel.jpg') }}"
+                                     alt="Gambar Artikel"
+                                     class="img-thumbnail"
                                      style="width: 150px; height: 150px; object-fit: cover;">
                             </div>
-                            {{-- @endif --}}
-                    
+
                             <!-- Judul dan Deskripsi Artikel -->
-                            <div class="flex-grow-1">
-                                <h3 class="text-primary mb-1">
-                                    <a href="{{ route('artikel.show', $item->id) }}" 
-                                       class="text-decoration-none text-black">
-                                        {{ $item->judul }}
-                                    </a>
-                                </h3>
-                                <p class="text-muted mb-2">
-                                    {{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}
-                                </p>
-                                <a href="{{ route('artikel.show', $item->id) }}" 
-                                   class="btn btn-primary btn-sm">
-                                    Baca Selengkapnya
-                                </a><br>
-                                <small class="text-secondary">Penulis: {{ $item->penulis }}</small><br>
-                                <small class="text-secondary">{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
+                            <div class="ml-2">
+                                <div class="flex-grow-1">
+                                    <h3 class="text-primary mb-1 text-left text-md-start">
+                                        <a href="{{ route('artikel.show', $item->id) }}"
+                                        class="text-decoration-none text-black">
+                                            {{ $item->judul }}
+                                        </a>
+                                    </h3>
+                                    <p class="text-muted mb-2 text-left text-md-start">
+                                        {{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}
+                                    </p>
+                                    <div class="text-left text-md-start">
+                                        <a href="{{ route('artikel.show', $item->id) }}"
+                                        class="btn btn-primary btn-sm">
+                                            Baca Selengkapnya
+                                        </a>
+                                    </div>
+                                    <div class="text-secondary text-left text-md-start mt-2">
+                                        <small>Penulis: {{ $item->penulis }}</small><br>
+                                        <small>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </li>
-                    
                     @endforeach
                 @endif
             </ul>
-            <!-- Pagination -->
+                        <!-- Pagination -->
             <div class="d-flex justify-content mt-4">
             {{ $artikel->appends(['artikel_page' => request('artikel_page')])->links('pagination::bootstrap-4') }}
             </div>
@@ -133,7 +140,7 @@
                             class="card-img-top" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <p id="sapaan_text" class="text-center">
-                       
+
                     </p>
                     <!-- Polling -->
                     <h5 class="text-blue font-bold mt-10"> POLLING SEKOLAH </h5>
@@ -214,32 +221,42 @@
     <div class="row">
         <!-- Left Section: Daftar Berita (70%) -->
         <div class="col-md-8 mb-4">
-            <h1 class="display-4 font-bold">Berita Sekolah</h1>
+            <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold">Berita Sekolah</h1>
             <p class="text-left text-muted mb-4">Berikut adalah berita terbaru dari sekolah.</p>
-
             <div class="d-flex flex-column">
                 @foreach ($berita as $item)
-                <div class="d-flex py-3 border-bottom">
+                <div class="d-flex flex-column flex-md-row py-3 border-bottom">
                     <!-- Card untuk gambar -->
-                    <div class="flex-shrink-0 me-3">
-                        <img src="{{ $item->gambar !== null ? asset('storage/' . $item->gambar): asset('foto_artikel.jpg') }}" 
-                        alt="Gambar Artikel" 
-                             class="img-thumbnail" 
+                    <div class="flex-shrink-0 mb-3 mb-md-0 me-md-3 text-center">
+                        <img src="{{ $item->gambar !== null ? asset('storage/' . $item->gambar) : asset('foto_artikel.jpg') }}"
+                             alt="Gambar Berita"
+                             class="img-thumbnail"
                              style="width: 150px; height: 150px; object-fit: cover;">
                     </div>
-                    <div>
-                        <h3 class="text-primary">
-                            <a href="{{ route('berita.show', $item->id) }}" class="text-decoration-none text-black">
-                                {{ $item->judul }}
-                            </a>
-                        </h3>
-                        <p class="text-muted mb-2">{{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}</p>
-                        <small class="text-secondary">Penulis: {{ $item->penulis ?? 'Anonim' }}</small> |
-                        <small class="text-secondary">{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
-                        <br>
-                        <a href="{{ route('berita.show', $item->id) }}" class="btn btn-primary mt-2 text-left">
-                            Lihat Selengkapnya
-                        </a>
+
+                    <!-- Konten Berita -->
+                    <div class="ml-2">
+                        <div class="flex-grow-1">
+                            <h3 class="text-primary mb-2 text-left text-md-start">
+                                <a href="{{ route('berita.show', $item->id) }}"
+                                class="text-decoration-none text-black">
+                                    {{ $item->judul }}
+                                </a>
+                            </h3>
+                            <p class="text-muted mb-2 text-left text-md-start">
+                                {{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}
+                            </p>
+                            <div class="text-secondary text-left text-md-start">
+                                <small>Penulis: {{ $item->penulis ?? 'Anonim' }}</small> |
+                                <small>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
+                            </div>
+                            <div class="text-left text-md-start mt-3">
+                                <a href="{{ route('berita.show', $item->id) }}"
+                                class="btn btn-primary">
+                                    Lihat Selengkapnya
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 @endforeach
@@ -277,8 +294,8 @@
         <!-- Foto Kepala Sekolah -->
         <div class="w-full lg:w-1/3 ">
             <h1 class="text-2xl md:text-3xl font-bold mb-4">KEPALA SEKOLAH</h1>
-            <img src="{{ asset('pasugiyo.jpg') }}" 
-                 alt="Foto Kepala Sekolah" 
+            <img src="{{ asset('pasugiyo.jpg') }}"
+                 alt="Foto Kepala Sekolah"
                  class="w-full h-72 md:h-80 lg:h-96 object-cover rounded-lg shadow-lg">
         </div>
 
@@ -287,9 +304,9 @@
             <div>
                 <h2 class="text-xl md:text-2xl font-semibold mb-4">Sugiyo,S.Sos,MM</h2>
                 <p class="text-sm md:text-base text-gray-700 leading-relaxed">
-                    Deskripsi Kepala Sekolah yang dapat mencakup visi, misi, serta pengalaman atau latar belakang 
-                    beliau di bidang pendidikan. Ini adalah tempat untuk memperkenalkan Kepala Sekolah dan nilai-nilai 
-                    yang mereka bawa ke Sekolah Harapan Bangsa. Deskripsi dapat lebih panjang untuk memberikan gambaran 
+                    Deskripsi Kepala Sekolah yang dapat mencakup visi, misi, serta pengalaman atau latar belakang
+                    beliau di bidang pendidikan. Ini adalah tempat untuk memperkenalkan Kepala Sekolah dan nilai-nilai
+                    yang mereka bawa ke Sekolah Harapan Bangsa. Deskripsi dapat lebih panjang untuk memberikan gambaran
                     yang jelas dan inspiratif.
                 </p>
             </div>
@@ -383,7 +400,7 @@
       burukProgress.setAttribute("aria-valuenow", burukPercent);
       burukPercentage.textContent = `${Math.round(burukPercent)}%`;
     }
- 
+
     document.addEventListener('DOMContentLoaded', () => {
     const sapaanTextElement = document.getElementById('sapaan_text');
     updateProgressBar();
