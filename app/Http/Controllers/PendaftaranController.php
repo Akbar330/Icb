@@ -73,8 +73,8 @@ class PendaftaranController extends Controller
             
             // Jika mgm adalah 'Y', tambahkan nama_mgm dan asal_mgm
             if ($validated['mgm'] === 'Y') {
-                $pendaftaranData['nama_mgm'] = $validated['nama_mgm'];
-                $pendaftaranData['asal_mgm'] = $validated['asal_mgm'];
+                $pendaftaranData['nama_mgm'] = $request->nama_mgm;
+                $pendaftaranData['asal_mgm'] = $request->asal_mgm;
             } else {
                 $pendaftaranData['nama_mgm'] = null;
                 $pendaftaranData['asal_mgm'] = null;
@@ -94,8 +94,7 @@ class PendaftaranController extends Controller
         } catch (\Exception $ex) {
             // dd($ex);
             Alert::error('Gagal', $ex->getMessage());
-
-            // return redirect()->back()->with('error', $ex->getMessage());
+            return redirect()->back()->with('error', $ex->getMessage());
 
         } 
 

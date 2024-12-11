@@ -23,7 +23,7 @@
             <!-- Konten Artikel -->
             <div class="mt-6 text-gray-700 leading-relaxed text-sm sm:text-base">
                 <!-- Gunakan paragraf, heading, dan list untuk membuat artikel lebih terstruktur -->
-                {!! nl2br(e($artikels->konten)) !!}
+                {!! nl2br(($artikels->konten)) !!}
             </div>
         </div>
 

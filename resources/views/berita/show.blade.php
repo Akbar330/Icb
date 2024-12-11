@@ -18,7 +18,7 @@
 
             <!-- Konten Berita -->
             <div class="mt-6 text-gray-700 leading-relaxed text-sm sm:text-base">
-                {!! nl2br(e($berita->konten)) !!}
+                {!! nl2br(($berita->konten)) !!}
             </div>
     </div>
 @endsection

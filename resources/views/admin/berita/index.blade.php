@@ -53,8 +53,7 @@
                             <img src="{{ asset('storage/' . $berita->gambar) }}" alt="{{ $berita->judul }}" class="w-full h-40 object-cover rounded">
                         @else
                             <div class="w-full h-40 bg-gray-200 flex items-center justify-center rounded">
-                                <span class="text-gray-500">Tidak ada gambar</span>
-                            </div>
+                                <img src="{{ asset('foto_artikel.jpg') }}" alt="{{ $berita->judul }}" class="w-full h-40 object-cover rounded">                            </div>
                         @endif
                     </div>
                     <h3 class="text-lg font-semibold text-gray-700">{{ $berita->judul }}</h3>

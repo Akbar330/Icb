@@ -11,7 +11,7 @@
             @else
                 <p class="text-gray-500 mt-2">Tidak ada gambar</p>
             @endif
-            <p class="text-lg text-gray-600">{!! nl2br(e($informasi->konten)) !!}</p>
+            <p class="text-lg text-gray-600">{!! nl2br(($informasi->konten)) !!}</p>
 
         </div>
     </div>

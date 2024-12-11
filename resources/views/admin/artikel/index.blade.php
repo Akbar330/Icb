@@ -49,13 +49,13 @@
         <div id="artikelCards" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             @foreach($artikels as $artikel)
                 <div class="bg-white rounded-lg shadow-md p-4">
-                    @if($artikel->gambar)
-                        <img src="{{ asset('storage/' . $artikel->gambar) }}" alt="{{ $artikel->judul }}" class="w-full h-48 object-cover rounded-t-md">
-                    @else
-                        <div class="w-full h-48 bg-gray-200 flex items-center justify-center rounded-t-md">
+                    {{-- @if($artikel->gambar) --}}
+                        <img src="{{ $artikel->gambar !== null ? asset('storage/' . $artikel->gambar) : asset('foto_artikel.jpg') }}" alt="{{ $artikel->judul }}" class="w-full h-48 object-cover rounded-t-md">
+                    {{-- @else --}}
+                        {{-- <div class="w-full h-48 bg-gray-200 flex items-center justify-center rounded-t-md">
                             <span class="text-gray-500">Tidak ada gambar</span>
-                        </div>
-                    @endif
+                        </div> --}}
+                    {{-- @endif --}}
                     <div class="p-4">
                         <h3 class="text-lg font-semibold text-gray-700">{{ $artikel->judul }}</h3>
                         <p class="text-sm text-gray-500">Penulis: {{ $artikel->penulis }}</p>
