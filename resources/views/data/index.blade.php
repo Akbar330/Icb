@@ -3,59 +3,55 @@
 @section('title', 'Data Sekolah')
 
 @section('content')
-    <div class="container mx-auto px-4 py-12">
-        <h1 class="text-4xl font-bold text-blue-600 text-center">Data Sekolah</h1>
-        <p class="text-lg text-gray-600 text-center mb-6">Data penting yang terkait dengan sekolah, tersedia di sini.</p>
+<div class="container mx-auto px-4 py-12">
+    <h1 class="text-3xl md:text-4xl font-bold text-blue-600 text-center">Data Sekolah</h1>
+    <p class="text-base md:text-lg text-gray-600 text-center mb-6">
+        Data penting yang terkait dengan sekolah, tersedia di sini.
+    </p>
 
-        <div class="bg-white p-6 rounded-lg shadow-lg">
-            <h2 class="text-2xl font-semibold text-blue-600 mb-4">Informasi Sekolah</h2>
+        <h2 class="text-xl md:text-2xl font-semibold text-blue-600 mb-4">Informasi Sekolah</h2>
 
-            <table class="min-w-full table-auto border-collapse border border-gray-300">
-                <thead>
-                    <tr class="bg-gray-100">
-                        <th class="px-4 py-2 text-left text-gray-700">Informasi</th>
-                        <th class="px-4 py-2 text-left text-gray-700">Detail</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="px-4 py-2 font-semibold">NPSN</td>
-                        <td class="px-4 py-2">20219292</td>
-                    </tr>
-                    <tr>
-                        <td class="px-4 py-2 font-semibold">Status</td>
-                        <td class="px-4 py-2">Swasta</td>
-                    </tr>
-                    <tr>
-                        <td class="px-4 py-2 font-semibold">Bentuk Pendidikan</td>
-                        <td class="px-4 py-2">SMK</td>
-                    </tr>
-                    <tr>
-                        <td class="px-4 py-2 font-semibold">Status Kepemilikan</td>
-                        <td class="px-4 py-2">Yayasan</td>
-                    </tr>
-                    <tr>
-                        <td class="px-4 py-2 font-semibold">SK Pendirian Sekolah</td>
-                        <td class="px-4 py-2">417/I02/Kep/E.91</td>
-                    </tr>
-                    <tr>
-                        <td class="px-4 py-2 font-semibold">Tanggal SK Pendirian</td>
-                        <td class="px-4 py-2">1991-08-14</td>
-                    </tr>
-                    <tr>
-                        <td class="px-4 py-2 font-semibold">SK Izin Operasional</td>
-                        <td class="px-4 py-2">417/I02/Kep/E.91</td>
-                    </tr>
-                    <tr>
-                        <td class="px-4 py-2 font-semibold">Tanggal SK Izin Operasional</td>
-                        <td class="px-4 py-2">1991-08-14</td>
-                    </tr>
-                    <tr>
-                        <td class="px-4 py-2 font-semibold">Alamat</td>
-                        <td class="px-4 py-2">Jalan Atlas Tengah No.2, Bandung, Indonesia</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="grid gap-2 sm:grid-cols-1 lg:grid-cols-2">
+            <!-- Item -->
+            <div class="flex flex-col bg-gray-100 p-4 rounded-lg shadow w-full">
+                <span class="font-semibold text-gray-700 text-base truncate">NPSN</span>
+                <span class="text-gray-600 text-sm md:text-base">20219292</span>
+            </div>
+            <div class="flex flex-col bg-gray-100 p-4 rounded-lg shadow w-full">
+                <span class="font-semibold text-gray-700 text-base truncate">Status</span>
+                <span class="text-gray-600 text-sm md:text-base">Swasta</span>
+            </div>
+            <div class="flex flex-col bg-gray-100 p-4 rounded-lg shadow w-full">
+                <span class="font-semibold text-gray-700 text-base truncate">Bentuk Pendidikan</span>
+                <span class="text-gray-600 text-sm md:text-base">SMK</span>
+            </div>
+            <div class="flex flex-col bg-gray-100 p-4 rounded-lg shadow w-full">
+                <span class="font-semibold text-gray-700 text-base truncate">Status Kepemilikan</span>
+                <span class="text-gray-600 text-sm md:text-base">Yayasan</span>
+            </div>
+            <div class="flex flex-col bg-gray-100 p-4 rounded-lg shadow w-full">
+                <span class="font-semibold text-gray-700 text-base truncate">SK Pendirian Sekolah</span>
+                <span class="text-gray-600 text-sm md:text-base">417/I02/Kep/E.91</span>
+            </div>
+            <div class="flex flex-col bg-gray-100 p-4 rounded-lg shadow w-full">
+                <span class="font-semibold text-gray-700 text-base truncate">Tanggal SK Pendirian</span>
+                <span class="text-gray-600 text-sm md:text-base">1991-08-14</span>
+            </div>
+            <div class="flex flex-col bg-gray-100 p-4 rounded-lg shadow w-full">
+                <span class="font-semibold text-gray-700 text-base truncate">SK Izin Operasional</span>
+                <span class="text-gray-600 text-sm md:text-base">417/I02/Kep/E.91</span>
+            </div>
+            <div class="flex flex-col bg-gray-100 p-4 rounded-lg shadow w-full">
+                <span class="font-semibold text-gray-700 text-base truncate">Tanggal SK Izin Operasional</span>
+                <span class="text-gray-600 text-sm md:text-base">1991-08-14</span>
+            </div>
+            <div class="flex flex-col bg-gray-100 p-4 rounded-lg shadow w-full">
+                <span class="font-semibold text-gray-700 text-base truncate">Alamat</span>
+                <span class="text-gray-600 text-sm md:text-base">Jalan Atlas Tengah No.2, Bandung, Indonesia</span>
+            </div>
         </div>
     </div>
+
+
+</div>
 @endsection
