@@ -22,7 +22,7 @@
             color: black;
             font-weight: bold;
             border-bottom: 3px solid black;
-            padding-bottom: 5px;
+            padding-bottom: 1px;
         }
 
         /* Footer */
@@ -59,6 +59,12 @@
             z-index: 9999;
             transition: width 0.5s ease-in-out;
         }
+
+        @media (max-width: 768px) {
+        .navbar-logo {
+            display: none;
+        }
+    }
     </style>
 </head>
 
@@ -149,11 +155,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white py-4 shadow-md z-10" id="navbar">
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-1 shadow-md z-10" id="navbar">
     <div class="container">
-        <div class="navbar-logo">
+        <div class="navbar-logo d-none d-md-block">
             <img src="{{ asset('icb.png') }}" alt="Logo SMK ICB Cinta Technika" class="h-20 w-20">
-        </div>
+        </div>        
         <div class="ml-4">
             <a class="navbar-brand d-block text-right" style="font-size: 1.5rem; color: black;">
                 SMK ICB CINTA TEKNIKA
