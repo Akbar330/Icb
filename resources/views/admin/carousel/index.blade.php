@@ -18,40 +18,29 @@
         </div>
     </div>
 
-
     <!-- Daftar Carousel -->
-    <div class="bg-white p-6 rounded-lg shadow-md">
+    <div class="mt-8">
         <h2 class="text-xl font-semibold text-gray-700 mb-4">Daftar Carousel</h2>
 
-        <table class="w-full text-left border-collapse">
-            <thead>
-                <tr>
-                    <th class="border-b px-4 py-2">Urutan</th>
-                    <th class="border-b px-4 py-2">Gambar</th>
-                    <th class="border-b px-4 py-2">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Looping daftar carousel dari database -->
-                @foreach($carousels as $carousel)
-                    <tr>
-                        <td class="border-b px-4 py-2">{{ $carousel->order }}</td>
-                        <td class="border-b px-4 py-2">
-                                <img src="{{ asset('storage/' . $carousel->image_path) }}" alt="Carousel Image" class="w-20 h-20 object-cover rounded">
-                        </td>
-                        <td class="border-b px-4 py-2">
-                            <!-- Aksi Edit dan Hapus -->
-                            <a href="{{ route('admin.carousel.edit', $carousel->id) }}" class="text-blue-500 hover:underline">Edit</a> |
-                            <form action="{{ route('admin.carousel.destroy', $carousel->id) }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-500 hover:underline">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Looping daftar carousel dari database -->
+            @foreach($carousels as $carousel)
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center justify-center mb-4">
+                        <img src="{{ asset('storage/' . $carousel->image_path) }}" alt="Carousel Image" class="w-full h-48 object-cover rounded-lg">
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-700">Urutan: {{ $carousel->order }}</h3>
+                    <div class="mt-4 flex justify-between">
+                        <a href="{{ route('admin.carousel.edit', $carousel->id) }}" class="text-blue-500 hover:underline">Edit</a> |
+                        <form action="{{ route('admin.carousel.destroy', $carousel->id) }}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-500 hover:underline">Hapus</button>
+                        </form>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
 </div>
 @endsection
