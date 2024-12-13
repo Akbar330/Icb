@@ -15,7 +15,7 @@
             color: #333;
             margin-top: 60px;
         }
-    
+
         header {
             position: fixed;
             top: 0;
@@ -26,19 +26,19 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 5px 0;
         }
-    
+
         header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-    
+
         nav .navbar-collapse {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
         }
-    
+
         nav a {
             padding: 6px 10px;
             text-transform: uppercase;
@@ -47,23 +47,23 @@
             font-size: 0.75rem;
             transition: color 0.3s, border-bottom 0.3s;
         }
-    
+
         nav a:hover,
         nav a.active {
             color: #000000;
             border-bottom: 2px solid #000000;
         }
-    
+
         @media (max-width: 768px) {
             nav .navbar-toggler {
                 display: inline-block;
             }
-    
+
             nav a {
                 display: block;
                 padding: 8px 10px;
             }
-    
+
             nav .navbar-collapse {
                 background-color: white;
                 position: absolute;
@@ -74,22 +74,22 @@
                 padding: 10px;
                 display: none;
             }
-    
+
             nav .navbar-collapse.show {
                 display: block;
             }
         }
-    
+
         @media (min-width: 769px) {
             nav .navbar-toggler {
                 display: none;
             }
-    
+
             nav .navbar-collapse {
                 display: flex;
                 justify-content: space-between;
             }
-    
+
             nav a {
                 padding: 6px 12px;
             }
@@ -123,6 +123,7 @@
                     <a href="/admin/sapaan" class="{{ request()->is('admin/sapaan') ? 'active' : '' }}">Sapaan</a>
                     <a href="/admin/pendaftaran" class="{{ request()->is('admin/pendaftaran') ? 'active' : '' }}">PPDB</a>
                     <a href="/admin/biaya" class="{{ request()->is('admin/biaya') ? 'active' : '' }}">Biaya</a>
+                    <a href="/admin/kepsek" class="{{ request()->is('admin/kepsek') ? 'active' : '' }}">kepsek</a>
                     <form action="{{ route('logout') }}" method="POST" class="inline">
                         @csrf
                         <button type="submit" class="text-black hover:text-gray-600 flex items-center space-x-2 font-bold">

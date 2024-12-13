@@ -270,8 +270,6 @@
     </div>
 </div>
 
-
-
     <!-- Bagian Galeri -->
     <div class="w-full mt-10">
         <h3 class="text-2xl font-semibold mb-4 text-gray-800">Galeri</h3>
@@ -289,30 +287,32 @@
         </div>
     </div>
 
-     <!-- Kepala Sekolah Section -->
-     <div class="mt-8 flex flex-col lg:flex-row items-center lg: space-y-6 lg:space-y-0 lg:space-x-6">
+    @foreach($kepsek as $item)
+    <!-- Kepala Sekolah Section -->
+    <div class="mt-8 flex flex-col lg:flex-row items-center lg:space-y-6 lg:space-y-0 lg:space-x-6">
         <!-- Foto Kepala Sekolah -->
-        <div class="w-full lg:w-1/3 ">
+        <div class="w-full lg:w-1/3">
             <h1 class="text-2xl md:text-3xl font-bold mb-4">KEPALA SEKOLAH</h1>
-            <img src="{{ asset('pasugiyo.jpg') }}"
-                 alt="Foto Kepala Sekolah"
-                 class="w-full h-72 md:h-80 lg:h-96 object-cover rounded-lg shadow-lg">
+            @if($item->gambar)
+                <img src="{{ asset('storage/' . $item->gambar) }}" alt="Foto Kepala Sekolah" class="w-full h-72 md:h-80 lg:h-96 object-cover rounded-lg shadow-lg">
+            @else
+                <div class="h-72 md:h-80 lg:h-96 bg-gray-200 rounded-lg shadow-lg flex items-center justify-center">
+                    <p class="text-gray-500">Tidak ada gambar</p>
+                </div>
+            @endif
         </div>
 
         <!-- Deskripsi Kepala Sekolah -->
-        <div class="w-full lg:w-2/3 flex items-center justify-center  lg:text-left">
+        <div class="w-full lg:w-2/3 flex items-center justify-center lg:text-left">
             <div>
-                <h2 class="text-xl md:text-2xl font-semibold mb-4">Sugiyo,S.Sos,MM</h2>
+                <h2 class="text-xl md:text-2xl font-semibold mb-4">{{ $item->nama ?? 'Nama tidak tersedia' }}</h2>
                 <p class="text-sm md:text-base text-gray-700 leading-relaxed">
-                    Deskripsi Kepala Sekolah yang dapat mencakup visi, misi, serta pengalaman atau latar belakang
-                    beliau di bidang pendidikan. Ini adalah tempat untuk memperkenalkan Kepala Sekolah dan nilai-nilai
-                    yang mereka bawa ke Sekolah Harapan Bangsa. Deskripsi dapat lebih panjang untuk memberikan gambaran
-                    yang jelas dan inspiratif.
+                    {{ $item->konten }}
                 </p>
             </div>
         </div>
     </div>
-
+@endforeach
 <!-- Embedded YouTube Videos Section -->
 <div class="w-full mt-10">
     <h3 class="text-2xl font-semibold mb-4 text-gray-800">Activity Oncam</h3>
