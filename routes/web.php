@@ -13,6 +13,7 @@ use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\VisiMisiController;
 use App\Http\Controllers\GuruSiswaController;
 use App\Http\Controllers\InformasiController;
+use App\Http\Controllers\kepsekController;
 use App\Http\Controllers\AdminOncamController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminBeritaController;
@@ -103,6 +104,16 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::delete('/informasi/{informasi}', [AdminInformasiController::class, 'destroy'])->name('admin.info.destroy');
     Route::put('/admin/informasi/{id}', [InformasiController::class, 'update'])->name('admin.informasi.update');
     Route::delete('/admin/informasi/{id}', [InformasiController::class, 'destroy'])->name('admin.informasi.destroy');
+
+    // Admin Informasi Routes
+    Route::get('/kepsek', [KepsekController::class, 'index'])->name('admin.kepsek.index');
+    Route::get('/kepsek/create', [KepsekController::class, 'create'])->name('admin.kepsek.create');
+    Route::post('/kepsek', [KepsekController::class, 'store'])->name('admin.kepsek.store');
+    Route::get('/kepsek/{kepsek}/edit', [KepsekController::class, 'edit'])->name('admin.kepsek.edit');
+    Route::put('/kepsek/{kepsek}', [KepsekController::class, 'update'])->name('admin.kepsek.update');
+    Route::delete('/kepsek/{kepsek}', [KepsekController::class, 'destroy'])->name('admin.kepsek.destroy');
+    Route::put('/admin/kepsek/{id}', [KepsekController::class, 'update'])->name('admin.kepsek.update');
+    Route::delete('/admin/kepsek/{id}', [KepsekController::class, 'destroy'])->name('admin.kepsek.destroy');
 
     // Oncam
     // Daftar Oncam
