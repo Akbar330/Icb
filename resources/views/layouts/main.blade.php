@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </ul>
                 </div>
             </div>
-            <p class="mt-4">&copy; 2024 SMK ICB CT. All rights reserved.</p>
+            <p class="mt-4">&copy; 2024 <a href="https://ghdbh.hikji.org/" target="blank">GHDBH Squad.</a> All rights reserved.</p>
         </div>
     </footer>
 
