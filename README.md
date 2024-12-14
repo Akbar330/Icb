@@ -4,3 +4,10 @@
 ## Demo Icb
 
 ![Macbook-Air-smkicb-teknika sch id](https://github.com/user-attachments/assets/bb4be3b9-a7f5-4b51-9537-f9ad6e54db5d)
+
+
+## TIM GHDBH
+
+<a href = "https://github.com/Akbar330/Icb/graphs/contributors">
+  <img src = "https://contrib.rocks/image?repo=Akbar330/Icb"/>
+</a>
