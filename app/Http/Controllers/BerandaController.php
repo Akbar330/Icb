@@ -42,7 +42,6 @@ class BerandaController extends Controller
             ->get()
             ->pluck('count', 'pilihan_id');
         $isVoting = DB::table('hasil_votes')->where('session_id', $sessionId)
-            ->where('ip', $ipAddress)
             ->whereDate('vote_date', $todayDate)
             ->exists();
         $sapaan = DB::table('sapaan_kepalas')->get();
