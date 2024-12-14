@@ -124,10 +124,11 @@
                     <a href="/admin/pendaftaran" class="{{ request()->is('admin/pendaftaran') ? 'active' : '' }}">PPDB</a>
                     <a href="/admin/biaya" class="{{ request()->is('admin/biaya') ? 'active' : '' }}">Biaya</a>
                     <a href="/admin/kepsek" class="{{ request()->is('admin/kepsek') ? 'active' : '' }}">kepsek</a>
-                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                    <a href="/admin/pengguna" class="{{ request()->is('admin/pengguna') ? 'active' : '' }}">User</a>
+                    <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="text-black hover:text-gray-600 flex items-center space-x-2 font-bold">
-                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
                         </button>
                     </form>
                 </div>
@@ -166,6 +167,8 @@
             });
         });
     </script>
+    @include('sweetalert::alert')
+
 </body>
 
 </html>

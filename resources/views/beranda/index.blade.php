@@ -346,6 +346,7 @@
     const isVoting = @json($isVoting);
     const resultPoll = document.getElementById('hasilVote');
     const formPoll = document.getElementById('formPoll');
+    const sapaanTextElement = document.getElementById('sapaan_text');
     const sapaan= @json($sapaan);
     if(isVoting){
         resultPoll.style.display = 'block'
@@ -402,7 +403,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-    const sapaanTextElement = document.getElementById('sapaan_text');
     updateProgressBar();
     sapaanTextElement.textContent = getRandomSapaan();
 });

@@ -22,7 +22,6 @@ class PollingController extends Controller
             // Cek apakah session_id dan ip_address sudah ada di polling_history pada hari ini
 
             $existingPoll = DB::table('hasil_votes')->where('session_id', $sessionId)
-                ->where('ip', $ipAddress)
                 ->whereDate('vote_date', $todayDate)
                 ->first();
 

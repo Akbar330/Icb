@@ -26,6 +26,7 @@ use App\Http\Controllers\AdminPendaftaranController;
 use App\Http\Controllers\AdminBiayaSekolahController;
 use App\Http\Controllers\PollingController;
 use App\Http\Controllers\SapaanController;
+use App\Http\Controllers\UserManagementController;
 
 // Landing Page Route
 Route::view('/', 'welcome');
@@ -112,8 +113,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/kepsek/{kepsek}/edit', [KepsekController::class, 'edit'])->name('admin.kepsek.edit');
     Route::put('/kepsek/{kepsek}', [KepsekController::class, 'update'])->name('admin.kepsek.update');
     Route::delete('/kepsek/{kepsek}', [KepsekController::class, 'destroy'])->name('admin.kepsek.destroy');
-    Route::put('/admin/kepsek/{id}', [KepsekController::class, 'update'])->name('admin.kepsek.update');
-    Route::delete('/admin/kepsek/{id}', [KepsekController::class, 'destroy'])->name('admin.kepsek.destroy');
 
     // Oncam
     // Daftar Oncam
@@ -179,6 +178,14 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/carousel/{carousel}/edit', [CarouselController::class, 'edit'])->name('admin.carousel.edit');
     Route::put('/carousel/{carousel}', [CarouselController::class, 'update'])->name('admin.carousel.update');
     Route::delete('/carousel/{carousel}', [CarouselController::class, 'destroy'])->name('admin.carousel.destroy');
+
+    // Users Management 
+    Route::get('/pengguna',[UserManagementController::class,'index'])->name('admin.pengguna.index');
+    Route::get('/pengguna/tambah',[UserManagementController::class,'create'])->name('admin.pengguna.create');
+    Route::post('/pengguna',[UserManagementController::class,'addUser'])->name('admin.pengguna.store');
+    Route::get('/pengguna/edit/{id}',[UserManagementController::class,'edit'])->name('admin.pengguna.edit');
+    Route::put('/pengguna/{id}',[UserManagementController::class,'editUser'])->name('admin.pengguna.update');
+    Route::delete('/pengguna/{id}',[UserManagementController::class,'deleteUser'])->name('admin.pengguna.destroy');
 
     //EXPORT
     Route::get('/admin/pendaftaran/export-excel', [AdminPendaftaranController::class, 'exportExcel'])->name('admin.pendaftaran.exportExcel');
