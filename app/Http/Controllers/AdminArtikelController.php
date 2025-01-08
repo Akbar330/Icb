@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Artikel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ArtikelExport;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -80,6 +81,7 @@ class AdminArtikelController extends Controller
 
         return redirect()->route('admin.artikel.index')->with('success', 'Artikel berhasil dihapus!');
     }
+
 // Export Excel
 
     public function exportExcel()

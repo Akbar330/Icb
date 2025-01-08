@@ -30,7 +30,7 @@
                             <p class="text-muted">{{ \Illuminate\Support\Str::limit($item->konten, 150) }}</p>
                             <a href="{{ route('informasi.show', $item->id) }}" class="btn btn-primary mt-2 mb-2">Lihat Selengkapnya</a><br>
                             <small class="text-secondary">{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</small>
-
+                            <small class="text-secondary">Dilihat: {{ $item->views }} kali</small>
                         </li>
                     @endforeach
                 </ul>
