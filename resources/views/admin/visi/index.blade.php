@@ -27,9 +27,15 @@
                 <!-- Loop visi dari database -->
                 @foreach($visis as $visi)
                     <div class="bg-white p-6 rounded-lg shadow-md">
-                        <p class="text-gray-600 mt-2">Visi: {{ $visi->visi }}</p>
-                        <p class="text-gray-600 mt-2">Misi: {{ $visi->misi }}</p>
-                        <p class="text-gray-600 mt-2">Tujuan: {{ $visi->tujuan }}</p>
+                        <div class="text-gray-600 mt-2">
+                            <strong>Visi:</strong> {!! htmlspecialchars_decode($visi->visi) !!}
+                        </div>
+                        <div class="text-gray-600 mt-2">
+                            <strong>Misi:</strong> {!! htmlspecialchars_decode($visi->misi) !!}
+                        </div>
+                        <div class="text-gray-600 mt-2">
+                            <strong>Tujuan:</strong> {!! htmlspecialchars_decode($visi->tujuan) !!}
+                        </div>
                         <div class="mt-4">
                             <a href="{{ route('admin.visi.edit', $visi->id) }}" class="text-blue-500 hover:underline">Edit</a> |
                             <form action="{{ route('admin.visi.destroy', $visi->id) }}" method="POST" class="inline">

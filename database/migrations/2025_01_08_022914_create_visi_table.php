@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('visi', function (Blueprint $table) {
             $table->id();
-            $table->string('visi');
-            $table->string('misi');
-            $table->string('tujuan');
+            $table->longText('visi');
+            $table->longText('misi');
+            $table->longText('tujuan');
             $table->timestamps();
         });
     }
