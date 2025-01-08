@@ -24,7 +24,6 @@ use App\Http\Controllers\BiayaSekolahController;
 use App\Http\Controllers\AdminInformasiController;
 use App\Http\Controllers\AdminPendaftaranController;
 use App\Http\Controllers\AdminBiayaSekolahController;
-use App\Http\Controllers\AdminVisiController;
 use App\Http\Controllers\PollingController;
 use App\Http\Controllers\SapaanController;
 use App\Http\Controllers\UserManagementController;
@@ -114,14 +113,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/kepsek/{kepsek}/edit', [KepsekController::class, 'edit'])->name('admin.kepsek.edit');
     Route::put('/kepsek/{kepsek}', [KepsekController::class, 'update'])->name('admin.kepsek.update');
     Route::delete('/kepsek/{kepsek}', [KepsekController::class, 'destroy'])->name('admin.kepsek.destroy');
-
-    // Admin Visi Misi
-    Route::get('/visi', [AdminVisiController::class, 'index'])->name('admin.visi.index');
-    Route::get('/visi/create', [AdminVisiController::class, 'create'])->name('admin.visi.create');
-    Route::post('/visi', [AdminVisiController::class, 'store'])->name('admin.visi.store');
-    Route::get('/visi/{visi}/edit', [AdminVisiController::class, 'edit'])->name('admin.visi.edit');
-    Route::put('/visi/{visi}', [AdminVisiController::class, 'update'])->name('admin.visi.update');
-    Route::delete('/visi/{visi}', [AdminVisiController::class, 'destroy'])->name('admin.visi.destroy');
 
     // Oncam
     // Daftar Oncam
