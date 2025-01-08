@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artikel;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ArtikelController extends Controller
@@ -17,10 +18,34 @@ class ArtikelController extends Controller
         return view('artikel.index', compact('artikels'));
     }
 
-    public function show($id)
+    public function show($id, Request $request)
     {
         // Find article by ID or fail
         $artikels = Artikel::findOrFail($id);
+
+        // Mendapatkan IP address pengguna
+        $ipAddress = $request->ip();
+
+        // Memeriksa apakah IP address sudah melihat artikel ini dalam 24 jam terakhir
+        $ipCheck = DB::table('artikel_views')
+            ->where('artikel_id', $id)
+            ->where('ip_address', $ipAddress)
+            ->where('created_at', '>=', now()->subDay())
+            ->exists();
+
+        if (!$ipCheck) {
+            // Tambahkan IP address ke tabel 'artikel_views'
+            DB::table('artikel_views')->insert([
+                'artikel_id' => $id,
+                'ip_address' => $ipAddress,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            // Increment kolom 'views' di tabel 'artikels'
+            $artikels->increment('views');
+        }
+
         return view('artikel.show', compact('artikels'));
     }
 

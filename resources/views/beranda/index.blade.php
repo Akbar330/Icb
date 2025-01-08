@@ -112,6 +112,7 @@
                                     <div class="text-secondary text-left text-md-start mt-2">
                                         <small>Penulis: {{ $item->penulis }}</small><br>
                                         <small>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
+                                        <small>Dilihat: {{ $item->views }} kali</small>
                                     </div>
                                 </div>
                             </div>
@@ -249,6 +250,7 @@
                             <div class="text-secondary text-left text-md-start">
                                 <small>Penulis: {{ $item->penulis ?? 'Anonim' }}</small> |
                                 <small>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
+                                <small>Dilihat: {{ $item->views }} kali</small>
                             </div>
                             <div class="text-left text-md-start mt-3">
                                 <a href="{{ route('berita.show', $item->id) }}"

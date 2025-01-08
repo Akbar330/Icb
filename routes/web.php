@@ -88,6 +88,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::put('/artikel/{artikel}', [AdminArtikelController::class, 'update'])->name('admin.artikel.update');
     Route::delete('/artikel/{artikel}', [AdminArtikelController::class, 'destroy'])->name('admin.artikel.destroy');
 
+
     // Admin Berita Routes
     Route::get('/berita', [AdminBeritaController::class, 'index'])->name('admin.berita.index');
     Route::get('/berita/create', [AdminBeritaController::class, 'create'])->name('admin.berita.create');
@@ -179,7 +180,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::put('/carousel/{carousel}', [CarouselController::class, 'update'])->name('admin.carousel.update');
     Route::delete('/carousel/{carousel}', [CarouselController::class, 'destroy'])->name('admin.carousel.destroy');
 
-    // Users Management 
+    // Users Management
     Route::get('/pengguna',[UserManagementController::class,'index'])->name('admin.pengguna.index');
     Route::get('/pengguna/tambah',[UserManagementController::class,'create'])->name('admin.pengguna.create');
     Route::post('/pengguna',[UserManagementController::class,'addUser'])->name('admin.pengguna.store');
