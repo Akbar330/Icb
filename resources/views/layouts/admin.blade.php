@@ -123,7 +123,6 @@
                     <a href="/admin/sapaan" class="{{ request()->is('admin/sapaan') ? 'active' : '' }}">Sapaan</a>
                     <a href="/admin/pendaftaran" class="{{ request()->is('admin/pendaftaran') ? 'active' : '' }}">PPDB</a>
                     <a href="/admin/biaya" class="{{ request()->is('admin/biaya') ? 'active' : '' }}">Biaya</a>
-                    <a href="/admin/kepsek" class="{{ request()->is('admin/kepsek') ? 'active' : '' }}">kepsek</a>
                     <a href="/admin/pengguna" class="{{ request()->is('admin/pengguna') ? 'active' : '' }}">User</a>
                     <a href="/admin/visi" class="{{ request()->is('admin/visi') ? 'active' : '' }}">Visi-Misi</a>
                     <form action="{{ route('logout') }}" method="POST">

@@ -44,7 +44,8 @@ class BerandaController extends Controller
         $isVoting = DB::table('hasil_votes')->where('session_id', $sessionId)
             ->whereDate('vote_date', $todayDate)
             ->exists();
-        $sapaan = DB::table('sapaan_kepalas')->get();
+        $sapaan = DB::table('sapaan_kepalas')->latest()->get()->first();
+
         $kepsek = DB::table('kepsek')->get();
 
         return view('beranda.index', compact('berita', 'gambarGaleri', 'carousels', 'artikel', 'oncams', 'isVoting', 'pilihan', 'totalVotes', 'sapaan' , 'kepsek'));

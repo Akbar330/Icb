@@ -21,6 +21,11 @@
                 <h2 class="text-xl font-semibold text-gray-700">Total Pengumuman</h2>
                 <p class="text-3xl font-bold text-red-600 mt-4">{{ $totalInformasis ?? 0 }}</p>
             </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <h2 class="text-xl font-semibold text-gray-700">Total Kunjungan</h2>
+                <p class="text-3xl font-bold text-purple-600 mt-4">{{ $totalVisits ?? 0 }}</p>
+            </div>
+
         </div>
     </div>
 @endsection

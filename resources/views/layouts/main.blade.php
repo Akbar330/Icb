@@ -10,64 +10,90 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<style>
 
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F9FAFB;
-            color: #333;
-        }
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: #F9FAFB;
+        color: #333;
+    }
 
-        .navbar-nav .nav-item.active .nav-link {
-            color: black;
-            font-weight: bold;
-            border-bottom: 3px solid black;
-            padding-bottom: 1px;
-        }
+    .navbar-nav .nav-item.active .nav-link {
+        color: black;
+        font-weight: bold;
+        border-bottom: 3px solid black;
+        padding-bottom: 1px;
+    }
 
-        /* Footer */
-        footer {
-            background-color: #2D3748;
-            padding: 15px 0;
-            color: #CBD5E0;
-        }
+    /* Footer */
+    footer {
+        background-color: #2D3748;
+        padding: 15px 0;
+        color: #CBD5E0;
+    }
 
-        footer a {
-            color: #CBD5E0;
-            font-size: 0.875rem;
-            transition: color 0.3s;
-        }
+    footer a {
+        color: #CBD5E0;
+        font-size: 0.875rem;
+        transition: color 0.3s;
+    }
 
-        footer a:hover {
-            color: #F1C40F;
-        }
+    footer a:hover {
+        color: #F1C40F;
+    }
 
-        /* Buttons */
-        .btn {
-            font-weight: 600;
-            text-transform: uppercase;
-        }
+    /* Buttons */
+    .btn {
+        font-weight: 600;
+        text-transform: uppercase;
+    }
 
-        /* Loading Bar */
-        #loading-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 5px;
-            background-color: #4CAF50;
-            z-index: 9999;
-            transition: width 0.5s ease-in-out;
-        }
+    /* Loading Bar */
+    #loading-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 5px;
+        background-color: #4CAF50;
+        z-index: 9999;
+        transition: width 0.5s ease-in-out;
+    }
 
-        @media (max-width: 768px) {
+    @media (max-width: 768px) {
         .navbar-logo {
             display: none;
         }
-    }
-    </style>
-</head>
 
+        .right-section{
+            order: 1;
+        }
+        .left-section{
+            order: 2;
+        }
+    }
+
+    /* Untuk animasi fade-out + bergerak ke kiri */
+    .news-text {
+        opacity: 0;
+        transform: translateX(100%);
+        transition: opacity 1s ease, transform 1s ease;
+    }
+
+    /* Saat berita masuk (fade-in + bergerak ke posisi semula) */
+    .news-text.fade-in {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* Saat berita keluar (fade-out + bergerak ke kiri) */
+    .news-text.fade-out {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+</style>
 <body class="font-sans bg-gray-100 text-gray-800">
 
     @yield('scripts')
@@ -131,35 +157,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<style>
-        /* Untuk animasi fade-out + bergerak ke kiri */
-        .news-text {
-            opacity: 0;
-            transform: translateX(100%);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-
-        /* Saat berita masuk (fade-in + bergerak ke posisi semula) */
-        .news-text.fade-in {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* Saat berita keluar (fade-out + bergerak ke kiri) */
-        .news-text.fade-out {
-            opacity: 0;
-            transform: translateX(-100%);
-        }
-
-</style>
-
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white py-1 shadow-md z-10" id="navbar">
     <div class="container">
         <div class="navbar-logo d-none d-md-block">
             <img src="{{ asset('icb.png') }}" alt="Logo SMK ICB Cinta Technika" class="h-20 w-20">
-        </div>        
+        </div>
         <div class="ml-4">
             <a class="navbar-brand d-block text-right" style="font-size: 1.5rem; color: black;">
                 SMK ICB CINTA TEKNIKA

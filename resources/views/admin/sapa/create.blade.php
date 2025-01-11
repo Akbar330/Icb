@@ -9,11 +9,13 @@
             @csrf
 
             <!-- sapaan Artikel -->
-            
+
             <div class="mb-4">
                 <label for="sapaan" class="block text-gray-700 font-semibold">Sapaan</label>
                 <input type="text" id="sapaan" name="sapaan" value="{{ old('sapaan') }}"
                        class="w-full p-2 border border-gray-300 rounded mt-1" required>
+                <label for="gambar">Gambar:</label>
+                <input type="file" name="gambar" accept="image/*">
                 @error('sapaan')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
