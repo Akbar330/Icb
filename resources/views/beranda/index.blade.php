@@ -29,8 +29,6 @@
         @endforeach
     </div>
 </div>
-
-
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const carousel = document.getElementById('carousel');
@@ -72,8 +70,9 @@
 <!-- Container untuk Artikel dan Kontak Sekolah -->
 <div class="container py-4">
     <div class="row">
+
         <!-- Left Section: Daftar Artikel (70%) -->
-        <div class="col-md-8 mb-4">
+        <div class="col-md-8 order-1 order-md-1 mb-4 left-section">
             <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold">Artikel Terbaru</h1>
             <p class="text-left text-muted mb-4">Berikut adalah beberapa artikel terbaru untuk Anda.</p>
             <ul class="list-group list-group-flush">
@@ -81,133 +80,110 @@
                     <p>Tidak ada artikel tersedia.</p>
                 @else
                     @foreach ($artikel as $item)
-                    <li class="list-group-item">
-                        <div class="d-flex flex-column flex-md-row align-items-start">
-                            <!-- Gambar Artikel -->
-                            <div class="flex-shrink-0 mb-3 mb-md-0 me-md-3 text-center">
-                                <img src="{{ $item->gambar !== null ? asset('storage/' . $item->gambar): asset('foto_artikel.jpg') }}"
-                                     alt="Gambar Artikel"
-                                     class="img-thumbnail"
-                                     style="width: 150px; height: 150px; object-fit: cover;">
-                            </div>
-
-                            <!-- Judul dan Deskripsi Artikel -->
-                            <div class="ml-2">
-                                <div class="flex-grow-1">
-                                    <h3 class="text-primary mb-1 text-left text-md-start">
-                                        <a href="{{ route('artikel.show', $item->id) }}"
-                                        class="text-decoration-none text-black">
-                                            {{ $item->judul }}
-                                        </a>
-                                    </h3>
-                                    <p class="text-muted mb-2 text-left text-md-start">
-                                        {{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}
-                                    </p>
-                                    <div class="text-left text-md-start">
-                                        <a href="{{ route('artikel.show', $item->id) }}"
-                                        class="btn btn-primary btn-sm">
-                                            Baca Selengkapnya
-                                        </a>
-                                    </div>
-                                    <div class="text-secondary text-left text-md-start mt-2">
-                                        <small>Penulis: {{ $item->penulis }}</small><br>
-                                        <small>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
-                                        <small>Dilihat: {{ $item->views }} kali</small>
+                        <li class="list-group-item">
+                            <div class="d-flex flex-column flex-md-row align-items-start">
+                                <!-- Gambar Artikel -->
+                                <div class="flex-shrink-0 mb-3 mb-md-0 me-md-3 text-center">
+                                    <img src="{{ $item->gambar !== null ? asset('storage/' . $item->gambar) : asset('foto_artikel.jpg') }}"
+                                        alt="Gambar Artikel" class="img-thumbnail"
+                                        style="width: 150px; height: 150px; object-fit: cover;">
+                                </div>
+                                <!-- Judul dan Deskripsi Artikel -->
+                                <div class="ml-2">
+                                    <div class="flex-grow-1">
+                                        <h3 class="text-primary mb-1 text-left text-md-start">
+                                            <a href="{{ route('artikel.show', $item->id) }}"
+                                                class="text-decoration-none text-black">
+                                                {{ $item->judul }}
+                                            </a>
+                                        </h3>
+                                        <p class="text-muted mb-2 text-left text-md-start">
+                                            {{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}
+                                        </p>
+                                        <div class="text-left text-md-start">
+                                            <a href="{{ route('artikel.show', $item->id) }}"
+                                                class="btn btn-primary btn-sm">
+                                                Baca Selengkapnya
+                                            </a>
+                                        </div>
+                                        <div class="text-secondary text-left text-md-start mt-2">
+                                            <small>Penulis: {{ $item->penulis }}</small><br>
+                                            <small>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
+                                            <small class="text-secondary"> Dilihat: {{ $item->views }} kali</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
                     @endforeach
                 @endif
             </ul>
-                        <!-- Pagination -->
+            <!-- Pagination -->
             <div class="d-flex justify-content mt-4">
-            {{ $artikel->appends(['artikel_page' => request('artikel_page')])->links('pagination::bootstrap-4') }}
+                {{ $artikel->appends(['artikel_page' => request('artikel_page')])->links('pagination::bootstrap-4') }}
             </div>
-
         </div>
 
-        <!-- Right Section: Sapaan Sekolah (30%) -->
-        <div class="col-md-4">
+        <!-- Right Section: Sapaan Sekolah (30%) di atas artikel untuk perangkat kecil -->
+        <div class="col-md-4 order-2 order-md-2 right-section">
             <div class="card">
                 <div class="card-body">
-                    <!-- Kontak Sekolah -->
                     <h3 class="text-primary font-weight-bold text-center">
                         SAPAAN KEPALA SEKOLAH
                     </h3>
                     <div class="card mx-auto mt-3 mb-3" style="width: 200px; height: 200px;">
-                        <img src="{{ asset('pasugiyo.jpg') }}" alt="Foto Kepala Sekolah"
-                            class="card-img-top" style="width: 100%; height: 100%; object-fit: cover;">
+                        @if(!empty($sapaan->gambar) && file_exists(public_path('storage/' . $sapaan->gambar)))
+                            <img src="{{ asset('storage/' . $sapaan->gambar) }}" alt="Foto Kepala Sekolah" class="card-img-top" style="width: 100%; height: 100%; object-fit: cover;">
+                        @else
+                            <div class="h-72 md:h-80 lg:h-96 bg-gray-200 rounded-lg shadow-lg flex items-center justify-center">
+                                <p class="text-gray-500">Tidak ada gambar</p>
+                            </div>
+                        @endif
                     </div>
                     <p id="sapaan_text" class="text-center">
-
+                        {{ $sapaan->sapaan ?? 'Belum ada sapaan.' }}
                     </p>
+
                     <!-- Polling -->
                     <h5 class="text-blue font-bold mt-10"> POLLING SEKOLAH </h5>
                     <div class="container mt-3" id="hasilVote" style="display: none;">
                         <p><strong>Bagus</strong>: <span id="bagusPercentage">0%</span></p>
-
                         <div class="progress mb-3">
-                          <div
-                            class="progress-bar bg-success"
-                            role="progressbar"
-                            id="bagusProgress"
-                            style="width: 0%"
-                            aria-valuenow="0"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                          ></div>
+                            <div class="progress-bar bg-success" role="progressbar" id="bagusProgress" style="width: 0%"
+                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <p><strong>Kurang Bagus</strong>: <span id="kurangBagusPercentage">0%</span></p>
-
                         <div class="progress mb-3">
-                          <div
-                            class="progress-bar bg-warning"
-                            role="progressbar"
-                            id="kurangBagusProgress"
-                            style="width: 0%"
-                            aria-valuenow="0"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                          ></div>
+                            <div class="progress-bar bg-warning" role="progressbar" id="kurangBagusProgress"
+                                style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <p><strong>Buruk</strong>: <span id="burukPercentage">0%</span></p>
-
                         <div class="progress mb-3">
-                          <div
-                            class="progress-bar bg-danger"
-                            role="progressbar"
-                            id="burukProgress"
-                            style="width: 0%"
-                            aria-valuenow="0"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                          ></div>
+                            <div class="progress-bar bg-danger" role="progressbar" id="burukProgress" style="width: 0%"
+                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                      </div>
-                    <form action="{{ route('vote.store') }}" method="post" class="mt-2"  id="formPoll">
+                    </div>
+                    <form action="{{ route('vote.store') }}" method="post" class="mt-2" id="formPoll">
                         @csrf
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="pilihan" id="flexRadioDefault1" value="1">
                             <label class="form-check-label" for="flexRadioDefault1">
-                             Baik
+                                Baik
                             </label>
-                          </div>
-
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="pilihan" id="flexRadioDefault2" value="2" >
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="pilihan" id="flexRadioDefault2" value="2">
                             <label class="form-check-label" for="flexRadioDefault2">
-                              Kurang Baik
+                                Kurang Baik
                             </label>
-                          </div>
-                          <div class="form-check">
+                        </div>
+                        <div class="form-check">
                             <input class="form-check-input" type="radio" name="pilihan" id="flexRadioDefault2" value="3">
                             <label class="form-check-label" for="flexRadioDefault2">
-                              Buruk
+                                Buruk
                             </label>
-                          </div>
-                          <button type="submit" class="btn btn-primary mt-2">Kirim</button>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2">Kirim</button>
                     </form>
                 </div>
             </div>
@@ -250,7 +226,6 @@
                             <div class="text-secondary text-left text-md-start">
                                 <small>Penulis: {{ $item->penulis ?? 'Anonim' }}</small> |
                                 <small>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
-                                <small>Dilihat: {{ $item->views }} kali</small>
                             </div>
                             <div class="text-left text-md-start mt-3">
                                 <a href="{{ route('berita.show', $item->id) }}"
@@ -289,32 +264,6 @@
         </div>
     </div>
 
-    @foreach($kepsek as $item)
-    <!-- Kepala Sekolah Section -->
-    <div class="mt-8 flex flex-col lg:flex-row items-center lg:space-y-6 lg:space-y-0 lg:space-x-6">
-        <!-- Foto Kepala Sekolah -->
-        <div class="w-full lg:w-1/3">
-            <h1 class="text-2xl md:text-3xl font-bold mb-4">KEPALA SEKOLAH</h1>
-            @if($item->gambar)
-                <img src="{{ asset('storage/' . $item->gambar) }}" alt="Foto Kepala Sekolah" class="w-full h-72 md:h-80 lg:h-96 object-cover rounded-lg shadow-lg">
-            @else
-                <div class="h-72 md:h-80 lg:h-96 bg-gray-200 rounded-lg shadow-lg flex items-center justify-center">
-                    <p class="text-gray-500">Tidak ada gambar</p>
-                </div>
-            @endif
-        </div>
-
-        <!-- Deskripsi Kepala Sekolah -->
-        <div class="w-full lg:w-2/3 flex items-center justify-center lg:text-left">
-            <div>
-                <h2 class="text-xl md:text-2xl font-semibold mb-4">{{ $item->nama ?? 'Nama tidak tersedia' }}</h2>
-                <p class="text-sm md:text-base text-gray-700 leading-relaxed">
-                    {{ $item->konten }}
-                </p>
-            </div>
-        </div>
-    </div>
-@endforeach
 <!-- Embedded YouTube Videos Section -->
 <div class="w-full mt-10">
     <h3 class="text-2xl font-semibold mb-4 text-gray-800">Activity Oncam</h3>
@@ -408,6 +357,7 @@
     updateProgressBar();
     sapaanTextElement.textContent = getRandomSapaan();
 });
+
   </script>
 </body>
 @endsection
