@@ -78,8 +78,10 @@
 
                 <!-- Left Section: Daftar Artikel (70%) -->
                 <div class="col-md-8 order-1 order-md-1 mb-4 left-section">
-                    <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold">Artikel Terbaru</h1>
-                    <p class="text-left text-muted mb-4">Berikut adalah beberapa artikel terbaru untuk Anda.</p>
+                    <div class="text-center">
+                        <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold">Artikel Terbaru</h1>
+                        <p class="text-muted mb-4">Berikut adalah beberapa artikel terbaru untuk Anda.</p>
+                    </div>
                     <ul class="list-group list-group-flush">
                         @if ($artikel->isEmpty())
                             <p>Tidak ada artikel tersedia.</p>
@@ -88,12 +90,13 @@
                                 <li class="list-group-item">
                                     <div class="d-flex flex-column flex-md-row align-items-start">
                                         <!-- Gambar Artikel -->
-                                        <div class="flex-shrink-0 mb-3 mb-md-0 me-md-3 text-center">
+                                        <div class="md:w-1/1 w-full mb-4 md:mb-0">
                                             <img src="{{ $item->gambar !== null ? asset('storage/' . $item->gambar) : asset('foto_artikel.jpg') }}"
-                                                alt="Gambar Artikel" class="img-thumbnail" style="width:250px;">
+                                                alt="Gambar Artikel" class="img-thumbnail" style="width:250px;"
+                                                class="w-full h-auto object-cover rounded-lg shadow-md">
                                         </div>
                                         <!-- Judul dan Deskripsi Artikel -->
-                                        <div class="ml-2">
+                                        <div class="">
                                             <div class="flex-grow-1">
                                                 <h3 class="text-primary mb-1 text-left text-md-start">
                                                     <a href="{{ route('artikel.show', $item->id) }}"
@@ -101,8 +104,9 @@
                                                         {{ $item->judul }}
                                                     </a>
                                                 </h3>
+
                                                 <p class="text-muted mb-2 text-left text-md-start">
-                                                    {{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}
+                                                    {{ \Illuminate\Support\Str::limit($item->konten, 150) }}
                                                 </p>
                                                 <div class="text-left text-md-start">
                                                     <a href="{{ route('artikel.show', $item->id) }}"
@@ -199,15 +203,18 @@
             <div class="row">
                 <!-- Left Section: Daftar Berita (70%) -->
                 <div class="col-md-8 mb-4">
-                    <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold">Berita Sekolah</h1>
-                    <p class="text-left text-muted mb-4">Berikut adalah berita terbaru dari sekolah.</p>
-                    <div class="d-flex flex-column">
+                    <div class="text-center">
+                        <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold">Berita Sekolah</h1>
+                        <p class="text-muted mb-4">Berikut adalah berita terbaru dari sekolah.</p>
+                    </div>
+                        <div class="d-flex flex-column">
                         @foreach ($berita as $item)
                             <div class="d-flex flex-column flex-md-row py-3 border-bottom">
                                 <!-- Card untuk gambar -->
-                                <div class="flex-shrink-0 mb-3 mb-md-0 me-md-3 text-center">
-                                    <img src="{{ $item->gambar !== null ? asset('storage/' . $item->gambar) : asset('foto_artikel.jpg') }}"
-                                        alt="Gambar Berita" class="img-thumbnail" style="object-fit:scale-down;">
+                                <div class="md:w-1/1 w-full mb-4 md:mb-0">
+                                    <img src="{{ $item->gambar !== null ? asset('storage/' . $item->gambar) : asset('foto_berita.jpg') }}"
+                                        alt="Gambar Berita" class="img-thumbnail" style="width: 250px"
+                                        class="w-full h-auto object-cover rounded-lg shadow-md">
                                 </div>
 
                                 <!-- Konten Berita -->
@@ -220,11 +227,13 @@
                                             </a>
                                         </h3>
                                         <p class="text-muted mb-2 text-left text-md-start">
-                                            {{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}
+                                            {{ \Illuminate\Support\Str::limit($item->konten, 150) }}
                                         </p>
                                         <div class="text-secondary text-left text-md-start">
-                                            <small>Penulis: {{ $item->penulis ?? 'Anonim' }}</small> |
-                                            <small>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
+                                            <small>Penulis: {{ $item->penulis ?? 'Anonim' }}</small>
+                                            <br>
+                                            <small>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small> |
+                                            <small> Dilihat: {{ $item->views}} kali</small>
                                         </div>
                                         <div class="text-left text-md-start mt-3">
                                             <a href="{{ route('berita.show', $item->id) }}" class="btn btn-primary">
@@ -239,7 +248,7 @@
 
                     <!-- Pagination -->
                     <div class="d-flex justify-content mt-4">
-                        {{ $berita->appends(['artikel_page' => request('artikel_page')])->links('pagination::bootstrap-4') }}
+                        {{ $berita->appends(['berita_page' => request('berita_page')])->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>
