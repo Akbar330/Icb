@@ -33,15 +33,6 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="deskripsi" class="block text-gray-700 font-semibold">Deskripsi Singkat</label>
-                    <input type="text" id="deskripsi" name="deskripsi"
-                        value="{{ old('deskripsi', $artikel->deskripsi) }}"
-                        class="w-full mt-2 p-2 border border-gray-300 rounded-md" required>
-                    @error('deskripsi')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="mb-4">
                     <label for="gambar" class="block text-gray-700 font-semibold">Gambar Cover</label>
                     <input type="file" id="gambar" name="gambar"
                         class="w-full p-2 border border-gray-300 rounded mt-1" accept="image/*">
