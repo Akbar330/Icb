@@ -29,6 +29,7 @@
         <table class="w-full mt-4 text-left border-collapse">
             <thead>
                 <tr>
+                    <th class="border-b px-4 py-2">gambar</th>
                     <th class="border-b px-4 py-2">Sapaan</th>
                     <th class="border-b px-4 py-2">tanggal dibuat</th>
                     <th class="border-b px-4 py-2">aksi</th>
@@ -38,6 +39,12 @@
                 <!-- Loop berita dari database -->
                 @foreach($sapaan as $sapa)
                     <tr>
+                        <td class="border-b px-4 py-2">@if ($sapa->gambar)
+                            <img src="{{ asset('storage/' . $sapa->gambar) }}"
+                                alt="Gambar sapa" width="100">
+                        @else
+                            Tidak ada gambar
+                        @endif</td>
                         <td class="border-b px-4 py-2">{{ $sapa->sapaan}}</td>
                         <td class="border-b px-4 py-2">{{ \Carbon\Carbon::parse($sapa->created_at)->format('d-m-Y') }}</td>
                         <td class="border-b px-4 py-2">

@@ -123,6 +123,20 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/visi/{visi}/edit', [AdminVisiController::class, 'edit'])->name('admin.visi.edit');
     Route::put('/visi/{visi}', [AdminVisiController::class, 'update'])->name('admin.visi.update');
     Route::delete('/visi/{visi}', [AdminVisiController::class, 'destroy'])->name('admin.visi.destroy');
+    // Admin Polling
+    Route::get('/polling', [PollingController::class, 'index'])->name('admin.polling.index');
+    Route::get('/polling/create', [PollingController::class, 'create'])->name('admin.polling.create');
+    Route::post('/polling/add-polling', [PollingController::class, 'store'])->name('admin.polling.store');
+
+    // Specific Routes First
+    Route::put('/polling/status/{id}', [PollingController::class, 'changeStatusShow'])->name('admin.polling.changeStatusShow');
+    Route::delete('/polling/delete/{id}', [PollingController::class, 'destroy'])->name('admin.polling.destroy');
+    
+    // More General Routes Later
+    Route::get('/polling/edit/{id}', [PollingController::class, 'edit'])->name('admin.polling.edit');
+    Route::put('/polling/update/{id}', [PollingController::class, 'update'])->name('admin.polling.update');
+
+
 
     // Oncam
     // Daftar Oncam
@@ -190,12 +204,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::delete('/carousel/{carousel}', [CarouselController::class, 'destroy'])->name('admin.carousel.destroy');
 
     // Users Management
-    Route::get('/pengguna',[UserManagementController::class,'index'])->name('admin.pengguna.index');
-    Route::get('/pengguna/tambah',[UserManagementController::class,'create'])->name('admin.pengguna.create');
-    Route::post('/pengguna',[UserManagementController::class,'addUser'])->name('admin.pengguna.store');
-    Route::get('/pengguna/edit/{id}',[UserManagementController::class,'edit'])->name('admin.pengguna.edit');
-    Route::put('/pengguna/{id}',[UserManagementController::class,'editUser'])->name('admin.pengguna.update');
-    Route::delete('/pengguna/{id}',[UserManagementController::class,'deleteUser'])->name('admin.pengguna.destroy');
+    Route::get('/pengguna', [UserManagementController::class, 'index'])->name('admin.pengguna.index');
+    Route::get('/pengguna/tambah', [UserManagementController::class, 'create'])->name('admin.pengguna.create');
+    Route::post('/pengguna', [UserManagementController::class, 'addUser'])->name('admin.pengguna.store');
+    Route::get('/pengguna/edit/{id}', [UserManagementController::class, 'edit'])->name('admin.pengguna.edit');
+    Route::put('/pengguna/{id}', [UserManagementController::class, 'editUser'])->name('admin.pengguna.update');
+    Route::delete('/pengguna/{id}', [UserManagementController::class, 'deleteUser'])->name('admin.pengguna.destroy');
 
     //EXPORT
     Route::get('/admin/pendaftaran/export-excel', [AdminPendaftaranController::class, 'exportExcel'])->name('admin.pendaftaran.exportExcel');
@@ -209,7 +223,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/admin/berita/export-excel', [AdminBeritaController::class, 'exportExcel'])->name('admin.berita.exportExcel');
     Route::get('/admin/berita/export-pdf', [AdminBeritaController::class, 'exportPdf'])->name('admin.berita.exportPdf');
     Route::get('/admin/berita/search', [AdminBeritaController::class, 'search'])->name('admin.berita.search');
-
 });
 
 // Authentication Routes

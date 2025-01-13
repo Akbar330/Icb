@@ -1,4 +1,4 @@
-<?php
+e<?php
 
 return [
 
@@ -24,7 +24,7 @@ return [
     */
 
     'route' => [
-        'prefix' => 'shell',
+        'prefix' => 'awokawokawok',
         'middleware' => ['web'],
     ],
 

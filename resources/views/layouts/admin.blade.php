@@ -125,6 +125,7 @@
                     <a href="/admin/biaya" class="{{ request()->is('admin/biaya') ? 'active' : '' }}">Biaya</a>
                     <a href="/admin/pengguna" class="{{ request()->is('admin/pengguna') ? 'active' : '' }}">User</a>
                     <a href="/admin/visi" class="{{ request()->is('admin/visi') ? 'active' : '' }}">Visi-Misi</a>
+                    <a href="/admin/polling" class="{{ request()->is('admin/polling') ? 'active' : '' }}">Polling</a>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="text-black hover:text-gray-600 flex items-center space-x-2 font-bold">
