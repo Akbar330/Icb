@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
     <!-- Main Content -->
     <main class="container mt-4">
-        <div class="main-content p-4 bg-white rounded shadow">
+        <div class="main-content p-3 bg-white rounded shadow w-full	 ">
             @yield('content')
         </div>
     </main>

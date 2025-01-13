@@ -137,8 +137,8 @@
     </header>
 
     <!-- Main Content -->
-    <main class="container mx-auto mt-10 px-4">
-        <div class="main-content">
+    <main class="container mx-auto  px-4">
+        <div class="main-content" style="margin-top: 100px">
             @yield('content')
         </div>
     </main>

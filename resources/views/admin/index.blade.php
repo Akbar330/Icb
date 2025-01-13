@@ -3,7 +3,7 @@
 @section('title', 'Dashboard Admin')
 
 @section('content')
-    <div class="px-4 py-8">
+    <div class="px-4 py-8 " style="height: 100vh">
         <h1 class="text-3xl font-bold text-gray-700">Dashboard Admin</h1>
         <p class="text-lg text-gray-500 mt-4">Selamat datang di dashboard admin! Anda dapat mengelola artikel, berita, pengumuman, dan konten lainnya untuk website sekolah Anda melalui menu navigasi di atas.</p>
 
