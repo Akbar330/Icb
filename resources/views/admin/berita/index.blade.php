@@ -33,14 +33,14 @@
                 placeholder="Cari data berita...">
 
             <!-- Tombol Export -->
-            <div class="flex space-x-4 mt-4 sm:mt-0">
+            {{-- <div class="flex space-x-4 mt-4 sm:mt-0">
                 <a href="{{ route('admin.berita.exportExcel') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg shadow hover:bg-green-600">
                     Export Excel
                 </a>
                 <a href="{{ route('admin.berita.exportPdf') }}" class="bg-red-500 text-white py-2 px-4 rounded-lg shadow hover:bg-red-600">
                     Export PDF
                 </a>
-            </div>
+            </div> --}}
         </div>
 
         <!-- Daftar Berita Responsif -->
@@ -50,10 +50,10 @@
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <div class="mb-4">
                         @if($berita->gambar)
-                            <img src="{{ asset('storage/' . $berita->gambar) }}" alt="{{ $berita->judul }}" class="w-full h-40 object-cover rounded">
+                            <img src="{{ asset('storage/' . $berita->gambar) }}" alt="{{ $berita->judul }}" class=" h-40 object-scale-down rounded">
                         @else
                             <div class="w-full h-40 bg-gray-200 flex items-center justify-center rounded">
-                                <img src="{{ asset('foto_artikel.jpg') }}" alt="{{ $berita->judul }}" class="w-full h-40 object-cover rounded">                            </div>
+                                <img src="{{ asset('foto_artikel.jpg') }}" alt="{{ $berita->judul }}" class=" h-40 object-scale-down rounded">                            </div>
                         @endif
                     </div>
                     <h3 class="text-lg font-semibold text-gray-700">{{ $berita->judul }}</h3>

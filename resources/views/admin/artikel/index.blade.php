@@ -33,7 +33,7 @@
                 placeholder="Cari data artikel...">
 
             <!-- Tombol Export -->
-            <div class="flex space-x-4">
+            {{-- <div class="flex space-x-4">
                 <a href="{{ route('admin.artikel.exportExcel') }}"
                    class="btn btn-success">
                    Export Excel
@@ -42,7 +42,7 @@
                    class="btn btn-danger">
                    Export PDF
                 </a>
-            </div>
+            </div> --}}
         </div>
 
         <!-- Artikel Cards -->

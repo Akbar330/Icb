@@ -17,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
             $beritas = Berita::latest()->take(5)->get(); // Ambil 5 berita terbaru
             $view->with('beritas', $beritas); // Share data berita ke view
         });
+        \Carbon\Carbon::setLocale('id');
     }
 
     public function register()

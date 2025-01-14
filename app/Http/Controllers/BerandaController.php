@@ -26,27 +26,59 @@ class BerandaController extends Controller
         $berita = Berita::latest()->paginate(3, ['*'], 'berita_page');
         $artikel = Artikel::latest()->paginate(3, ['*'], 'artikel_page');
         $oncams = Oncam::latest()->paginate(3, ['*'], 'oncam_page'); // Pagination untuk Oncam
-        $Q = DB::table('hasil_votes')->where('session_id', $sessionId)
-            ->where('ip', $ipAddress)
-            ->whereDate('vote_date', $todayDate)
-            ->first();
-        if ($Q) {
-            $isVoting = true;
-        } else {
-            $isVoting = false;
-        }
-        $totalVotes = DB::table('hasil_votes')->count();
-        $pilihan = DB::table('hasil_votes')
-            ->select('pilihan_id', DB::raw('count(*) as count'))
-            ->groupBy('pilihan_id')
-            ->get()
-            ->pluck('count', 'pilihan_id');
-        $isVoting = DB::table('hasil_votes')->where('session_id', $sessionId)
-            ->whereDate('vote_date', $todayDate)
+        // Start Polling
+        $masterPolling = null;
+        $isVoting = false;
+        $listPilihan = [];
+        $pilihan = [];
+        $totalVotes = 0;
+
+        $pollingAya = DB::table('master_pollings as mp')
+            ->where('mp.isShowing', true)
+            ->select('mp.id', 'mp.nama_polling', 'mp.isShowing')
             ->exists();
-        $sapaan = DB::table('sapaan_kepalas')->select('sapaan','gambar')->orderBy('created_at','desc')->get()->toJson();
-      
+
+        if ($pollingAya) {
+            $masterPolling = DB::table('master_pollings as mp')
+                ->where('mp.isShowing', true)
+                ->select('mp.id', 'mp.nama_polling', 'mp.isShowing')
+                ->first();
+
+            $isVoting = DB::table('hasil_votes')
+                ->where('id_polling', '=', $masterPolling->id)
+                ->where('session_id', $sessionId)
+                ->whereDate('vote_date', $todayDate)
+                ->exists();
+
+            $listPilihan = DB::table('pilihan_votes')
+                ->where('id_polling', '=', $masterPolling->id)
+                ->orderBy('id', 'asc')
+                ->select('id', 'option')
+                ->get();
+
+            // PERHitungan
+            $totalVotes = DB::table('hasil_votes')->where('id_polling','=',$masterPolling->id)->count();
+            $pilihanRAW = DB::table('pilihan_votes')
+            ->leftJoin('hasil_votes', function($join) use ($masterPolling) {
+                $join->on('pilihan_votes.id', '=', 'hasil_votes.pilihan_id')
+                     ->where('hasil_votes.id_polling', '=', $masterPolling->id);
+            })
+            ->where('pilihan_votes.id_polling', '=', $masterPolling->id)
+            ->select('pilihan_votes.id as pilihan_id', DB::raw('COUNT(hasil_votes.pilihan_id) as count'))
+            ->groupBy('pilihan_votes.id')
+            ->get();
+            foreach ($pilihanRAW as $item) {
+                $pilihan[] = [
+                    'pilihan_id' => $item->pilihan_id,
+                    'count' => $item->count,
+                ];
+            }
+        }
+
+        // END Polling
+        $sapaan = DB::table('sapaan_kepalas')->select('sapaan', 'gambar')->orderBy('created_at', 'desc')->get()->toJson();
+
         $kepsek = DB::table('kepsek')->get();
-        return view('beranda.index', compact('berita', 'gambarGaleri', 'carousels', 'artikel', 'oncams', 'isVoting', 'pilihan', 'totalVotes', 'sapaan', 'kepsek'));
+        return view('beranda.index', compact('berita', 'gambarGaleri', 'carousels', 'artikel', 'oncams', 'isVoting', 'pilihan', 'totalVotes', 'sapaan', 'kepsek', 'masterPolling', 'listPilihan', 'pollingAya'));
     }
 }
