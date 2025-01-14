@@ -13,7 +13,7 @@ use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\VisiMisiController;
 use App\Http\Controllers\GuruSiswaController;
 use App\Http\Controllers\InformasiController;
-use App\Http\Controllers\kepsekController;
+use App\Http\Controllers\KepsekController;
 use App\Http\Controllers\AdminOncamController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminBeritaController;

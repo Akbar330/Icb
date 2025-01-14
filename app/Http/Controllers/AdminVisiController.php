@@ -5,7 +5,7 @@ use App\Models\visi;
 
 use Illuminate\Http\Request;
 
-class AdminvisiController extends Controller
+class AdminVisiController extends Controller
 {
     //
     public function index() {

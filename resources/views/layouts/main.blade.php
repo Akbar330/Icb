@@ -95,7 +95,6 @@
 </style>
 
 <body class="font-sans bg-gray-100 text-gray-800">
-
     @yield('scripts')
     <!-- Loading Bar -->
     <div id="loading-bar"></div>
@@ -217,7 +216,7 @@
     </script>
     <!-- Main Content -->
     <main class="container mx-auto mt-2">
-        <div class="main-content p-3 bg-white rounded shadow w-full	 ">
+        <div class="main-content p-3 bg-white rounded shadow w-full">
             @yield('content')
         </div>
     </main>

@@ -7,7 +7,6 @@
     "require": {
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.0",
-        "jakyeru/laravel-shell": "^2.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "livewire/volt": "^1.0",

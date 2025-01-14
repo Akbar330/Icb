@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "054595f19168c3a0f2a64ba9893ea695",
+    "content-hash": "9d62d91289b8087bd39a7b4ce9ec3e7d",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1427,58 +1427,6 @@
                 }
             ],
             "time": "2023-12-03T19:50:20+00:00"
-        },
-        {
-            "name": "jakyeru/laravel-shell",
-            "version": "v2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/JakyeRU/laravel-shell.git",
-                "reference": "8ebbd65627459523bca67d2e9233b65fabac358b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/JakyeRU/laravel-shell/zipball/8ebbd65627459523bca67d2e9233b65fabac358b",
-                "reference": "8ebbd65627459523bca67d2e9233b65fabac358b",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": "^11",
-                "livewire/livewire": "^3",
-                "php": "^8.2|^8.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^11"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Jakyeru\\LaravelShell\\LaravelShellServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Jakyeru\\LaravelShell\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jakye",
-                    "email": "jakye@jakye.me"
-                }
-            ],
-            "description": "Laravel-Shell adds a terminal interface to your web application, allowing you to run shell commands directly from your browser.",
-            "support": {
-                "issues": "https://github.com/JakyeRU/laravel-shell/issues",
-                "source": "https://github.com/JakyeRU/laravel-shell/tree/v2.0.0"
-            },
-            "time": "2024-10-09T03:53:05+00:00"
         },
         {
             "name": "laravel/framework",
