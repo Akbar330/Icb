@@ -58,12 +58,15 @@ class BerandaController extends Controller
 
             // PERHitungan
             $totalVotes = DB::table('hasil_votes')->where('id_polling','=',$masterPolling->id)->count();
-            $pilihanRAW = DB::table('hasil_votes')
-                ->where('id_polling', '=', $masterPolling->id)
-                ->select('pilihan_id', DB::raw('count(*) as count'))
-                ->groupBy('pilihan_id')
-                ->get();
-
+            $pilihanRAW = DB::table('pilihan_votes')
+            ->leftJoin('hasil_votes', function($join) use ($masterPolling) {
+                $join->on('pilihan_votes.id', '=', 'hasil_votes.pilihan_id')
+                     ->where('hasil_votes.id_polling', '=', $masterPolling->id);
+            })
+            ->where('pilihan_votes.id_polling', '=', $masterPolling->id)
+            ->select('pilihan_votes.id as pilihan_id', DB::raw('COUNT(hasil_votes.pilihan_id) as count'))
+            ->groupBy('pilihan_votes.id')
+            ->get();
             foreach ($pilihanRAW as $item) {
                 $pilihan[] = [
                     'pilihan_id' => $item->pilihan_id,

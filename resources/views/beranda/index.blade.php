@@ -86,43 +86,43 @@
                         @if ($artikel->isEmpty())
                             <p>Tidak ada artikel tersedia.</p>
                         @else
-                        @foreach ($artikel as $item)
-                        <li class="list-group-item">
-                            <div class="d-flex flex-column flex-md-row align-items-start">
-                                <!-- Gambar Artikel -->
-                                <div class="flex-shrink-0 mb-3 mb-md-0 me-md-3 text-center">
-                                    <img src="{{ $item->gambar !== null ? asset('storage/' . $item->gambar) : asset('foto_artikel.jpg') }}"
-                                        alt="Gambar Artikel" class="img-thumbnail" style="width:250px;">
-                                </div>
-                                <!-- Judul dan Deskripsi Artikel -->
-                                <div class="ml-2">
-                                    <div class="flex-grow-1">
-                                        <h3 class="text-primary mb-1 text-left text-md-start">
-                                            <a href="{{ route('artikel.show', $item->id) }}"
-                                                class="text-decoration-none text-black">
-                                                {{ $item->judul }}
-                                            </a>
-                                        </h3>
-                                        <p class="text-muted mb-2 text-left text-md-start">
-                                            {{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}
-                                        </p>
-                                        <div class="text-left text-md-start">
-                                            <a href="{{ route('artikel.show', $item->id) }}"
-                                                class="btn btn-primary btn-sm">
-                                                Baca Selengkapnya
-                                            </a>
+                            @foreach ($artikel as $item)
+                                <li class="list-group-item">
+                                    <div class="d-flex flex-column flex-md-row align-items-start">
+                                        <!-- Gambar Artikel -->
+                                        <div class="flex-shrink-0 mb-3 mb-md-0 me-md-3 text-center">
+                                            <img src="{{ $item->gambar !== null ? asset('storage/' . $item->gambar) : asset('foto_artikel.jpg') }}"
+                                                alt="Gambar Artikel" class="img-thumbnail" style="width:250px;">
                                         </div>
-                                        <div class="text-secondary text-left text-md-start mt-2">
-                                            <small>Penulis: {{ $item->penulis }}</small><br>
-                                            <small>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
-                                            <small class="text-secondary"> Dilihat: {{ $item->views }} kali</small>
+                                        <!-- Judul dan Deskripsi Artikel -->
+                                        <div class="ml-2">
+                                            <div class="flex-grow-1">
+                                                <h3 class="text-primary mb-1 text-left text-md-start">
+                                                    <a href="{{ route('artikel.show', $item->id) }}"
+                                                        class="text-decoration-none text-black">
+                                                        {{ $item->judul }}
+                                                    </a>
+                                                </h3>
+                                                <p class="text-muted mb-2 text-left text-md-start">
+                                                    {{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}
+                                                </p>
+                                                <div class="text-left text-md-start">
+                                                    <a href="{{ route('artikel.show', $item->id) }}"
+                                                        class="btn btn-primary btn-sm">
+                                                        Baca Selengkapnya
+                                                    </a>
+                                                </div>
+                                                <div class="text-secondary text-left text-md-start mt-2">
+                                                    <small>Penulis: {{ $item->penulis }}</small><br>
+                                                    <small>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
+                                                    <small class="text-secondary"> Dilihat: {{ $item->views }} kali</small>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </li>
-                    @endforeach
-                @endif
+                                </li>
+                            @endforeach
+                        @endif
                     </ul>
                     <!-- Pagination -->
                     <div class="d-flex justify-content mt-4">
@@ -148,41 +148,48 @@
                             <h5 class="text-blue font-bold mt-10"> POLLING SEKOLAH </h5>
                             <h3 id="fallbackPolling">Polling Tidak Tersedia</h3>
                             @if ($masterPolling !== null)
-                            <div id="pollingSection">
-                                <h1 class="mt-1">{{$masterPolling->nama_polling }}</h1>
-                                <div class="container mt-3" id="hasilVote" style="display: none;">
-                                    <p><strong>{{$listPilihan[0]->option }}</strong>: <span id="bagusPercentage">0%</span></p>
-                                    <div class="progress mb-3">
-                                        <div class="progress-bar bg-success" role="progressbar" id="bagusProgress"
-                                            style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div id="pollingSection">
+                                    <h1 class="mt-1">{{ $masterPolling->nama_polling }}</h1>
+                                    <div class="container mt-3" id="hasilVote" style="display: none;">
+                                        <p><strong>{{ $listPilihan[0]->option }}</strong>: <span
+                                                id="bagusPercentage">0%</span></p>
+                                        <div class="progress mb-3">
+                                            <div class="progress-bar bg-success" role="progressbar" id="bagusProgress"
+                                                style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                            </div>
+                                        </div>
+                                        <p><strong>{{ $listPilihan[1]->option }}</strong>: <span
+                                                id="kurangBagusPercentage">0%</span></p>
+                                        <div class="progress mb-3">
+                                            <div class="progress-bar bg-warning" role="progressbar" id="kurangBagusProgress"
+                                                style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                            </div>
+                                        </div>
+                                        <p><strong>{{ $listPilihan[2]->option }}</strong>: <span
+                                                id="burukPercentage">0%</span></p>
+                                        <div class="progress mb-3">
+                                            <div class="progress-bar bg-danger" role="progressbar" id="burukProgress"
+                                                style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p><strong>{{$listPilihan[1]->option}}</strong>: <span id="kurangBagusPercentage">0%</span></p>
-                                    <div class="progress mb-3">
-                                        <div class="progress-bar bg-warning" role="progressbar" id="kurangBagusProgress"
-                                            style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p><strong>{{$listPilihan[2]->option}}</strong>: <span id="burukPercentage">0%</span></p>
-                                    <div class="progress mb-3">
-                                        <div class="progress-bar bg-danger" role="progressbar" id="burukProgress"
-                                            style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+                                    <form action="{{ route('vote.store') }}" method="post" class="mt-2"
+                                        id="formPoll">
+                                        @csrf
+                                        <input type="hidden" name="id_polling" value="{{ $masterPolling->id }}">
+                                        @foreach ($listPilihan as $pilihanVote)
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="pilihan"
+                                                    id="{{ $pilihanVote->option }}" value="{{ $pilihanVote->id }}">
+                                                <label class="form-check-label" for="{{ $pilihanVote->option }}">
+                                                    {{ $pilihanVote->option }}
+                                                </label>
+                                            </div>
+                                        @endforeach
+
+                                        <button type="submit" class="btn btn-primary mt-2">Kirim</button>
+                                    </form>
                                 </div>
-                                <form action="{{ route('vote.store') }}" method="post" class="mt-2" id="formPoll">
-                                    @csrf
-                                    <input type="hidden" id="custId" name="id_polling" value="{{$masterPolling->id}}">
-                                    @foreach ($listPilihan as $pilihanVote)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="pilihan" id="flexRadioDefault1"
-                                            value="{{$pilihanVote->id}}">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            {{$pilihanVote->option}}
-                                        </label>
-                                    </div>
-                                    @endforeach
-    
-                                    <button type="submit" class="btn btn-primary mt-2">Kirim</button>
-                                </form>
-                            </div>
                             @endif
                         </div>
                     </div>
@@ -201,13 +208,13 @@
                         <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold">Berita Sekolah</h1>
                         <p class="text-muted mb-4">Berikut adalah berita terbaru dari sekolah.</p>
                     </div>
-                        <div class="d-flex flex-column">
+                    <div class="d-flex flex-column">
                         @foreach ($berita as $item)
                             <div class="d-flex flex-column flex-md-row py-3 border-bottom">
                                 <!-- Card untuk gambar -->
                                 <div class="flex-shrink-0 mb-3 mb-md-0 me-md-3 text-center">
                                     <img src="{{ $item->gambar !== null ? asset('storage/' . $item->gambar) : asset('foto_berita.jpg') }}"
-                                    alt="Gambar Berita" class="img-thumbnail" style="object-fit:scale-down;">
+                                        alt="Gambar Berita" class="img-thumbnail" style="object-fit:scale-down;">
                                 </div>
 
                                 <!-- Konten Berita -->
@@ -225,8 +232,9 @@
                                         <div class="text-secondary text-left text-md-start">
                                             <small>Penulis: {{ $item->penulis ?? 'Anonim' }}</small>
                                             <br>
-                                            <small>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small> |
-                                            <small> Dilihat: {{ $item->views}} kali</small>
+                                            <small>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
+                                            |
+                                            <small> Dilihat: {{ $item->views }} kali</small>
                                         </div>
                                         <div class="text-left text-md-start mt-3">
                                             <a href="{{ route('berita.show', $item->id) }}" class="btn btn-primary">
@@ -295,33 +303,39 @@
             const pollingAya = @json($pollingAya);
             const resultPoll = document.getElementById('hasilVote');
             const formPoll = document.getElementById('formPoll');
-            const pollingSec= document.getElementById('pollingSection');
-            const fallbackPol= document.getElementById('fallbackPolling');
+            const pollingSec = document.getElementById('pollingSection');
+            const fallbackPol = document.getElementById('fallbackPolling');
             const sapaanTextElement = document.getElementById('sapaan_text');
             const imgElement = document.getElementById('sapaan-img');
 
             const sapaanRAW = @json($sapaan);
             const sapaan = JSON.parse(sapaanRAW);
-            if (isVoting) {
-                resultPoll.style.display = 'block'
-                formPoll.style.display = 'none'
-            } else {
-                resultPoll.style.display = 'none'
-                formPoll.style.display = 'block'
+            if (resultPoll && formPoll) {
+                if (isVoting) {
+                    resultPoll.style.display = 'block';
+                    formPoll.style.display = 'none';
+                } else {
+                    resultPoll.style.display = 'none';
+                    formPoll.style.display = 'block';
+                }
             }
-            if (pollingAya) {
-               pollingSec.style.display = 'block'
-               fallbackPol.style.display = 'none'
-               
-            } else {
-                pollingSec.style.display = 'none'
-                fallbackPol.style.display = 'block'
+
+            if (pollingSec && fallbackPol) {
+                if (pollingAya) {
+                    pollingSec.style.display = 'block';
+                    fallbackPol.style.display = 'none';
+                } else {
+                    pollingSec.style.display = 'none';
+                    fallbackPol.style.display = 'block';
+                }
             }
-          
+
             // Fungsi untuk menghitung persentase
             function calculatePercentage(count, total) {
                 return total > 0 ? (count / total) * 100 : 0;
             }
+            // Set the random sapaan text to the <p> element
+
             const getRandomSapaan = () => {
                 if (sapaan.length > 0) {
                     const randomIndex = Math.floor(Math.random() * sapaan.length);
@@ -334,7 +348,6 @@
                 }
             };
 
-            // Set the random sapaan text to the <p> element
 
 
             // Update progress bar secara dinamis
@@ -352,30 +365,39 @@
                 // Hitung persentase
                 const bagusPercent = calculatePercentage(pilihan[0]?.count || 0, totalVotes);
                 const kurangBagusPercent = calculatePercentage(pilihan[1]?.count || 0, totalVotes);
-                const burukPercent = calculatePercentage(pilihan[2]?.count || 0 , totalVotes);
+                const burukPercent = calculatePercentage(pilihan[2]?.count || 0, totalVotes);
 
                 // Update progress bar
-                bagusProgress.style.width = `${bagusPercent}%`;
-                bagusProgress.setAttribute("aria-valuenow", bagusPercent);
-                bagusPercentage.textContent = `${Math.round(bagusPercent)}%`;
+                if (bagusProgress && bagusPercentage) {
+                    bagusProgress.style.width = `${bagusPercent}%`;
+                    bagusProgress.setAttribute("aria-valuenow", bagusPercent);
+                    bagusPercentage.textContent = `${Math.round(bagusPercent)}%`;
+                }
 
-                kurangBagusProgress.style.width = `${kurangBagusPercent}%`;
-                kurangBagusProgress.setAttribute("aria-valuenow", kurangBagusPercent);
-                kurangBagusPercentage.textContent = `${Math.round(kurangBagusPercent)}%`;
+                if (kurangBagusProgress && kurangBagusPercentage) {
+                    kurangBagusProgress.style.width = `${kurangBagusPercent}%`;
+                    kurangBagusProgress.setAttribute("aria-valuenow", kurangBagusPercent);
+                    kurangBagusPercentage.textContent = `${Math.round(kurangBagusPercent)}%`;
+                }
 
-                burukProgress.style.width = `${burukPercent}%`;
-                burukProgress.setAttribute("aria-valuenow", burukPercent);
-                burukPercentage.textContent = `${Math.round(burukPercent)}%`;
+                if (burukProgress && burukPercentage) {
+                    burukProgress.style.width = `${burukPercent}%`;
+                    burukProgress.setAttribute("aria-valuenow", burukPercent);
+                    burukPercentage.textContent = `${Math.round(burukPercent)}%`;
+                }
             }
 
             document.addEventListener('DOMContentLoaded', () => {
                 updateProgressBar();
                 const randomSapaan = getRandomSapaan();
-                sapaanTextElement.textContent = randomSapaan.sapaan;
-                imgElement.src = randomSapaan.gambar ?
-                    `/storage/${randomSapaan.gambar}` :
-                    'kepsex.jpg'; 
-
+                if (sapaanTextElement) {
+                    sapaanTextElement.textContent = randomSapaan.sapaan || "Selamat Pagi!";
+                }
+                if (imgElement) {
+                    imgElement.src = randomSapaan.gambar ?
+                        `/storage/${randomSapaan.gambar}` :
+                        'kepsex.jpg';
+                }
             });
         </script>
     </body>
