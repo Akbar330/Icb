@@ -1,77 +1,72 @@
 @extends('layouts.admin')
 
-@section('title', 'Dashboard Admin')
+@section('title', 'Manajemen Artikel')
 
 @section('content')
-<div class="px-4 py-8">
-    <h1 class="text-3xl font-bold text-gray-700 text-center">Dashboard Admin</h1>
-    <p class="text-lg text-gray-500 text-center mt-2">Kelola Artikel dan Berita di Sekolah Anda</p>
+<div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div>
+        <h1 class="text-2xl font-bold text-gray-800">Manajemen Artikel</h1>
+        <p class="text-sm text-gray-500 mt-1">Kelola dan publikasikan artikel untuk pengunjung website.</p>
+    </div>
+    <a href="{{ route('admin.artikel.create') }}" class="inline-flex items-center bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:bg-blue-700 hover:shadow-md transition-all">
+        <i class="fas fa-plus mr-2"></i> Tambah Artikel Baru
+    </a>
+</div>
 
-    <!-- Dashboard Actions -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-        <!-- Tambah Artikel -->
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-            <h2 class="text-xl font-semibold text-gray-700">Tambah Artikel</h2>
-            <p class="text-gray-600 mt-2">Buat artikel baru untuk berbagi informasi penting dengan pengunjung.</p>
-            <a href="{{ route('admin.artikel.create') }}" class="mt-4 inline-block bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 hover:bg-blue-700">
-                Tambah Artikel
-            </a>
+<!-- Main Card -->
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+    <!-- Toolbar -->
+    <div class="p-5 border-b border-gray-100 bg-gray-50/50 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <h2 class="font-semibold text-gray-700">Daftar Artikel</h2>
+        <div class="relative w-full sm:w-72">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-search text-gray-400"></i>
+            </div>
+            <input type="text" id="search" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Cari artikel berdasarkan judul...">
         </div>
     </div>
 
-    <!-- Daftar Artikel -->
-    <div class="mt-8">
-        <h2 class="text-2xl font-semibold text-gray-700 mb-4">Daftar Artikel</h2>
-
-        <!-- Search and Export Section -->
-        <div class="mb-6 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-            <!-- Input Live Search -->
-            <input
-                type="text"
-                id="search"
-                class="border px-4 py-2 rounded-lg w-full sm:w-1/3"
-                placeholder="Cari data artikel...">
-
-            <!-- Tombol Export -->
-            {{-- <div class="flex space-x-4">
-                <a href="{{ route('admin.artikel.exportExcel') }}"
-                   class="btn btn-success">
-                   Export Excel
-                </a>
-                <a href="{{ route('admin.artikel.exportPdf') }}"
-                   class="btn btn-danger">
-                   Export PDF
-                </a>
-            </div> --}}
-        </div>
-
-        <!-- Artikel Cards -->
-        <div id="artikelCards" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            @foreach($artikels as $artikel)
-                <div class="bg-white rounded-lg shadow-md p-4">
-                    {{-- @if($artikel->gambar) --}}
-                        <img src="{{ $artikel->gambar !== null ? asset('storage/' . $artikel->gambar) : asset('foto_artikel.jpg') }}" alt="{{ $artikel->judul }}" class="w-full h-48 object-cover rounded-t-md">
-                    {{-- @else --}}
-                        {{-- <div class="w-full h-48 bg-gray-200 flex items-center justify-center rounded-t-md">
-                            <span class="text-gray-500">Tidak ada gambar</span>
-                        </div> --}}
-                    {{-- @endif --}}
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-700">{{ $artikel->judul }}</h3>
-                        <p class="text-sm text-gray-500">Penulis: {{ $artikel->penulis }}</p>
-                        <p class="text-sm text-gray-500">Tanggal: {{ $artikel->created_at->format('d M Y') }}</p>
-
-                        <div class="mt-4 flex justify-between items-center">
-                            <a href="{{ route('admin.artikel.edit', $artikel->id) }}" class="text-blue-500 hover:underline">Edit</a>
-                            <form action="{{ route('admin.artikel.destroy', $artikel->id) }}" method="POST" class="inline">
+    <div class="p-5 bg-gray-50/30">
+        <!-- Artikel Cards Grid -->
+        <div id="artikelCards" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            @forelse($artikels as $artikel)
+                <div class="bg-white rounded-xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col transition-shadow duration-300 group">
+                    <div class="relative h-48 overflow-hidden bg-gray-100">
+                        <img src="{{ $artikel->gambar !== null ? asset('storage/' . $artikel->gambar) : asset('foto_artikel.jpg') }}" alt="{{ $artikel->judul }}" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute top-2 right-2 bg-white/90 backdrop-blur text-xs font-semibold px-2 py-1 rounded shadow-sm text-gray-700">
+                            {{ $artikel->created_at->format('d M Y') }}
+                        </div>
+                    </div>
+                    
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-bold text-gray-800 line-clamp-2 leading-tight mb-2 group-hover:text-blue-600 transition-colors" title="{{ $artikel->judul }}">{{ $artikel->judul }}</h3>
+                        <div class="flex items-center text-xs text-gray-500 mb-4">
+                            <i class="fas fa-user-edit mr-1.5 text-blue-500"></i> {{ $artikel->penulis }}
+                        </div>
+                        
+                        <div class="mt-auto pt-4 border-t border-gray-50 flex justify-between items-center gap-2">
+                            <a href="{{ route('admin.artikel.edit', $artikel->id) }}" class="flex-1 text-center bg-blue-50 hover:bg-blue-100 text-blue-600 font-medium py-1.5 px-3 rounded-lg text-sm transition-colors">
+                                <i class="fas fa-edit mr-1"></i> Edit
+                            </a>
+                            <form action="{{ route('admin.artikel.destroy', $artikel->id) }}" method="POST" class="flex-1" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?');">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-red-500 hover:underline">Hapus</button>
+                                <button type="submit" class="w-full text-center bg-red-50 hover:bg-red-100 text-red-600 font-medium py-1.5 px-3 rounded-lg text-sm transition-colors">
+                                    <i class="fas fa-trash-alt mr-1"></i> Hapus
+                                </button>
                             </form>
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="col-span-full bg-white p-8 rounded-xl border border-dashed border-gray-300 text-center">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
+                        <i class="fas fa-newspaper text-2xl text-gray-400"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-1">Belum ada artikel</h3>
+                    <p class="text-gray-500">Mulai buat artikel pertama Anda untuk mengisi website.</p>
+                </div>
+            @endforelse
         </div>
     </div>
 </div>
@@ -90,22 +85,52 @@
             success: function(data) {
                 let cards = '';
                 let assetPath = "{{ asset('storage/') }}";
+                let defaultImg = "{{ asset('foto_artikel.jpg') }}";
 
-                data.forEach(function(item) {
-                    cards += `
-                        <div class="bg-white rounded-lg shadow-md p-4">
-                            ${item.gambar ? `<img src="${assetPath}/${item.gambar}" alt="${item.judul}" class="w-full h-48 object-cover rounded-t-md">` : `<div class="w-full h-48 bg-gray-200 flex items-center justify-center rounded-t-md"><span class="text-gray-500">Tidak ada gambar</span></div>`}
-                            <div class="p-4">
-                                <h3 class="text-lg font-semibold text-gray-700">${item.judul}</h3>
-                                <p class="text-sm text-gray-500">Penulis: ${item.penulis}</p>
-                                <p class="text-sm text-gray-500">Tanggal: ${item.created_at}</p>
-                                <div class="mt-4 flex justify-between items-center">
-                                    <a href="/admin/artikel/${item.id}/edit" class="text-blue-500 hover:underline">Edit</a>
-                                    <a href="/admin/artikel/${item.id}" class="text-blue-600 hover:underline">Hapus</a>
+                if (data.length === 0) {
+                    cards = `
+                    <div class="col-span-full bg-white p-8 rounded-xl border border-dashed border-gray-300 text-center">
+                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
+                            <i class="fas fa-search text-2xl text-gray-400"></i>
+                        </div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-1">Pencarian Tidak Ditemukan</h3>
+                        <p class="text-gray-500">Tidak ada artikel yang cocok dengan kata kunci tersebut.</p>
+                    </div>`;
+                } else {
+                    data.forEach(function(item) {
+                        let imgSrc = item.gambar ? `${assetPath}/${item.gambar}` : defaultImg;
+                        let dateObj = new Date(item.created_at);
+                        let formattedDate = dateObj.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+                        
+                        cards += `
+                            <div class="bg-white rounded-xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col transition-shadow duration-300 group">
+                                <div class="relative h-48 overflow-hidden bg-gray-100">
+                                    <img src="${imgSrc}" alt="${item.judul}" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                                    <div class="absolute top-2 right-2 bg-white/90 backdrop-blur text-xs font-semibold px-2 py-1 rounded shadow-sm text-gray-700">
+                                        ${formattedDate}
+                                    </div>
                                 </div>
-                            </div>
-                        </div>`;
-                });
+                                <div class="p-5 flex-1 flex flex-col">
+                                    <h3 class="text-lg font-bold text-gray-800 line-clamp-2 leading-tight mb-2 group-hover:text-blue-600 transition-colors" title="${item.judul}">${item.judul}</h3>
+                                    <div class="flex items-center text-xs text-gray-500 mb-4">
+                                        <i class="fas fa-user-edit mr-1.5 text-blue-500"></i> ${item.penulis}
+                                    </div>
+                                    <div class="mt-auto pt-4 border-t border-gray-50 flex justify-between items-center gap-2">
+                                        <a href="/admin/artikel/${item.id}/edit" class="flex-1 text-center bg-blue-50 hover:bg-blue-100 text-blue-600 font-medium py-1.5 px-3 rounded-lg text-sm transition-colors">
+                                            <i class="fas fa-edit mr-1"></i> Edit
+                                        </a>
+                                        <form action="/admin/artikel/${item.id}" method="POST" class="flex-1" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="w-full text-center bg-red-50 hover:bg-red-100 text-red-600 font-medium py-1.5 px-3 rounded-lg text-sm transition-colors">
+                                                <i class="fas fa-trash-alt mr-1"></i> Hapus
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>`;
+                    });
+                }
                 $('#artikelCards').html(cards);
             }
         });

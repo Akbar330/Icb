@@ -49,6 +49,7 @@ class PendaftaranController extends Controller
                 'pekerjaan_wali' => 'required|string|max:255',
                 'no_hp_wali' => 'required|string|max:20',
                 'mgm' => 'required|in:Y,N',
+                'tempat_lahir'=>'required|string'
             ]);
             $pendaftaranData = [
                 'nis'=> null,
@@ -68,6 +69,7 @@ class PendaftaranController extends Controller
                 'pekerjaan_wali' => $validated['pekerjaan_wali'],
                 'no_hp_wali' => $validated['no_hp_wali'],
                 'mgm' => $validated['mgm'],
+                'tempat_lahir' => $validated['tempat_lahir'],
                 'created_at' => Carbon::now(),
             ];
             

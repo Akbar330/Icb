@@ -4,6 +4,7 @@
             <th>Nis</th>
             <th>Nama Siswa</th>
             <th>Alamat</th>
+            <th>Tempat Lahir</th> 
             <th>TTL</th> 
             <th>Agama</th> 
             <th>Jenis Kelamin</th>
@@ -27,8 +28,9 @@
         @foreach ($pendaftarans as $pendaftaran)
         <tr>
             <td>{{ $pendaftaran->nis }}</td>
-            <td>{{ $pendaftaran->nama_siswa }}</td>
+            <td>{{ ucwords($pendaftaran->nama_siswa) }}</td>
             <td>{{ $pendaftaran->alamat }}</td>
+            <td>{{ $pendaftaran->tempat_lahir ?? '-' }}</td>
             <td>{{ \Carbon\Carbon::parse($pendaftaran->ttl)->format('d-m-Y') }}</td>
             <td>{{ $pendaftaran->agama }}</td>
             <td>{{ $pendaftaran->jenis_kelamin }}</td>
@@ -38,7 +40,7 @@
             <td>{{ $pendaftaran->jurusan }}</td>
             <td>{{ $pendaftaran->no_hp }}</td>
             <td>{{ $pendaftaran->abk === 'Y' ? 'Ya' :'Tidak' }}</td>
-            <td>{{ $pendaftaran->nama_ortu_wali }}</td>
+            <td>{{ ucwords( $pendaftaran->nama_ortu_wali) }}</td>
             <td>{{ $pendaftaran->alamat_wali }}</td>
             <td>{{ $pendaftaran->pekerjaan_wali }}</td>
             <td>{{ $pendaftaran->no_hp_wali}}</td>

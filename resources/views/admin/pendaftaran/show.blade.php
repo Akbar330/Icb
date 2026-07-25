@@ -24,11 +24,15 @@
                     </tr>
                     <tr>
                         <td class="px-4 py-2 font-semibold">Nama Siswa</td>
-                        <td class="px-4 py-2">{{ $pendaftaran->nama_siswa }}</td>
+                        <td class="px-4 py-2">{{  ucwords($pendaftaran->nama_siswa) }}</td>
                     </tr>
                     <tr>
                         <td class="px-4 py-2 font-semibold">Alamat</td>
                         <td class="px-4 py-2">{{ $pendaftaran->alamat }}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2 font-semibold">Tempat Lahir</td>
+                        <td class="px-4 py-2">{{ $pendaftaran->tempat_lahir ?? 'Tidak Diisi' }}</td>
                     </tr>
                     <tr>
                         <td class="px-4 py-2 font-semibold">Tanggal Lahir</td>
@@ -55,8 +59,12 @@
                         <td class="px-4 py-2">{{ $pendaftaran->no_hp }}</td>
                     </tr>
                     <tr>
+                        <td class="px-4 py-2 font-semibold">Asal Sekolah</td>
+                        <td class="px-4 py-2">{{ $pendaftaran->asal_sekolah }}</td>
+                    </tr>
+                    <tr>
                         <td class="px-4 py-2 font-semibold">Nama Orang Tua/Wali</td>
-                        <td class="px-4 py-2">{{ $pendaftaran->nama_ortu_wali }}</td>
+                        <td class="px-4 py-2">{{ ucwords( $pendaftaran->nama_ortu_wali ?? 'Tidak Diisi') }}</td>
                     </tr>
                     <tr>
                         <td class="px-4 py-2 font-semibold">Alamat Wali</td>

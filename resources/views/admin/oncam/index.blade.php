@@ -1,54 +1,67 @@
 @extends('layouts.admin')
 
-@section('title', 'Dashboard Admin - Oncam')
+@section('title', 'Manajemen Video YouTube')
 
 @section('content')
-<div class="px-4 py-8">
-    <h1 class="text-3xl font-bold text-gray-700">Dashboard Admin - Oncam</h1>
-    <p class="text-lg text-gray-500 mt-2">Kelola daftar link Oncam di sistem Anda.</p>
+<div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div>
+        <h1 class="text-2xl font-bold text-gray-800">Manajemen Video YouTube</h1>
+        <p class="text-sm text-gray-500 mt-1">Kelola link video YouTube (Oncam) untuk ditampilkan di website.</p>
+    </div>
+    <a href="{{ route('oncam.create') }}" class="inline-flex items-center bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:bg-blue-700 hover:shadow-md transition-all">
+        <i class="fas fa-plus mr-2"></i> Tambah Video Baru
+    </a>
+</div>
 
-    <!-- Dashboard Actions -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-        <!-- Tambah Oncam -->
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-            <h2 class="text-xl font-semibold text-gray-700">Tambah Oncam</h2>
-            <p class="text-gray-600 mt-2">Tambahkan link Oncam baru untuk ditampilkan pada halaman utama.</p>
-            <a href="{{ route('oncam.create') }}" class="mt-4 inline-block bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 hover:bg-blue-700">
-                Tambah Oncam
-            </a>
-        </div>
+<!-- Main Card -->
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+    <!-- Toolbar -->
+    <div class="p-5 border-b border-gray-100 bg-gray-50/50">
+        <h2 class="font-semibold text-gray-700">Daftar Link Video</h2>
     </div>
 
-    <!-- Daftar Oncam -->
-    <div class="mt-8">
-        <h2 class="text-2xl font-semibold text-gray-700 mb-4">Daftar Link Oncam</h2>
-
-        <!-- Daftar Oncam dalam Card -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach($oncams as $oncam)
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold text-gray-700">ID: {{ $oncam->id }}</h3>
-                <p class="text-gray-600 mt-2">Embed Link:
-                    <a href="{{ $oncam->embed_link }}" target="_blank" class="text-blue-600 hover:underline break-words">
-                        {{ $oncam->embed_link }}
-                    </a>
-                </p>
-                <p class="text-gray-600 mt-2">Tanggal: {{ $oncam->created_at->format('d M Y') }}</p>
-                <div class="mt-4 flex justify-between">
-                    <a href="{{ route('oncam.edit', $oncam->id) }}" class="text-blue-500 hover:underline">Edit</a> |
-                    <form action="{{ route('oncam.destroy', $oncam->id) }}" method="POST" class="inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="text-red-500 hover:underline">Hapus</button>
-                    </form>
+    <div class="p-5 bg-gray-50/30">
+        <!-- Video Grid -->
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            @forelse($oncams as $oncam)
+                <div class="bg-white rounded-xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col transition-shadow duration-300">
+                    <div class="relative aspect-video overflow-hidden bg-gray-900 flex items-center justify-center group p-4">
+                        <i class="fab fa-youtube text-red-600 text-6xl group-hover:scale-110 transition-transform duration-300"></i>
+                        <div class="absolute top-2 right-2 bg-black/60 backdrop-blur text-white text-xs font-semibold px-2 py-1 rounded shadow-sm">
+                            {{ $oncam->created_at->format('d M Y') }}
+                        </div>
+                    </div>
+                    
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-2">Embed Link</h3>
+                        <a href="{{ $oncam->embed_link }}" target="_blank" class="text-sm text-blue-600 hover:text-blue-800 break-all mb-4 hover:underline line-clamp-2" title="{{ $oncam->embed_link }}">
+                            <i class="fas fa-external-link-alt mr-1"></i> {{ $oncam->embed_link }}
+                        </a>
+                        
+                        <div class="mt-auto pt-4 border-t border-gray-50 flex justify-between items-center gap-2">
+                            <a href="{{ route('oncam.edit', $oncam->id) }}" class="flex-1 text-center bg-blue-50 hover:bg-blue-100 text-blue-600 font-medium py-1.5 px-3 rounded-lg text-sm transition-colors">
+                                <i class="fas fa-edit mr-1"></i> Edit
+                            </a>
+                            <form action="{{ route('oncam.destroy', $oncam->id) }}" method="POST" class="flex-1" onsubmit="return confirm('Apakah Anda yakin ingin menghapus video ini?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="w-full text-center bg-red-50 hover:bg-red-100 text-red-600 font-medium py-1.5 px-3 rounded-lg text-sm transition-colors">
+                                    <i class="fas fa-trash-alt mr-1"></i> Hapus
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            @endforeach
+            @empty
+                <div class="col-span-full bg-white p-8 rounded-xl border border-dashed border-gray-300 text-center">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
+                        <i class="fab fa-youtube text-2xl text-red-500"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-1">Belum ada video</h3>
+                    <p class="text-gray-500">Mulai tambahkan link embed YouTube untuk ditampilkan.</p>
+                </div>
+            @endforelse
         </div>
     </div>
 </div>
-
-<!-- jQuery CDN -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @endsection

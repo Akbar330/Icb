@@ -5,7 +5,7 @@
 @section('content')
 
     <body>
-        <section class="bg-gray-100 text-black shadow-xl mb-10 p-2" style="min-height: 350px;">
+        <section class="mb-12 shadow-2xl rounded-b-xl overflow-hidden relative" style="min-height: 450px;">
             <!-- Carousel Section -->
             <div class="relative w-full overflow-hidden" style="height: 450px;">
                 <div id="carousel" class="flex transition-transform duration-700 ease-in-out"
@@ -14,17 +14,16 @@
                         <div class="w-full flex-shrink-0" style="height: 450px; position: relative;">
                             <!-- Gambar Carousel -->
                             <img src="{{ asset('storage/' . $carousel->image_path) }}" class="w-full h-full object-cover"
-                                alt="Gambar Carousel">
+                                alt="Gambar Carousel" {{ $index > 0 ? 'loading="lazy"' : '' }}>
 
                             <!-- Overlay tetap di posisi kiri -->
-                            <div class="absolute top-0 left-0 w-[45%] h-full bg-black opacity-45"
-                                style="clip-path: polygon(0 0, 100% 0%, 100% 100%, 30% 100%); z-index: 20;"></div>
+                            <div class="absolute top-0 left-0 w-full md:w-[50%] h-full bg-gradient-to-r from-black/80 to-transparent z-20"></div>
 
                             <!-- Overlay Teks -->
-                            <div class="absolute top-1/2 left-10 transform -translate-y-1/2 text-white z-30">
+                            <div class="absolute top-1/2 left-6 md:left-12 transform -translate-y-1/2 text-white z-30">
                                 @if ($index == 0)
-                                    <h1 class="text-4xl font-bold">SELAMAT DATANG DI SMK ICB</h1>
-                                    <p class="text-lg mt-2">Pusat pendidikan kejuruan yang unggul.</p>
+                                    <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight drop-shadow-lg">SELAMAT DATANG DI SMK ICB</h1>
+                                    <p class="text-lg md:text-xl mt-3 font-light text-gray-200">Pusat pendidikan kejuruan yang unggul.</p>
                                 @endif
                                 <!-- Anda dapat menambahkan teks berbeda untuk slide lain di sini -->
                             </div>
@@ -49,148 +48,158 @@
                     }, 5000);
                 });
             </script>
-
         </section>
 
         <!-- Welcome Section with Small Image -->
-        <div class="flex flex-col md:flex-row items-center bg-gray-100 text-gray-800 p-6 mb-10 shadow-lg rounded-lg">
-            <div class="md:w-1/3 w-full mb-4 md:mb-0">
-                <img src="{{ asset('smk_icb_ct.jpeg') }}" alt="Gambar Sambutan"
-                    class="w-full h-auto object-cover rounded-lg shadow-md">
-            </div>
-            <div class="md:w-2/3 w-full md:pl-6">
-                <h2 class="text-2xl md:text-3xl font-semibold mt-3 text-center md:text-left">Selamat Datang di SMK ICB Cinta
-                    Teknika</h2>
-                <!-- Garis Bawah -->
-                <div class="w-1/2 h-1 bg-blue-600 mt-2 mb-4 mx-auto md:mx-0"></div>
-                <p class="mt-4 text-base md:text-lg text-center md:text-left">
-                    Kami adalah sekolah yang berkomitmen untuk memberikan pendidikan terbaik di bidang teknik. Di SMK ICB
-                    Cinta Teknika, siswa-siswa kami dibekali dengan pengetahuan dan keterampilan praktis yang akan
-                    mempersiapkan mereka untuk menjadi profesional di dunia industri. Bergabunglah dengan kami dan jadilah
-                    bagian dari masa depan teknologi.
-                </p>
+        <div class="container mb-12">
+            <div class="flex flex-col md:flex-row items-center bg-white p-8 md:p-12 shadow-xl hover-card rounded-2xl border border-gray-100" data-aos="fade-up">
+                <div class="md:w-5/12 w-full mb-6 md:mb-0 md:pr-8">
+                    <div class="overflow-hidden rounded-xl shadow-lg">
+                        <img src="{{ asset('bghome.png') }}" alt="Gambar Sambutan"
+                            class="w-full h-auto object-cover transform hover:scale-105 transition duration-500" loading="lazy">
+                    </div>
+                </div>
+                <div class="md:w-7/12 w-full">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center md:text-left tracking-tight">Selamat Datang di SMK ICB Cinta Teknika</h2>
+                    <!-- Garis Bawah -->
+                    <div class="w-20 h-1.5 bg-blue-600 mt-4 mb-6 mx-auto md:mx-0 rounded-full"></div>
+                    <p class="text-gray-600 text-lg leading-relaxed text-center md:text-left">
+                        Kami adalah sekolah yang berkomitmen untuk memberikan pendidikan terbaik di bidang teknik. Di SMK ICB
+                        Cinta Teknika, siswa-siswa kami dibekali dengan pengetahuan dan keterampilan praktis yang akan
+                        mempersiapkan mereka untuk menjadi profesional di dunia industri. Bergabunglah dengan kami dan jadilah
+                        bagian dari masa depan teknologi.
+                    </p>
+                </div>
             </div>
         </div>
 
         <!-- Container untuk Artikel dan Kontak Sekolah -->
-        <div class="container py-4">
+        <div class="container py-8">
             <div class="row">
 
                 <!-- Left Section: Daftar Artikel (70%) -->
-                <div class="col-md-8 order-1 order-md-1 mb-4 left-section">
-                    <div class="text-center">
-                        <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold">Artikel Terbaru</h1>
-                        <p class="text-muted mb-4">Berikut adalah beberapa artikel terbaru untuk Anda.</p>
+                <div class="col-lg-8 order-2 order-lg-1 mb-5 left-section" id="artikel-container" data-ajax-container>
+                    <div class="mb-5" data-aos="fade-right">
+                        <h2 class="text-3xl font-bold text-gray-800 border-l-4 border-blue-600 pl-3">Artikel Terbaru</h2>
+                        <p class="text-gray-500 mt-2">Berikut adalah beberapa artikel terbaru untuk Anda.</p>
                     </div>
-                    <ul class="list-group list-group-flush">
+                    
+                    <div class="space-y-6">
                         @if ($artikel->isEmpty())
-                            <p>Tidak ada artikel tersedia.</p>
+                            <p class="text-gray-500 italic">Tidak ada artikel tersedia.</p>
                         @else
                             @foreach ($artikel as $item)
-                                <li class="list-group-item">
-                                    <div class="d-flex flex-column flex-md-row align-items-start">
-                                        <!-- Gambar Artikel -->
-                                        <div class="flex-shrink-0 mb-3 mb-md-0 me-md-3 text-center">
-                                            <img src="{{ $item->gambar !== null ? asset('storage/' . $item->gambar) : asset('foto_artikel.jpg') }}"
-                                                alt="Gambar Artikel" class="img-thumbnail" style="width:250px;">
+                                <div class="bg-white rounded-xl shadow-md hover-card overflow-hidden border border-gray-100 flex flex-col sm:flex-row" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                                    <!-- Gambar Artikel -->
+                                    <div class="sm:w-1/3 h-48 sm:h-auto overflow-hidden relative">
+                                        <img src="{{ $item->gambar !== null ? asset('storage/' . $item->gambar) : asset('foto_artikel.jpg') }}"
+                                            alt="{{ $item->judul }}" class="w-full h-full object-cover transition duration-500 hover:scale-110" loading="lazy">
+                                    </div>
+                                    <!-- Judul dan Deskripsi Artikel -->
+                                    <div class="p-5 sm:w-2/3 flex flex-col justify-between">
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800 hover:text-blue-600 transition-colors mb-2">
+                                                <a href="{{ route('artikel.show', $item->id) }}" class="text-decoration-none text-inherit">
+                                                    {{ $item->judul }}
+                                                </a>
+                                            </h3>
+                                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                                {{ \Illuminate\Support\Str::limit($item->deskripsi, 120) }}
+                                            </p>
                                         </div>
-                                        <!-- Judul dan Deskripsi Artikel -->
-                                        <div class="ml-2">
-                                            <div class="flex-grow-1">
-                                                <h3 class="text-primary mb-1 text-left text-md-start">
-                                                    <a href="{{ route('artikel.show', $item->id) }}"
-                                                        class="text-decoration-none text-black">
-                                                        {{ $item->judul }}
-                                                    </a>
-                                                </h3>
-                                                <p class="text-muted mb-2 text-left text-md-start">
-                                                    {{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}
-                                                </p>
-                                                <div class="text-left text-md-start">
-                                                    <a href="{{ route('artikel.show', $item->id) }}"
-                                                        class="btn btn-primary btn-sm">
-                                                        Baca Selengkapnya
-                                                    </a>
-                                                </div>
-                                                <div class="text-secondary text-left text-md-start mt-2">
-                                                    <small>Penulis: {{ $item->penulis }}</small><br>
-                                                    <small>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
-                                                    <small class="text-secondary"> Dilihat: {{ $item->views }} kali</small>
-                                                </div>
+                                        <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+                                            <div class="text-xs text-gray-500 flex flex-col">
+                                                <span><i class="fas fa-user-edit mr-1"></i> {{ $item->penulis }}</span>
+                                                <span class="mt-1"><i class="far fa-calendar-alt mr-1"></i> {{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }} &bull; <i class="fas fa-eye ml-1 mr-1"></i> {{ $item->views }}</span>
                                             </div>
+                                            <a href="{{ route('artikel.show', $item->id) }}" class="btn btn-sm btn-outline-primary rounded-full px-4 font-semibold hover:bg-blue-600 hover:text-white transition-colors">
+                                                Baca
+                                            </a>
                                         </div>
                                     </div>
-                                </li>
+                                </div>
                             @endforeach
                         @endif
-                    </ul>
+                    </div>
                     <!-- Pagination -->
-                    <div class="d-flex justify-content mt-4">
+                    <div class="d-flex justify-content-center mt-8">
                         {{ $artikel->appends(['artikel_page' => request('artikel_page')])->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
 
                 <!-- Right Section: Sapaan Sekolah (30%) di atas artikel untuk perangkat kecil -->
-                <div class="col-md-4 order-2 order-md-2 right-section">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="text-primary font-weight-bold text-center">
-                                SAPAAN KEPALA SEKOLAH
-                            </h3>
-                            <div class="card mx-auto mt-3 mb-3" style="width: 200px; height: 200px;">
+                <div class="col-lg-4 order-1 order-lg-2 mb-5 right-section" data-aos="fade-left">
+                    <div class="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden sticky-top" style="top: 100px; z-index: 10;">
+                        <!-- Bagian Header Biru -->
+                        <div class="bg-blue-600 text-white text-center py-4">
+                            <h3 class="font-bold text-lg m-0 tracking-wide">SAPAAN KEPALA SEKOLAH</h3>
+                        </div>
+                        <div class="p-5">
+                            <div class="w-32 h-32 mx-auto mb-4 overflow-hidden rounded-full border-4 border-white shadow-md">
                                 <img id="sapaan-img" src="{{ asset('kepsex.jpg') }}" alt="Foto Kepala Sekolah"
-                                    class="card-img-top" style="width: 100%; height: 100%; object-fit: cover;">
+                                    class="w-full h-full object-cover" loading="lazy">
                             </div>
-                            <p id="sapaan_text" class="text-center">
+                            <p id="sapaan_text" class="text-center text-gray-600 italic text-sm leading-relaxed mb-6">
                             </p>
 
-                            <!-- Polling -->
-                            <h5 class="text-blue font-bold mt-10"> POLLING SEKOLAH </h5>
-                            <h3 id="fallbackPolling">Polling Tidak Tersedia</h3>
-                            @if ($masterPolling !== null)
-                                <div id="pollingSection">
-                                    <h1 class="mt-1">{{ $masterPolling->nama_polling }}</h1>
-                                    <div class="container mt-3" id="hasilVote" style="display: none;">
-                                        <p><strong>{{ $listPilihan[0]->option }}</strong>: <span
-                                                id="bagusPercentage">0%</span></p>
-                                        <div class="progress mb-3">
-                                            <div class="progress-bar bg-success" role="progressbar" id="bagusProgress"
-                                                style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                            </div>
-                                        </div>
-                                        <p><strong>{{ $listPilihan[1]->option }}</strong>: <span
-                                                id="kurangBagusPercentage">0%</span></p>
-                                        <div class="progress mb-3">
-                                            <div class="progress-bar bg-warning" role="progressbar" id="kurangBagusProgress"
-                                                style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                            </div>
-                                        </div>
-                                        <p><strong>{{ $listPilihan[2]->option }}</strong>: <span
-                                                id="burukPercentage">0%</span></p>
-                                        <div class="progress mb-3">
-                                            <div class="progress-bar bg-danger" role="progressbar" id="burukProgress"
-                                                style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <form action="{{ route('vote.store') }}" method="post" class="mt-2"
-                                        id="formPoll">
-                                        @csrf
-                                        <input type="hidden" name="id_polling" value="{{ $masterPolling->id }}">
-                                        @foreach ($listPilihan as $pilihanVote)
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="pilihan"
-                                                    id="{{ $pilihanVote->option }}" value="{{ $pilihanVote->id }}">
-                                                <label class="form-check-label" for="{{ $pilihanVote->option }}">
-                                                    {{ $pilihanVote->option }}
-                                                </label>
-                                            </div>
-                                        @endforeach
+                            <hr class="border-gray-200 mb-6">
 
-                                        <button type="submit" class="btn btn-primary mt-2">Kirim</button>
-                                    </form>
-                                </div>
-                            @endif
+                            <!-- Polling -->
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
+                                <h5 class="text-blue-600 font-bold mb-3 flex items-center"><i class="fas fa-poll mr-2"></i> POLLING SEKOLAH</h5>
+                                <h6 id="fallbackPolling" class="text-sm text-gray-500 italic">Polling Tidak Tersedia</h6>
+                                @if ($masterPolling !== null)
+                                    <div id="pollingSection">
+                                        <p class="font-semibold text-gray-800 text-sm mb-3">{{ $masterPolling->nama_polling }}</p>
+                                        <div id="hasilVote" style="display: none;" class="space-y-3">
+                                            <div>
+                                                <div class="flex justify-between text-xs mb-1">
+                                                    <span class="font-medium text-gray-700">{{ $listPilihan[0]->option }}</span>
+                                                    <span id="bagusPercentage" class="font-bold text-green-600">0%</span>
+                                                </div>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-success rounded-full" role="progressbar" id="bagusProgress"
+                                                        style="width: 0%"></div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="flex justify-between text-xs mb-1">
+                                                    <span class="font-medium text-gray-700">{{ $listPilihan[1]->option }}</span>
+                                                    <span id="kurangBagusPercentage" class="font-bold text-yellow-500">0%</span>
+                                                </div>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-warning rounded-full" role="progressbar" id="kurangBagusProgress"
+                                                        style="width: 0%"></div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="flex justify-between text-xs mb-1">
+                                                    <span class="font-medium text-gray-700">{{ $listPilihan[2]->option }}</span>
+                                                    <span id="burukPercentage" class="font-bold text-red-500">0%</span>
+                                                </div>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-danger rounded-full" role="progressbar" id="burukProgress"
+                                                        style="width: 0%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <form action="{{ route('vote.store') }}" method="post" class="mt-3" id="formPoll">
+                                            @csrf
+                                            <input type="hidden" name="id_polling" value="{{ $masterPolling->id }}">
+                                            <div class="space-y-2 mb-3">
+                                                @foreach ($listPilihan as $pilihanVote)
+                                                    <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-100 transition-colors">
+                                                        <input type="radio" name="pilihan" class="form-radio text-blue-600 h-4 w-4" value="{{ $pilihanVote->id }}">
+                                                        <span class="text-sm text-gray-700">{{ $pilihanVote->option }}</span>
+                                                    </label>
+                                                @endforeach
+                                            </div>
+                                            <button type="submit" class="w-full btn btn-primary py-2 text-sm font-bold tracking-wide rounded-md">Kirim Suara</button>
+                                        </form>
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -200,99 +209,107 @@
 
 
         <!-- Berita Section -->
-        <div class="container py-4">
-            <div class="row">
-                <!-- Left Section: Daftar Berita (70%) -->
-                <div class="col-md-8 mb-4">
-                    <div class="text-center">
-                        <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold">Berita Sekolah</h1>
-                        <p class="text-muted mb-4">Berikut adalah berita terbaru dari sekolah.</p>
-                    </div>
-                    <div class="d-flex flex-column">
-                        @foreach ($berita as $item)
-                            <div class="d-flex flex-column flex-md-row py-3 border-bottom">
-                                <!-- Card untuk gambar -->
-                                <div class="flex-shrink-0 mb-3 mb-md-0 me-md-3 text-center">
-                                    <img src="{{ $item->gambar !== null ? asset('storage/' . $item->gambar) : asset('foto_berita.jpg') }}"
-                                        alt="Gambar Berita" class="img-thumbnail" style="object-fit:scale-down;">
-                                </div>
-
-                                <!-- Konten Berita -->
-                                <div class="ml-2">
-                                    <div class="flex-grow-1">
-                                        <h3 class="text-primary mb-2 text-left text-md-start">
-                                            <a href="{{ route('berita.show', $item->id) }}"
-                                                class="text-decoration-none text-black">
+        <div class="bg-white py-12 shadow-sm border-t border-b border-gray-100">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <!-- Left Section: Daftar Berita (80%) -->
+                    <div class="col-lg-10 mb-4" id="berita-container" data-ajax-container>
+                        <div class="text-center mb-10" data-aos="fade-up">
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Berita Sekolah</h2>
+                            <div class="w-16 h-1 bg-blue-600 mx-auto mt-3 rounded-full"></div>
+                            <p class="text-gray-500 mt-3">Informasi dan berita terbaru seputar kegiatan di lingkungan sekolah.</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            @foreach ($berita as $item)
+                                <div class="bg-white rounded-xl shadow-md hover-card overflow-hidden border border-gray-100 flex flex-col h-full" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                                    <div class="h-48 overflow-hidden relative bg-gray-50 flex items-center justify-center border-b border-gray-100">
+                                        <img src="{{ $item->gambar !== null ? asset('storage/' . $item->gambar) : asset('foto_berita.jpg') }}"
+                                            alt="{{ $item->judul }}" class="w-full h-full object-contain p-2 transition duration-500 hover:scale-105" loading="lazy">
+                                    </div>
+                                    <div class="p-5 flex-grow flex flex-col">
+                                        <h3 class="text-xl font-bold text-gray-800 hover:text-blue-600 transition-colors mb-2">
+                                            <a href="{{ route('berita.show', $item->id) }}" class="text-decoration-none text-inherit">
                                                 {{ $item->judul }}
                                             </a>
                                         </h3>
-                                        <p class="text-muted mb-2 text-left text-md-start">
-                                            {{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}
-                                        </p>
-                                        <div class="text-secondary text-left text-md-start">
-                                            <small>Penulis: {{ $item->penulis ?? 'Anonim' }}</small>
-                                            <br>
-                                            <small>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</small>
-                                            |
-                                            <small> Dilihat: {{ $item->views }} kali</small>
+                                        <div class="text-xs text-blue-600 font-semibold mb-3">
+                                            <i class="far fa-calendar-alt mr-1"></i> {{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}
                                         </div>
-                                        <div class="text-left text-md-start mt-3">
-                                            <a href="{{ route('berita.show', $item->id) }}" class="btn btn-primary">
-                                                Lihat Selengkapnya
-                                            </a>
+                                        <p class="text-gray-600 text-sm leading-relaxed mb-4 flex-grow">
+                                            {{ \Illuminate\Support\Str::limit($item->deskripsi, 120) }}
+                                        </p>
+                                        <div class="mt-auto border-t border-gray-100 pt-3 flex justify-between items-center">
+                                            <span class="text-xs text-gray-500"><i class="fas fa-eye mr-1"></i> {{ $item->views }} views</span>
+                                            <a href="{{ route('berita.show', $item->id) }}" class="text-sm font-semibold text-blue-600 hover:text-blue-800">Baca <i class="fas fa-arrow-right ml-1"></i></a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
-                    </div>
+                            @endforeach
+                        </div>
 
-                    <!-- Pagination -->
-                    <div class="d-flex justify-content mt-4">
-                        {{ $berita->appends(['berita_page' => request('berita_page')])->links('pagination::bootstrap-4') }}
+                        <!-- Pagination -->
+                        <div class="d-flex justify-content-center mt-10">
+                            {{ $berita->appends(['berita_page' => request('berita_page')])->links('pagination::bootstrap-4') }}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Bagian Galeri -->
-        <div class="w-full mt-10">
-            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Galeri</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-10">
-                @foreach ($gambarGaleri as $gambar)
-                    <section class="bg-white text-black shadow-xl overflow-hidden">
-                        <div class="p-2">
-                            <img src="{{ asset('storage/' . $gambar->filename) }}" alt="Galeri Gambar"
-                                class="w-full h-64 object-contain rounded-lg">
+        <div class="container mt-12 mb-10">
+            <div class="text-center mb-8" data-aos="zoom-in">
+                <h2 class="text-3xl font-bold text-gray-800">Galeri Kegiatan</h2>
+                <div class="w-16 h-1 bg-blue-600 mx-auto mt-3 rounded-full"></div>
+            </div>
+            
+            <div id="galeri-container" data-ajax-container>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 relative">
+                    <!-- Loading overlay yang akan aktif saat fetching -->
+                    <div id="galeri-loading" class="absolute inset-0 bg-white/60 z-10 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+                        <div class="spinner-border text-blue-500" role="status">
+                            <span class="sr-only">Loading...</span>
                         </div>
-                    </section>
-                @endforeach
-                <div class="d-flex justify-content mt-4">
+                    </div>
+                    
+                    @foreach ($gambarGaleri as $gambar)
+                        <div class="bg-white rounded-xl shadow-sm hover-card overflow-hidden group border border-gray-100" data-aos="zoom-in" data-aos-delay="{{ $loop->index * 50 }}">
+                            <div class="relative h-48 md:h-56 bg-gray-100 flex items-center justify-center">
+                                <img src="{{ asset('storage/' . $gambar->filename) }}" alt="Galeri Gambar"
+                                    class="w-full h-full object-contain p-2 transition duration-500 group-hover:scale-110" loading="lazy">
+                                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition duration-300 flex items-center justify-center pointer-events-none">
+                                    <i class="fas fa-search-plus text-white opacity-0 group-hover:opacity-100 text-3xl transform scale-50 group-hover:scale-100 transition duration-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="d-flex justify-content-center mt-8">
                     {{ $gambarGaleri->appends(['galeri_page' => request('galeri_page')])->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>
 
         <!-- Embedded YouTube Videos Section -->
-        <div class="w-full mt-10">
-            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Activity Oncam</h3>
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="container mt-12 mb-16">
+            <div class="text-center mb-8" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800">Activity Oncam</h2>
+                <div class="w-16 h-1 bg-red-600 mx-auto mt-3 rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="oncam-container" data-ajax-container>
                 @foreach ($oncams as $oncam)
-                    <div class="rounded-lg overflow-hidden shadow-lg">
-                        <iframe width="100%" height="315" src="{{ $oncam->embed_link }}" title="Oncam Video"
-                            allowfullscreen>
+                    <div class="rounded-xl overflow-hidden shadow-lg hover-card bg-black" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                        <iframe width="100%" height="250" src="{{ $oncam->embed_link }}" title="Oncam Video"
+                            class="w-full" allowfullscreen loading="lazy">
                         </iframe>
                     </div>
                 @endforeach
             </div>
 
             <!-- Pagination -->
-            <div class="d-flex justify-content-center mt-4">
-                {{ $oncams->appends([
-                        'berita_page' => request('berita_page'),
-                        'artikel_page' => request('artikel_page'),
-                        'galeri_page' => request('galeri_page'),
-                    ])->links('pagination::bootstrap-4') }}
+            <div class="d-flex justify-content-center mt-8">
+                {{ $oncams->appends(['oncam_page' => request('oncam_page')])->links('pagination::bootstrap-4') }}
             </div>
         </div>
         <script>

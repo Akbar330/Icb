@@ -35,6 +35,7 @@
             <div class="mb-4">
                 <label for="gambar" class="block text-gray-700 font-semibold">Gambar (Opsional)</label>
                 <input type="file" name="gambar" id="gambar" class="w-full p-2 border border-gray-300 rounded mt-1">
+                <p class="text-xs text-blue-600 mt-2 font-medium"><i class="fas fa-info-circle mr-1"></i> Resolusi disarankan: 800x800 (Persegi) atau 600x800 (Potret). Maks 2MB.</p>
                 @error('gambar')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror

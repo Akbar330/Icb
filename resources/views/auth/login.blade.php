@@ -1,109 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9fafb;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .login-container {
-            max-width: 400px;
-            width: 100%;
-            background-color: #ffffff;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .login-container h1 {
-            font-size: 1.875rem;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        .form-group label {
-            display: block;
-            color: #4a5568;
-            margin-bottom: 0.5rem;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.375rem;
-            outline: none;
-        }
-        .form-group input:focus {
-            border-color: #3182ce;
-            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
-        }
-        .form-group .error-message {
-            color: #e53e3e;
-            font-size: 0.875rem;
-            margin-top: 0.5rem;
-        }
-        .btn-login {
-            width: 100%;
-            background-color: #3182ce;
-            color: #ffffff;
-            padding: 0.75rem;
-            border-radius: 0.375rem;
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .btn-login:hover {
-            background-color: #2c5282;
-        }
-        .forgot-password {
-            text-align: center;
-            margin-top: 1rem;
-        }
-        .forgot-password a {
-            color: #3182ce;
-            text-decoration: none;
-        }
-        .forgot-password a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-    <div class="login-container">
-        <h1>SILAHKAN LOGIN!</h1>
-
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" value="{{ old('email') }}" required>
-                @error('email')
-                    <div class="error-message">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" required>
-                @error('password')
-                    <div class="error-message">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <button type="submit" class="btn-login">Login</button>
-        </form>
+<x-guest-layout>
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Selamat Datang</h1>
+        <p class="text-gray-500 mt-2 text-sm font-medium">Silakan masuk ke akun admin Anda</p>
     </div>
-</body>
-</html>
+
+    <!-- Session Status -->
+    <x-auth-session-status class="mb-4" :status="session('status')" />
+
+    <form method="POST" action="{{ route('login') }}" class="space-y-6">
+        @csrf
+
+        <!-- Email Input -->
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <i class="fas fa-envelope text-gray-400"></i>
+                </div>
+                <input type="email" name="email" id="email" value="{{ old('email') }}" required autofocus
+                       class="block w-full pl-11 pr-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                       placeholder="admin@example.com">
+            </div>
+            @error('email')
+                <p class="text-red-500 text-xs font-medium mt-2 ml-1"><i class="fas fa-exclamation-circle mr-1"></i> {{ $message }}</p>
+            @enderror
+        </div>
+
+        <!-- Password Input -->
+        <div>
+            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <i class="fas fa-key text-gray-400"></i>
+                </div>
+                <input type="password" name="password" id="password" required
+                       class="block w-full pl-11 pr-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                       placeholder="••••••••">
+            </div>
+            @error('password')
+                <p class="text-red-500 text-xs font-medium mt-2 ml-1"><i class="fas fa-exclamation-circle mr-1"></i> {{ $message }}</p>
+            @enderror
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" 
+                class="w-full flex justify-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transform hover:-translate-y-0.5 transition-all duration-200">
+            Masuk Sekarang
+            <i class="fas fa-arrow-right ml-2 mt-0.5"></i>
+        </button>
+        
+        <!-- Back to Home -->
+        <div class="text-center mt-6">
+            <a href="/" class="text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors duration-200">
+                <i class="fas fa-arrow-left mr-1"></i> Kembali ke Beranda
+            </a>
+        </div>
+    </form>
+</x-guest-layout>

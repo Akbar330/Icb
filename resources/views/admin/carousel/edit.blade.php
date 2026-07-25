@@ -17,6 +17,7 @@
 
         <label for="image">Image:</label>
         <input type="file" id="image" name="image" accept="image/*" class="border px-4 py-2 rounded-lg">
+        <p class="text-xs text-blue-600 mt-2 font-medium"><i class="fas fa-info-circle mr-1"></i> Resolusi disarankan: 1920x1080 (16:9). Maks 2MB.</p>
         <br><br>
 
         <button type="submit" class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg">Update Carousel</button>

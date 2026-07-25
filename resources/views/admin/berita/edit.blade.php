@@ -44,6 +44,7 @@
                     <label for="gambar" class="block text-gray-700 font-semibold">Gambar Cover</label>
                     <input type="file" id="gambar" name="gambar" class="w-full p-2 border border-gray-300 rounded mt-1"
                         accept="image/*">
+                    <p class="text-xs text-blue-600 mt-2 font-medium"><i class="fas fa-info-circle mr-1"></i> Resolusi disarankan: 1280x720 (16:9). Maks 2MB.</p>
                     @error('gambar')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror

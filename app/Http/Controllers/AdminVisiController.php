@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\visi;
+use App\Models\Visi;
 
 use Illuminate\Http\Request;
 
@@ -9,7 +9,7 @@ class AdminVisiController extends Controller
 {
     //
     public function index() {
-        $visis = visi::all();
+        $visis = Visi::all();
         return view('admin.visi.index', compact('visis'));
     }
 
@@ -27,19 +27,19 @@ class AdminVisiController extends Controller
 
         $data = $request->only(['visi', 'misi', 'tujuan']);
 
-        visi::create($data);
+        Visi::create($data);
 
         return redirect()->route('admin.visi.index')->with('success', 'visi berhasil ditambahkan.');
     }
 
     // Menampilkan form untuk mengedit visi yang ada
-    public function edit(visi $visi)
+    public function edit(Visi $visi)
     {
         return view('admin.visi.edit', compact('visi'));
     }
 
     // Memperbarui visi yang sudah ada
-    public function update(Request $request, visi $visi)
+    public function update(Request $request, Visi $visi)
     {
         $request->validate([
             'visi' => 'required|string',
@@ -55,7 +55,7 @@ class AdminVisiController extends Controller
     }
 
     // Menghapus visi dari database
-    public function destroy(visi $visi)
+    public function destroy(Visi $visi)
     {
 
         $visi->delete();

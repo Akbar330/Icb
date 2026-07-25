@@ -4,12 +4,18 @@
 
 @section('content')
 
-<div class="container mt-5">
-    <div class="text-2xl font-bold text-blue-700 leading-tight mb-4">
-        <h3>PENERIMAAN SISWA BARU SMK ICB CINTA TEKNIKA KOTA BANDUNG TAHUN AKADEMIK 2024/2025</h3>
+<div class="container mx-auto px-4 py-12">
+    <div class="text-center mb-10">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 leading-tight">
+            Penerimaan Siswa Baru
+        </h1>
+        <h2 class="text-xl md:text-2xl font-semibold text-blue-600 mt-2">
+            SMK ICB Cinta Teknika Kota Bandung<br>
+            Tahun Akademik 2024/2025
+        </h2>
+        <div class="w-20 h-1.5 bg-blue-600 mx-auto mt-4 rounded-full"></div>
     </div>
 
-    <h1 class="text-center mt-4 font-bold text-blue-700">Formulir Pendaftaran</h1>
     <!-- Alert jika pendaftaran berhasil -->
     @if(session('success'))
         <div class="alert alert-success mt-4">
@@ -17,7 +23,8 @@
         </div>
     @endif
 
-    <form action="{{ route('pendaftaran.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+    <div class="max-w-4xl mx-auto bg-white p-8 md:p-10 rounded-2xl shadow-lg border border-gray-100 hover-card">
+        <form action="{{ route('pendaftaran.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
         @csrf
 
         <!-- Data Siswa -->
@@ -28,17 +35,35 @@
             </div>
         </div>
 
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="alamat">Alamat</label>
-                <textarea class="form-control" id="alamat" name="alamat" required></textarea>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="ttl">Tanggal Lahir</label>
-                <input type="date" class="form-control" id="ttl" name="ttl" required>
-            </div>
-        </div>
-
+        <!--<div class="form-row">-->
+        <!--    <div class="form-group col-md-6">-->
+        <!--        <label for="alamat">Alamat</label>-->
+        <!--        <textarea class="form-control" id="alamat" name="alamat" required></textarea>-->
+        <!--    </div>-->
+        <!--    <div class="form-group col-md-6">-->
+        <!--        <label for="tempat_lahir">Tempat Lahir</label>-->
+        <!--        <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" required>-->
+        <!--    </div>-->
+        <!--</div>-->
+        <!--   <div class="form-group col-md-6">-->
+        <!--        <label for="ttl">Tanggal Lahir</label>-->
+        <!--        <input type="date" class="form-control" id="ttl" name="ttl" required>-->
+        <!--    </div>-->
+        <!--</div>-->
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label for="alamat">Alamat</label>
+        <textarea class="form-control" id="alamat" name="alamat" required></textarea>
+    </div>
+    <div class="form-group col-md-6">
+        <label for="tempat_lahir">Tempat Lahir</label>
+        <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" required>
+    </div>
+</div>
+    <div class="form-group">
+        <label for="ttl">Tanggal Lahir</label>
+        <input type="date" class="form-control" id="ttl" name="ttl" required>
+    </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="jenis_kelamin">Jenis Kelamin</label>
@@ -157,8 +182,11 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Daftar</button>
+        <div class="text-center mt-8">
+            <button type="submit" class="btn btn-primary btn-lg rounded-full px-10 font-bold hover:shadow-lg transition-shadow">Kirim Pendaftaran</button>
+        </div>
     </form>
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

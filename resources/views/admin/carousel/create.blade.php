@@ -31,6 +31,7 @@
 
         <label for="image">Image:</label>
         <input type="file" id="image" name="image" accept="image/*" required>
+        <p class="text-xs text-blue-600 mt-2 font-medium"><i class="fas fa-info-circle mr-1"></i> Resolusi disarankan: 1920x1080 (16:9). Maks 2MB.</p>
         <br><br>
 
         <button type="submit" class="btn btn-primary">Create Carousel</button>

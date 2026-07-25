@@ -144,7 +144,7 @@
         </div>
         <h2>Barang Siapa Yang Menemukan Ini berarti kamu udah tersesat :P</h2>
         <a href="/" class="home-btn">Kembali Ke Jalan Yang Benar</a>
-        <a href="https://ghdbh.hikji.org/" class="contact-btn">Buka GHDBH.org</a>
+        <a href="https://ghdbh.smkicb-teknika.sch.id/" class="contact-btn">Buka GHDBH</a>
     </div>
 </div>
 

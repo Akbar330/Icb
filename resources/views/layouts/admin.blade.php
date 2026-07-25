@@ -1,175 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'SMK ICB CT')</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    @vite(['resources/js/app.js'])
+    <title>@yield('title', 'Admin Dashboard - SMK ICB CT')</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Tailwind CSS (via Vite) -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F9FAFB;
-            color: #333;
-            margin-top: 60px;
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            transition: transform 0.3s ease-in-out;
+            width: 260px;
         }
-
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: white;
-            z-index: 1000;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 5px 0;
+        .sidebar-link {
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
         }
-
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .sidebar-link:hover, .sidebar-link.active {
+            background-color: #1e3a8a; /* blue-900 */
+            border-left-color: #60a5fa; /* blue-400 */
         }
-
-        nav .navbar-collapse {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            padding: 6px 10px;
-            text-transform: uppercase;
-            font-weight: 500;
-            color: black;
-            font-size: 0.75rem;
-            transition: color 0.3s, border-bottom 0.3s;
-        }
-
-        nav a:hover,
-        nav a.active {
-            color: #000000;
-            border-bottom: 2px solid #000000;
-        }
-
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            nav .navbar-toggler {
-                display: inline-block;
-            }
-
-            nav a {
-                display: block;
-                padding: 8px 10px;
-            }
-
-            nav .navbar-collapse {
-                background-color: white;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                padding: 10px;
-                display: none;
-            }
-
-            nav .navbar-collapse.show {
-                display: block;
-            }
-        }
-
-        @media (min-width: 769px) {
-            nav .navbar-toggler {
-                display: none;
-            }
-
-            nav .navbar-collapse {
-                display: flex;
-                justify-content: space-between;
-            }
-
-            nav a {
-                padding: 6px 12px;
-            }
+            .sidebar { transform: translateX(-100%); position: fixed; z-index: 50; }
+            .sidebar.open { transform: translateX(0); }
+            .content-area { margin-left: 0 !important; }
+            .overlay { display: none; }
+            .overlay.open { display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 40; }
         }
     </style>
 </head>
+<body class="text-gray-800 antialiased overflow-x-hidden flex h-screen">
 
-<body>
-    <!-- Header with Navigation -->
-    <header>
-        <div class="container mx-auto px-4 flex items-center justify-between">
-            <div class="flex items-center space-x-4">
-                <img src="{{ asset('icb.png') }}" alt="Logo" class="h-12 w-auto">
+    <!-- Mobile Overlay -->
+    <div id="sidebarOverlay" class="overlay"></div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar bg-blue-800 text-white flex-shrink-0 h-full overflow-y-auto z-50 md:relative fixed">
+        <div class="p-5 flex items-center justify-between border-b border-blue-700">
+            <div class="flex items-center space-x-3">
+                <img src="{{ asset('icb.png') }}" alt="Logo" class="h-10 w-10 bg-white rounded-full p-1">
                 <div>
-                    <h1>ADMIN DASHBOARD SMK ICB CINTA TEKNIKA</h1>
-                    <p>Admin Page</p>
+                    <h2 class="text-sm font-bold tracking-wider">SMK ICB CT</h2>
+                    <p class="text-xs text-blue-300">Admin Panel</p>
                 </div>
             </div>
-            <nav class="navbar">
-                <button class="navbar-toggler" type="button">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="navbar-collapse" id="navbarNav">
-                    <a href="/admin" class="{{ request()->is('admin') ? 'active' : '' }}">Home</a>
-                    <a href="/admin/artikel" class="{{ request()->is('admin/artikel') ? 'active' : '' }}">Artikel</a>
-                    <a href="/admin/berita" class="{{ request()->is('admin/berita') ? 'active' : '' }}">Berita</a>
-                    <a href="/admin/galeri" class="{{ request()->is('admin/galeri') ? 'active' : '' }}">Galeri</a>
-                    <a href="/admin/informasi" class="{{ request()->is('admin/informasi') ? 'active' : '' }}">Informasi</a>
-                    <a href="/admin/carousel" class="{{ request()->is('admin/carousel') ? 'active' : '' }}">Banner</a>
-                    <a href="/admin/oncam" class="{{ request()->is('admin/oncam') ? 'active' : '' }}">Youtube</a>
-                    <a href="/admin/sapaan" class="{{ request()->is('admin/sapaan') ? 'active' : '' }}">Sapaan</a>
-                    <a href="/admin/pendaftaran" class="{{ request()->is('admin/pendaftaran') ? 'active' : '' }}">PPDB</a>
-                    <a href="/admin/biaya" class="{{ request()->is('admin/biaya') ? 'active' : '' }}">Biaya</a>
-                    <a href="/admin/pengguna" class="{{ request()->is('admin/pengguna') ? 'active' : '' }}">User</a>
-                    <a href="/admin/visi" class="{{ request()->is('admin/visi') ? 'active' : '' }}">Visi-Misi</a>
-                    <a href="/admin/polling" class="{{ request()->is('admin/polling') ? 'active' : '' }}">Polling</a>
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="text-black hover:text-gray-600 flex items-center space-x-2 font-bold">
-                            Logout
-                        </button>
-                    </form>
+            <!-- Mobile Close Button -->
+            <button id="closeSidebar" class="md:hidden text-blue-200 hover:text-white">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+
+        <nav class="mt-5 mb-10">
+            <p class="px-5 text-xs font-semibold text-blue-300 uppercase tracking-wider mb-2">Menu Utama</p>
+            <ul class="space-y-1">
+                <li><a href="/admin" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin') ? 'active' : '' }}"><i class="fas fa-tachometer-alt w-6 text-center mr-2"></i> Dashboard</a></li>
+                <li><a href="/admin/artikel" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/artikel*') ? 'active' : '' }}"><i class="fas fa-newspaper w-6 text-center mr-2"></i> Artikel</a></li>
+                <li><a href="/admin/berita" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/berita*') ? 'active' : '' }}"><i class="fas fa-bullhorn w-6 text-center mr-2"></i> Berita</a></li>
+                <li><a href="/admin/informasi" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/informasi*') ? 'active' : '' }}"><i class="fas fa-info-circle w-6 text-center mr-2"></i> Informasi</a></li>
+                <li><a href="/admin/galeri" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/galeri*') ? 'active' : '' }}"><i class="fas fa-images w-6 text-center mr-2"></i> Galeri</a></li>
+            </ul>
+
+            <p class="px-5 text-xs font-semibold text-blue-300 uppercase tracking-wider mt-6 mb-2">Konten Spesifik</p>
+            <ul class="space-y-1">
+                <li><a href="/admin/carousel" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/carousel*') ? 'active' : '' }}"><i class="fas fa-image w-6 text-center mr-2"></i> Banner (Carousel)</a></li>
+                <li><a href="/admin/oncam" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/oncam*') ? 'active' : '' }}"><i class="fab fa-youtube w-6 text-center mr-2"></i> Video YouTube</a></li>
+                <li><a href="/admin/sapaan" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/sapaan*') ? 'active' : '' }}"><i class="fas fa-comment-dots w-6 text-center mr-2"></i> Sapaan Kepsek</a></li>
+            </ul>
+
+            <p class="px-5 text-xs font-semibold text-blue-300 uppercase tracking-wider mt-6 mb-2">Manajemen Profil</p>
+            <ul class="space-y-1">
+                <li><a href="/admin/visi" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/visi*') ? 'active' : '' }}"><i class="fas fa-eye w-6 text-center mr-2"></i> Visi & Misi</a></li>
+                <li><a href="/admin/biaya" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/biaya*') ? 'active' : '' }}"><i class="fas fa-money-bill-wave w-6 text-center mr-2"></i> Biaya Sekolah</a></li>
+                <li><a href="/admin/pendaftaran" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/pendaftaran*') ? 'active' : '' }}"><i class="fas fa-user-plus w-6 text-center mr-2"></i> Data PPDB</a></li>
+                <li><a href="/admin/polling" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/polling*') ? 'active' : '' }}"><i class="fas fa-poll w-6 text-center mr-2"></i> Polling Web</a></li>
+            </ul>
+
+            <p class="px-5 text-xs font-semibold text-blue-300 uppercase tracking-wider mt-6 mb-2">Sistem</p>
+            <ul class="space-y-1">
+                <li><a href="/admin/pengguna" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/pengguna*') ? 'active' : '' }}"><i class="fas fa-users w-6 text-center mr-2"></i> Pengguna (User)</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Wrapper -->
+    <div class="flex-1 flex flex-col h-full w-full overflow-hidden bg-gray-50 content-area">
+        <!-- Top Header -->
+        <header class="bg-white shadow-sm z-30 h-16 flex items-center justify-between px-5 sm:px-8 border-b border-gray-200 flex-shrink-0">
+            <!-- Left: Mobile Toggle -->
+            <button id="openSidebar" class="md:hidden text-gray-500 hover:text-blue-600 focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+            <div class="hidden md:block">
+                <h3 class="text-gray-700 font-semibold text-lg">@yield('title', 'Admin Dashboard')</h3>
+            </div>
+
+            <!-- Right: User Menu -->
+            <div class="flex items-center space-x-4">
+                <a href="/" target="_blank" class="text-sm text-blue-600 hover:text-blue-800 font-medium hidden sm:flex items-center">
+                    <i class="fas fa-external-link-alt mr-2"></i> Lihat Website
+                </a>
+                <div class="h-6 w-px bg-gray-300 hidden sm:block"></div>
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold border border-blue-200">
+                        {{ substr(Auth::user()->name ?? 'A', 0, 1) }}
+                    </div>
+                    <span class="text-sm font-medium text-gray-700 hidden sm:block">{{ Auth::user()->name ?? 'Administrator' }}</span>
                 </div>
-            </nav>
-        </div>
-    </header>
+                <!-- Logout Button -->
+                <form action="{{ route('logout') }}" method="POST" class="m-0 pl-2 ml-2 border-l border-gray-200">
+                    @csrf
+                    <button type="submit" class="text-gray-500 hover:text-red-600 transition-colors" title="Logout">
+                        <i class="fas fa-sign-out-alt text-lg"></i>
+                    </button>
+                </form>
+            </div>
+        </header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto  px-4">
-        <div class="main-content" style="margin-top: 100px">
+        <!-- Page Content -->
+        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-5 sm:p-8">
             @yield('content')
-        </div>
-    </main>
+            
+            <footer class="mt-10 pt-5 border-t border-gray-200 text-center text-sm text-gray-500">
+                <p>&copy; {{ date('Y') }} Reworked by Ndraw. All rights reserved.</p>
+            </footer>
+        </main>
+    </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300 text-center py-6 mt-10">
-        <p>&copy; 2024 SMK ICB CT. All rights reserved.</p>
-    </footer>
-
+    <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const toggler = document.querySelector('.navbar-toggler');
-            const collapse = document.querySelector('.navbar-collapse');
+            const sidebar = document.getElementById('sidebar');
+            const openBtn = document.getElementById('openSidebar');
+            const closeBtn = document.getElementById('closeSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
 
-            toggler.addEventListener('click', function () {
-                collapse.classList.toggle('show');
-            });
+            function toggleSidebar() {
+                sidebar.classList.toggle('open');
+                overlay.classList.toggle('open');
+            }
 
-            // Menambahkan active class pada menu yang dipilih
-            const links = document.querySelectorAll('.navbar-collapse a');
-            links.forEach(link => {
-                link.addEventListener('click', function () {
-                    links.forEach(link => link.classList.remove('active'));
-                    link.classList.add('active');
-                });
-            });
+            if(openBtn) openBtn.addEventListener('click', toggleSidebar);
+            if(closeBtn) closeBtn.addEventListener('click', toggleSidebar);
+            if(overlay) overlay.addEventListener('click', toggleSidebar);
         });
     </script>
+    
     @include('sweetalert::alert')
-
+    @yield('scripts')
 </body>
-
 </html>

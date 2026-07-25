@@ -17,6 +17,7 @@
             <div class="mb-4">
                 <label for="gambar" class="block text-gray-700 font-bold mb-2">Pilih Gambar</label>
                 <input type="file" name="gambar" id="gambar" class="w-full border-gray-300 rounded-lg shadow-sm">
+                <p class="text-xs text-blue-600 mt-2 font-medium"><i class="fas fa-info-circle mr-1"></i> Resolusi disarankan: 1280x720 (Lanskap) atau 1080x1080 (Persegi). Maks 2MB.</p>
                 @error('gambar')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
