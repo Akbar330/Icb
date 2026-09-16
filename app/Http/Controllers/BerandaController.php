@@ -7,6 +7,8 @@ use App\Models\Galeri;
 use App\Models\Artikel;
 use App\Models\Carousel;
 use App\Models\Oncam;
+use App\Models\Eskul;
+use App\Models\KegiatanEskul;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +25,8 @@ class BerandaController extends Controller
         $oncams = Oncam::all();
         $carousels = Carousel::orderBy('order')->get();
         $gambarGaleri = Galeri::latest()->paginate(3, ['*'], 'galeri_page');
+        $eskuls = Eskul::withCount('kegiatans')->latest()->take(6)->get();
+        $kegiatanTerbaru = KegiatanEskul::with('eskul')->latest('tanggal_kegiatan')->latest('created_at')->take(4)->get();
         $berita = Berita::latest()->paginate(3, ['*'], 'berita_page');
         $artikel = Artikel::latest()->paginate(3, ['*'], 'artikel_page');
         $oncams = Oncam::latest()->paginate(3, ['*'], 'oncam_page'); // Pagination untuk Oncam
@@ -79,6 +83,6 @@ class BerandaController extends Controller
         $sapaan = DB::table('sapaan_kepalas')->select('sapaan', 'gambar')->orderBy('created_at', 'desc')->get()->toJson();
 
         $kepsek = DB::table('kepsek')->get();
-        return view('beranda.index', compact('berita', 'gambarGaleri', 'carousels', 'artikel', 'oncams', 'isVoting', 'pilihan', 'totalVotes', 'sapaan', 'kepsek', 'masterPolling', 'listPilihan', 'pollingAya'));
+        return view('beranda.index', compact('berita', 'gambarGaleri', 'eskuls', 'kegiatanTerbaru', 'carousels', 'artikel', 'oncams', 'isVoting', 'pilihan', 'totalVotes', 'sapaan', 'kepsek', 'masterPolling', 'listPilihan', 'pollingAya'));
     }
 }

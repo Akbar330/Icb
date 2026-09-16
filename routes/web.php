@@ -28,6 +28,9 @@ use App\Http\Controllers\AdminVisiController;
 use App\Http\Controllers\PollingController;
 use App\Http\Controllers\SapaanController;
 use App\Http\Controllers\UserManagementController;
+use App\Http\Controllers\EskulController;
+use App\Http\Controllers\AdminEskulController;
+use App\Http\Controllers\AdminKegiatanEskulController;
 
 // Landing Page Route
 Route::view('/', 'welcome');
@@ -36,7 +39,10 @@ Route::view('/', 'welcome');
 Route::get('/', [BerandaController::class, 'index']);
 Route::get('/visi-misi', [VisiMisiController::class, 'index']);
 Route::get('/informasi', [InformasiController::class, 'index']);
-Route::get('/galeri', [GaleriController::class, 'index']);
+Route::get('/eskul', [EskulController::class, 'index'])->name('eskul.index');
+Route::get('/eskul/artikel/{slug}', [EskulController::class, 'showArtikel'])->name('eskul.artikel.show');
+Route::get('/eskul/{slug}', [EskulController::class, 'show'])->name('eskul.show');
+Route::get('/galeri', [GaleriController::class, 'index']); // Tetap ada untuk kompatibilitas data lama
 Route::get('/data', [DataController::class, 'index']);
 Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.index');
 // Public route for articles
@@ -179,13 +185,25 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     // Menghapus biaya sekolah
     Route::delete('/biaya/{id}', [AdminBiayaSekolahController::class, 'destroy'])->name('admin.biaya.destroy');
 
-    // Galeri
+    // Ekstrakurikuler (Eskul)
+    Route::get('/eskul', [AdminEskulController::class, 'index'])->name('admin.eskul.index');
+    Route::get('/eskul/create', [AdminEskulController::class, 'create'])->name('admin.eskul.create');
+    Route::post('/eskul', [AdminEskulController::class, 'store'])->name('admin.eskul.store');
+    Route::get('/eskul/{id}/edit', [AdminEskulController::class, 'edit'])->name('admin.eskul.edit');
+    Route::put('/eskul/{id}', [AdminEskulController::class, 'update'])->name('admin.eskul.update');
+    Route::delete('/eskul/{id}', [AdminEskulController::class, 'destroy'])->name('admin.eskul.destroy');
+
+    // Kegiatan & Berita Eskul
+    Route::get('/kegiatan-eskul', [AdminKegiatanEskulController::class, 'index'])->name('admin.kegiatan-eskul.index');
+    Route::get('/kegiatan-eskul/create', [AdminKegiatanEskulController::class, 'create'])->name('admin.kegiatan-eskul.create');
+    Route::post('/kegiatan-eskul', [AdminKegiatanEskulController::class, 'store'])->name('admin.kegiatan-eskul.store');
+    Route::get('/kegiatan-eskul/{id}/edit', [AdminKegiatanEskulController::class, 'edit'])->name('admin.kegiatan-eskul.edit');
+    Route::put('/kegiatan-eskul/{id}', [AdminKegiatanEskulController::class, 'update'])->name('admin.kegiatan-eskul.update');
+    Route::delete('/kegiatan-eskul/{id}', [AdminKegiatanEskulController::class, 'destroy'])->name('admin.kegiatan-eskul.destroy');
+
+    // Galeri (dipertahankan untuk kompatibilitas data lama)
     Route::get('/galeri', [AdminGaleriController::class, 'index'])->name('admin.galeri.index');
-
-    // Menampilkan form upload gambar
     Route::get('/galeri/create', [AdminGaleriController::class, 'create'])->name('admin.galeri.create');
-
-    // Menyimpan gambar yang diunggah
     Route::post('/galeri', [AdminGaleriController::class, 'store'])->name('admin.galeri.store');
 
     // Sapaan Kepsek

@@ -248,8 +248,8 @@
                     <li class="nav-item <?php echo $_SERVER['REQUEST_URI'] == '/informasi' ? 'active' : ''; ?>">
                         <a class="nav-link text-base font-medium text-gray-700 hover:text-blue-600" href="/informasi">Informasi</a>
                     </li>
-                    <li class="nav-item <?php echo $_SERVER['REQUEST_URI'] == '/galeri' ? 'active' : ''; ?>">
-                        <a class="nav-link text-base font-medium text-gray-700 hover:text-blue-600" href="/galeri">Galeri</a>
+                    <li class="nav-item <?php echo str_starts_with($_SERVER['REQUEST_URI'], '/eskul') ? 'active' : ''; ?>">
+                        <a class="nav-link text-base font-medium text-gray-700 hover:text-blue-600" href="/eskul">Ekstrakurikuler</a>
                     </li>
                     <li class="nav-item <?php echo $_SERVER['REQUEST_URI'] == '/data' ? 'active' : ''; ?>">
                         <a class="nav-link text-base font-medium text-gray-700 hover:text-blue-600" href="/data">Data</a>
@@ -261,7 +261,7 @@
                         <a class="nav-link text-base font-medium text-gray-700 hover:text-blue-600" href="/kontak">Kontak</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-base font-medium text-gray-700 hover:text-blue-600"  href="https://spmb.smkicbcintateknika.sch.id/">SPMB</a>
+                        <a class="nav-link text-base font-medium text-gray-700 hover:text-blue-600"  href="https://spmb.smkicb-teknika.sch.id/">SPMB</a>
                     </li>
                     <li class="nav-item d-flex align-items-center ml-lg-3 mt-2 mt-lg-0">
                         <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2 transition-colors">

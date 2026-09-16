@@ -59,34 +59,47 @@
         </div>
 
         <nav class="mt-5 mb-10">
-            <p class="px-5 text-xs font-semibold text-blue-300 uppercase tracking-wider mb-2">Menu Utama</p>
-            <ul class="space-y-1">
-                <li><a href="/admin" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin') ? 'active' : '' }}"><i class="fas fa-tachometer-alt w-6 text-center mr-2"></i> Dashboard</a></li>
-                <li><a href="/admin/artikel" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/artikel*') ? 'active' : '' }}"><i class="fas fa-newspaper w-6 text-center mr-2"></i> Artikel</a></li>
-                <li><a href="/admin/berita" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/berita*') ? 'active' : '' }}"><i class="fas fa-bullhorn w-6 text-center mr-2"></i> Berita</a></li>
-                <li><a href="/admin/informasi" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/informasi*') ? 'active' : '' }}"><i class="fas fa-info-circle w-6 text-center mr-2"></i> Informasi</a></li>
-                <li><a href="/admin/galeri" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/galeri*') ? 'active' : '' }}"><i class="fas fa-images w-6 text-center mr-2"></i> Galeri</a></li>
-            </ul>
+            @if(Auth::user()->role === 'eskul')
+                <p class="px-5 text-xs font-semibold text-blue-300 uppercase tracking-wider mb-2">Panel Eskul</p>
+                <ul class="space-y-1">
+                    @if(Auth::user()->eskul_id)
+                        <li><a href="/admin/eskul/{{ Auth::user()->eskul_id }}/edit" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/eskul*') ? 'active' : '' }}"><i class="fas fa-id-card w-6 text-center mr-2"></i> Profil Eskul Saya</a></li>
+                    @endif
+                    <li><a href="/admin/kegiatan-eskul" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/kegiatan-eskul*') ? 'active' : '' }}"><i class="fas fa-newspaper w-6 text-center mr-2"></i> Berita & Kegiatan</a></li>
+                    <li><a href="/eskul/{{ Auth::user()->eskul ? Auth::user()->eskul->slug : '' }}" target="_blank" class="sidebar-link flex items-center px-5 py-3 text-sm"><i class="fas fa-external-link-alt w-6 text-center mr-2"></i> Lihat Eskul di Web</a></li>
+                </ul>
+            @else
+                <p class="px-5 text-xs font-semibold text-blue-300 uppercase tracking-wider mb-2">Menu Utama</p>
+                <ul class="space-y-1">
+                    <li><a href="/admin" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin') ? 'active' : '' }}"><i class="fas fa-tachometer-alt w-6 text-center mr-2"></i> Dashboard</a></li>
+                    <li><a href="/admin/eskul" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/eskul*') ? 'active' : '' }}"><i class="fas fa-trophy w-6 text-center mr-2"></i> Ekstrakurikuler</a></li>
+                    <li><a href="/admin/kegiatan-eskul" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/kegiatan-eskul*') ? 'active' : '' }}"><i class="fas fa-calendar-alt w-6 text-center mr-2"></i> Kegiatan Eskul</a></li>
+                    <li><a href="/admin/artikel" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/artikel*') ? 'active' : '' }}"><i class="fas fa-newspaper w-6 text-center mr-2"></i> Artikel</a></li>
+                    <li><a href="/admin/berita" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/berita*') ? 'active' : '' }}"><i class="fas fa-bullhorn w-6 text-center mr-2"></i> Berita</a></li>
+                    <li><a href="/admin/informasi" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/informasi*') ? 'active' : '' }}"><i class="fas fa-info-circle w-6 text-center mr-2"></i> Informasi</a></li>
+                    <li><a href="/admin/galeri" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/galeri*') ? 'active' : '' }}"><i class="fas fa-images w-6 text-center mr-2"></i> Galeri (Lama)</a></li>
+                </ul>
 
-            <p class="px-5 text-xs font-semibold text-blue-300 uppercase tracking-wider mt-6 mb-2">Konten Spesifik</p>
-            <ul class="space-y-1">
-                <li><a href="/admin/carousel" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/carousel*') ? 'active' : '' }}"><i class="fas fa-image w-6 text-center mr-2"></i> Banner (Carousel)</a></li>
-                <li><a href="/admin/oncam" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/oncam*') ? 'active' : '' }}"><i class="fab fa-youtube w-6 text-center mr-2"></i> Video YouTube</a></li>
-                <li><a href="/admin/sapaan" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/sapaan*') ? 'active' : '' }}"><i class="fas fa-comment-dots w-6 text-center mr-2"></i> Sapaan Kepsek</a></li>
-            </ul>
+                <p class="px-5 text-xs font-semibold text-blue-300 uppercase tracking-wider mt-6 mb-2">Konten Spesifik</p>
+                <ul class="space-y-1">
+                    <li><a href="/admin/carousel" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/carousel*') ? 'active' : '' }}"><i class="fas fa-image w-6 text-center mr-2"></i> Banner (Carousel)</a></li>
+                    <li><a href="/admin/oncam" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/oncam*') ? 'active' : '' }}"><i class="fab fa-youtube w-6 text-center mr-2"></i> Video YouTube</a></li>
+                    <li><a href="/admin/sapaan" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/sapaan*') ? 'active' : '' }}"><i class="fas fa-comment-dots w-6 text-center mr-2"></i> Sapaan Kepsek</a></li>
+                </ul>
 
-            <p class="px-5 text-xs font-semibold text-blue-300 uppercase tracking-wider mt-6 mb-2">Manajemen Profil</p>
-            <ul class="space-y-1">
-                <li><a href="/admin/visi" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/visi*') ? 'active' : '' }}"><i class="fas fa-eye w-6 text-center mr-2"></i> Visi & Misi</a></li>
-                <li><a href="/admin/biaya" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/biaya*') ? 'active' : '' }}"><i class="fas fa-money-bill-wave w-6 text-center mr-2"></i> Biaya Sekolah</a></li>
-                <li><a href="/admin/pendaftaran" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/pendaftaran*') ? 'active' : '' }}"><i class="fas fa-user-plus w-6 text-center mr-2"></i> Data PPDB</a></li>
-                <li><a href="/admin/polling" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/polling*') ? 'active' : '' }}"><i class="fas fa-poll w-6 text-center mr-2"></i> Polling Web</a></li>
-            </ul>
+                <p class="px-5 text-xs font-semibold text-blue-300 uppercase tracking-wider mt-6 mb-2">Manajemen Profil</p>
+                <ul class="space-y-1">
+                    <li><a href="/admin/visi" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/visi*') ? 'active' : '' }}"><i class="fas fa-eye w-6 text-center mr-2"></i> Visi & Misi</a></li>
+                    <li><a href="/admin/biaya" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/biaya*') ? 'active' : '' }}"><i class="fas fa-money-bill-wave w-6 text-center mr-2"></i> Biaya Sekolah</a></li>
+                    <li><a href="/admin/pendaftaran" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/pendaftaran*') ? 'active' : '' }}"><i class="fas fa-user-plus w-6 text-center mr-2"></i> Data PPDB</a></li>
+                    <li><a href="/admin/polling" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/polling*') ? 'active' : '' }}"><i class="fas fa-poll w-6 text-center mr-2"></i> Polling Web</a></li>
+                </ul>
 
-            <p class="px-5 text-xs font-semibold text-blue-300 uppercase tracking-wider mt-6 mb-2">Sistem</p>
-            <ul class="space-y-1">
-                <li><a href="/admin/pengguna" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/pengguna*') ? 'active' : '' }}"><i class="fas fa-users w-6 text-center mr-2"></i> Pengguna (User)</a></li>
-            </ul>
+                <p class="px-5 text-xs font-semibold text-blue-300 uppercase tracking-wider mt-6 mb-2">Sistem</p>
+                <ul class="space-y-1">
+                    <li><a href="/admin/pengguna" class="sidebar-link flex items-center px-5 py-3 text-sm {{ request()->is('admin/pengguna*') ? 'active' : '' }}"><i class="fas fa-users w-6 text-center mr-2"></i> Pengguna (User)</a></li>
+                </ul>
+            @endif
         </nav>
     </aside>
 
@@ -112,7 +125,16 @@
                     <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold border border-blue-200">
                         {{ substr(Auth::user()->name ?? 'A', 0, 1) }}
                     </div>
-                    <span class="text-sm font-medium text-gray-700 hidden sm:block">{{ Auth::user()->name ?? 'Administrator' }}</span>
+                    <div class="hidden sm:block text-left">
+                        <span class="text-sm font-medium text-gray-700 block leading-tight">{{ Auth::user()->name ?? 'Administrator' }}</span>
+                        <span class="text-[10px] text-gray-400 font-semibold uppercase">
+                            @if(Auth::user()->role === 'eskul')
+                                Pengurus {{ Auth::user()->eskul ? Auth::user()->eskul->nama_eskul : 'Eskul' }}
+                            @else
+                                Super Admin
+                            @endif
+                        </span>
+                    </div>
                 </div>
                 <!-- Logout Button -->
                 <form action="{{ route('logout') }}" method="POST" class="m-0 pl-2 ml-2 border-l border-gray-200">

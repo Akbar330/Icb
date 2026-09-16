@@ -13,8 +13,14 @@ class AdminController extends Controller
 {
     public function index()
     {
+        if (auth()->user()->role === 'eskul') {
+            if (!auth()->user()->eskul_id) {
+                return view('admin.eskul.no_assigned');
+            }
+            return redirect()->route('admin.kegiatan-eskul.index');
+        }
 
-    $ipAddress = request()->ip(); // Ambil IP pengguna
+        $ipAddress = request()->ip(); // Ambil IP pengguna
     $visit = DB::table('visits')->where('ip_address', $ipAddress)->first();
 
     if ($visit) {

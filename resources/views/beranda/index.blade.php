@@ -256,37 +256,79 @@
             </div>
         </div>
 
-        <!-- Bagian Galeri -->
-        <div class="container mt-12 mb-10">
-            <div class="text-center mb-8" data-aos="zoom-in">
-                <h2 class="text-3xl font-bold text-gray-800">Galeri Kegiatan</h2>
-                <div class="w-16 h-1 bg-blue-600 mx-auto mt-3 rounded-full"></div>
+        <!-- Bagian Ekstrakurikuler & Kegiatan Siswa -->
+        <div class="container mt-16 mb-12">
+            <div class="text-center mb-10" data-aos="zoom-in">
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 uppercase tracking-wider mb-2">Bakat & Minat</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight">Ekstrakurikuler & Kegiatan</h2>
+                <div class="w-20 h-1.5 bg-blue-600 mx-auto mt-3 rounded-full"></div>
+                <p class="text-gray-500 mt-3 text-sm sm:text-base max-w-2xl mx-auto">Wadah pengembangan kreativitas, kepemimpinan, dan prestasi siswa di lingkungan SMK ICB Cinta Teknika.</p>
             </div>
             
-            <div id="galeri-container" data-ajax-container>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 relative">
-                    <!-- Loading overlay yang akan aktif saat fetching -->
-                    <div id="galeri-loading" class="absolute inset-0 bg-white/60 z-10 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
-                        <div class="spinner-border text-blue-500" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                    </div>
-                    
-                    @foreach ($gambarGaleri as $gambar)
-                        <div class="bg-white rounded-xl shadow-sm hover-card overflow-hidden group border border-gray-100" data-aos="zoom-in" data-aos-delay="{{ $loop->index * 50 }}">
-                            <div class="relative h-48 md:h-56 bg-gray-100 flex items-center justify-center">
-                                <img src="{{ asset('storage/' . $gambar->filename) }}" alt="Galeri Gambar"
-                                    class="w-full h-full object-contain p-2 transition duration-500 group-hover:scale-110" loading="lazy">
-                                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition duration-300 flex items-center justify-center pointer-events-none">
-                                    <i class="fas fa-search-plus text-white opacity-0 group-hover:opacity-100 text-3xl transform scale-50 group-hover:scale-100 transition duration-300"></i>
+            @if(isset($eskuls) && $eskuls->count() > 0)
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    @foreach ($eskuls as $eskul)
+                        <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 overflow-hidden border border-gray-100 flex flex-col group" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                            <div class="relative h-48 bg-gradient-to-br from-blue-600 to-indigo-700 overflow-hidden flex items-center justify-center">
+                                @if($eskul->foto)
+                                    <img src="{{ asset('storage/' . $eskul->foto) }}" alt="{{ $eskul->nama_eskul }}"
+                                         class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+                                @else
+                                    <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-white text-3xl">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                @endif
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/90 text-blue-700 shadow-sm">
+                                    {{ $eskul->kategori }}
+                                </span>
+                            </div>
+                            <div class="p-5 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition mb-1">
+                                        {{ $eskul->nama_eskul }}
+                                    </h3>
+                                    <p class="text-gray-500 text-xs line-clamp-2 mb-3">
+                                        {{ $eskul->deskripsi ?: 'Kembangkan minat dan keahlianmu bersama ekstrakurikuler ' . $eskul->nama_eskul . '.' }}
+                                    </p>
+                                    @if($eskul->jadwal)
+                                        <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-2">
+                                            <i class="far fa-clock text-blue-500"></i>
+                                            <span>{{ $eskul->jadwal }}</span>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
+                                    <span class="text-xs text-gray-400"><i class="far fa-images mr-1"></i> {{ $eskul->kegiatans_count }} Kegiatan</span>
+                                    <a href="{{ route('eskul.show', $eskul->slug) }}" class="text-xs font-semibold text-blue-600 hover:text-blue-800 inline-flex items-center gap-1">
+                                        Detail <i class="fas fa-chevron-right text-[10px]"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
-                <div class="d-flex justify-content-center mt-8">
-                    {{ $gambarGaleri->appends(['galeri_page' => request('galeri_page')])->links('pagination::bootstrap-4') }}
+            @else
+                <!-- Fallback galeri jika eskul belum ada data -->
+                <div id="galeri-container" data-ajax-container>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 relative">
+                        @foreach ($gambarGaleri as $gambar)
+                            <div class="bg-white rounded-xl shadow-sm hover-card overflow-hidden group border border-gray-100" data-aos="zoom-in" data-aos-delay="{{ $loop->index * 50 }}">
+                                <div class="relative h-48 md:h-56 bg-gray-100 flex items-center justify-center">
+                                    <img src="{{ asset('storage/' . $gambar->filename) }}" alt="Galeri Gambar"
+                                        class="w-full h-full object-contain p-2 transition duration-500 group-hover:scale-110" loading="lazy">
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
+            @endif
+
+            <div class="text-center mt-8">
+                <a href="{{ route('eskul.index') }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md shadow-blue-500/20 transition-all transform hover:-translate-y-0.5">
+                    <span>Jelajahi Seluruh Ekstrakurikuler</span>
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </a>
             </div>
         </div>
 
