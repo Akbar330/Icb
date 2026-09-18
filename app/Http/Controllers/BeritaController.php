@@ -11,7 +11,7 @@ class BeritaController extends Controller
 {
     //
     public function index() {
-        $beritas = Berita::latest()->paginate(3);
+        $beritas = Berita::latest()->paginate(6);
         $artikels = Artikel::latest()->take(5)->get(); // Ambil artikel terkini (limit 5)
 
         // Return view dengan data

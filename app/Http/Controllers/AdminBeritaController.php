@@ -25,11 +25,14 @@ class AdminBeritaController extends Controller
     {
         $request->validate([
             'judul' => 'required|string|max:255',
-            'penulis' => 'required|string|max:255'
+            'penulis' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+            'konten' => 'required',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
-        // Simpan gambar jika ada
-        $data = $request->all();
+        $data = $request->only(['judul', 'penulis', 'deskripsi', 'konten']);
+
         if ($request->hasFile('gambar')) {
             $data['gambar'] = $request->file('gambar')->store('images/beritas', 'public');
         }
@@ -50,21 +53,19 @@ class AdminBeritaController extends Controller
         $request->validate([
             'judul' => 'required|string|max:255',
             'penulis' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
             'konten' => 'required',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $berita = Berita::findOrFail($id);
 
-        // Update data berita
-        $data = $request->only(['judul', 'penulis', 'konten','deskripsi']);
+        $data = $request->only(['judul', 'penulis', 'deskripsi', 'konten']);
 
-        // Cek apakah ada gambar baru yang diupload
         if ($request->hasFile('gambar')) {
-            // Hapus gambar lama jika ada
-            if ($berita->gambar) {
+            if ($berita->gambar && Storage::disk('public')->exists($berita->gambar)) {
                 Storage::disk('public')->delete($berita->gambar);
             }
-            // Simpan gambar baru
             $data['gambar'] = $request->file('gambar')->store('images/beritas', 'public');
         }
 
@@ -78,7 +79,7 @@ class AdminBeritaController extends Controller
         $berita = Berita::findOrFail($id);
 
         // Hapus gambar jika ada
-        if ($berita->gambar) {
+        if ($berita->gambar && Storage::disk('public')->exists($berita->gambar)) {
             Storage::disk('public')->delete($berita->gambar);
         }
 

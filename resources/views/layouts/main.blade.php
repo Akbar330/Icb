@@ -254,8 +254,8 @@
                     <li class="nav-item <?php echo $_SERVER['REQUEST_URI'] == '/data' ? 'active' : ''; ?>">
                         <a class="nav-link text-base font-medium text-gray-700 hover:text-blue-600" href="/data">Data</a>
                     </li>
-                    <li class="nav-item <?php echo $_SERVER['REQUEST_URI'] == '/biaya' ? 'active' : ''; ?>">
-                        <a class="nav-link text-base font-medium text-gray-700 hover:text-blue-600" href="/biaya">Biaya Sekolah</a>
+                    <li class="nav-item <?php echo str_starts_with($_SERVER['REQUEST_URI'], '/berita') ? 'active' : ''; ?>">
+                        <a class="nav-link text-base font-medium text-gray-700 hover:text-blue-600" href="/berita">Berita</a>
                     </li>
                     <li class="nav-item <?php echo $_SERVER['REQUEST_URI'] == '/kontak' ? 'active' : ''; ?>">
                         <a class="nav-link text-base font-medium text-gray-700 hover:text-blue-600" href="/kontak">Kontak</a>

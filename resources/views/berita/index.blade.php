@@ -48,6 +48,10 @@
                         </div>
                     @endforelse
                 </div>
+
+                <div class="d-flex justify-content-center mt-8">
+                    {{ $beritas->links('pagination::bootstrap-4') }}
+                </div>
             </div>
 
             <!-- Right Section: Kontak Sekolah (30%) -->
