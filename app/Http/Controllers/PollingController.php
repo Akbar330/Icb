@@ -207,4 +207,42 @@ class PollingController extends Controller
             return redirect()->route('admin.polling.index');
         }
     }
+
+    public function hasil($id)
+    {
+        $polling = DB::table('master_pollings')->where('id', '=', $id)->first();
+        if (!$polling) {
+            Alert::error('Error', 'Polling tidak ditemukan!');
+            return redirect()->route('admin.polling.index');
+        }
+
+        $totalVotes = DB::table('hasil_votes')->where('id_polling', '=', $id)->count();
+
+        $pilihanVotes = DB::table('pilihan_votes')
+            ->leftJoin('hasil_votes', function ($join) use ($id) {
+                $join->on('pilihan_votes.id', '=', 'hasil_votes.pilihan_id')
+                     ->where('hasil_votes.id_polling', '=', $id);
+            })
+            ->where('pilihan_votes.id_polling', '=', $id)
+            ->select(
+                'pilihan_votes.id',
+                'pilihan_votes.option',
+                DB::raw('COUNT(hasil_votes.id) as total_vote')
+            )
+            ->groupBy('pilihan_votes.id', 'pilihan_votes.option')
+            ->get()
+            ->map(function ($item) use ($totalVotes) {
+                $item->persentase = $totalVotes > 0 ? round(($item->total_vote / $totalVotes) * 100, 1) : 0;
+                return $item;
+            });
+
+        $riwayatVotes = DB::table('hasil_votes')
+            ->join('pilihan_votes', 'hasil_votes.pilihan_id', '=', 'pilihan_votes.id')
+            ->where('hasil_votes.id_polling', '=', $id)
+            ->select('hasil_votes.*', 'pilihan_votes.option as pilihan_nama')
+            ->orderBy('hasil_votes.id', 'desc')
+            ->paginate(15);
+
+        return view('admin.polling.hasil', compact('polling', 'pilihanVotes', 'totalVotes', 'riwayatVotes'));
+    }
 }

@@ -139,6 +139,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::delete('/polling/delete/{id}', [PollingController::class, 'destroy'])->name('admin.polling.destroy');
     
     // More General Routes Later
+    Route::get('/polling/hasil/{id}', [PollingController::class, 'hasil'])->name('admin.polling.hasil');
     Route::get('/polling/edit/{id}', [PollingController::class, 'edit'])->name('admin.polling.edit');
     Route::put('/polling/update/{id}', [PollingController::class, 'update'])->name('admin.polling.update');
 

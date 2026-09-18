@@ -79,6 +79,10 @@
                                     </form>
                                 @endif
                                 
+                                <a href="{{ route('admin.polling.hasil', $polling->id) }}" class="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors" title="Lihat Hasil Polling">
+                                    <i class="fas fa-chart-pie"></i>
+                                </a>
+                                
                                 <a href="{{ route('admin.polling.edit', $polling->id) }}" class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors" title="Edit">
                                     <i class="fas fa-edit"></i>
                                 </a>
